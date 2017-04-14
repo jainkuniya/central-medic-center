@@ -15,6 +15,7 @@ hs_err_pid*
 nbproject/private/
 build/
 nbbuild/
+WebContent/
 
 # the dist file could make some problems
 # dist/
