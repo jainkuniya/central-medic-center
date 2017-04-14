@@ -9,4 +9,16 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Patient</servlet-name>
+    <url-pattern>/patient</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Doctor</servlet-name>
+    <url-pattern>/doctor</url-pattern>
+  </servlet-mapping>
 </web-app>
