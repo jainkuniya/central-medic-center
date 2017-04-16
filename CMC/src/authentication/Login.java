@@ -38,9 +38,9 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		//validate credentials and get user type
-		int personType = new DatabaseHelper().getPersonType(userName, password);
+		int personType[] = new DatabaseHelper().getPersonType(userName, password);
 		RequestDispatcher rs;
-		switch(personType)
+		switch(personType[0])
 		{
 			case -1:
 				//can't connect to DB
@@ -58,7 +58,13 @@ public class Login extends HttpServlet {
 			case 1:
 				//person is patient
 				rs = request.getRequestDispatcher("patient");
+				request.setAttribute("personId",personType[1]);
 		        rs.forward(request, response);
+				break;
+			case 2:
+				//person is doctor
+				rs = request.getRequestDispatcher("doctor");
+				rs.forward(request, response);
 				break;
 			default:
 				//redirect to login page

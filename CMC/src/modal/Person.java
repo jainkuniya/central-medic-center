@@ -1,33 +1,31 @@
-package authentication;
-
-import java.sql.Date;
+package modal;
 
 public class Person {
 
+	private int id;
 	private String firstName;
 	private String lastName;
-	private Date dob;
+	private String userName;
+	private String dob;
+	private int type;
 	private String gender;
 	private String address;
-	private int contactNumber;
-	private int userId;
-	private String userName;
-	private String password;
-	private String userType;
+	private String contactNumber;
 	
-	public Person(String firstName, String lastName, Date dob, String gender, String address, int contactNumber,
-			int userId, String userName, String password, String userType) {
-	 
+	
+
+	public Person(int id, String firstName, String lastName, String userName, String dob, int type, String gender,
+			String address, String contactNumber) {
+		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.userName = userName;
 		this.dob = dob;
+		this.type = type;
 		this.gender = gender;
 		this.address = address;
 		this.contactNumber = contactNumber;
-		this.userId = userId;
-		this.userName = userName;
-		this.password = password;
-		this.userType = userType;
 	}
 
 	public String getFirstName() {
@@ -46,12 +44,12 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public String setDob(String dob) {
+		return this.dob;
 	}
 
 	public String getGender() {
@@ -70,20 +68,20 @@ public class Person {
 		this.address = address;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
 	public int getUserId() {
-		return userId;
+		return id;
 	}
 
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.id = userId;
 	}
 
 	public String getUserName() {
@@ -94,20 +92,12 @@ public class Person {
 		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public int getUserType() {
+		return type;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public void setUserType(int userType) {
+		this.type = userType;
 	}
 
 	 

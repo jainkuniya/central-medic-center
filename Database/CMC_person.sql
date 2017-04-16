@@ -31,11 +31,14 @@ CREATE TABLE `person` (
   `dob` varchar(10) DEFAULT NULL,
   `token` varchar(10) CHARACTER SET big5 DEFAULT '0',
   `type` int(1) NOT NULL DEFAULT '1',
+  `gender` varchar(2) DEFAULT 'NA',
+  `address` varchar(45) DEFAULT NULL,
+  `contactNumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName_UNIQUE` (`userName`),
   KEY `type` (`type`),
   CONSTRAINT `person_ibfk_1` FOREIGN KEY (`type`) REFERENCES `PersonType` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +47,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty','03/07/1998','0',1),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty','03/07/1998','1',1),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty','03/07/1998','1',2);
+INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty','03/07/1998','0',1,'NA',NULL,NULL),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty','03/07/1998','1',1,'NA',NULL,NULL),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty','03/07/1998','1',2,'NA',NULL,NULL),(14,'Vishwesh','Jainkuniya','v3','qwerty','03/07/1998','1',2,'NA',NULL,NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-16 19:44:27
+-- Dump completed on 2017-04-17  4:49:04
