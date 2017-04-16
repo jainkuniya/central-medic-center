@@ -1,10 +1,11 @@
+package database;
 import java.sql.*;
 
 public class DatabaseHelper {
 
 	Connection connection;
 
-	DatabaseHelper(){
+	public DatabaseHelper(){
 		connection = DatabaseConnector.getDatabase();
 	}
 
