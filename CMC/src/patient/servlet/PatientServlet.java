@@ -44,24 +44,30 @@ public class PatientServlet extends HttpServlet {
 			int personId = (int)request.getAttribute("personId");
 			//get patient details
 			Patient patient= new DatabaseHelper().getPatient(personId);
-			RequestDispatcher rs;
+
 			if(patient==null)
 			{
 				//redirect to login
-				rs = request.getRequestDispatcher("login.jsp");
-				request.setAttribute("error","Please login again");
-		        rs.forward(request, response);
+				redirectToLogin(request, response);
 				return;
 			}
 			//redirect to person dashboard
-			rs = request.getRequestDispatcher("patient.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("patient.jsp");
 			request.setAttribute("patient",patient);
 	        rs.forward(request, response);
 			return;			
 		}catch(Exception e)
 		{
 			//redirect to login
+			redirectToLogin(request,response );
 		}
+	}
+
+	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
+		request.setAttribute("error","Please login again");
+        rs.forward(request, response);		
 	}
 
 }
