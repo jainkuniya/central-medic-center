@@ -6,7 +6,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private String userName;
-	private String dob;
+	private long dob;
 	private int type;
 	private String gender;
 	private String address;
@@ -14,7 +14,7 @@ public class Person {
 	
 	
 
-	public Person(int id, String firstName, String lastName, String userName, String dob, int type, String gender,
+	public Person(int id, String firstName, String lastName, String userName, long dob, int type, String gender,
 			String address, String contactNumber) {
 		super();
 		this.id = id;
@@ -44,11 +44,11 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public String getDob() {
+	public long getDob() {
 		return dob;
 	}
 
-	public String setDob(String dob) {
+	public long setDob(long dob) {
 		return this.dob;
 	}
 
@@ -100,7 +100,10 @@ public class Person {
 		this.type = userType;
 	}
 
-	 
+	public String getAge(){
+		System.out.println(System.currentTimeMillis() +" " + this.dob);
+		return String.valueOf((System.currentTimeMillis() - this.dob)/(60*60*24*365*1000));
+	}
 
 	 
 }

@@ -63,7 +63,7 @@ public class DatabaseHelper {
 				if(rsPatient.next())
 				{System.out.println(id);
 					return new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("userName"),
-							rs.getString("dob"), rs.getInt("type"), rs.getString("gender"), rs.getString("address"), rs.getString("contactNumber"), 
+							rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"), rs.getString("address"), rs.getString("contactNumber"), 
 							rsPatient.getInt("weight"), rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
 				}
 			}

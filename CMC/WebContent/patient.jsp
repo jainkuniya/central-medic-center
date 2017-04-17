@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="patient.modal.Patient" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,10 +49,11 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-8 info">
-              <br><span class="name">Mr. Rakesh Sharma</span><br>
-              <img src="media/gender.png"><span class="details"> Male, 19 years</span><br>
-              <img src="media/bloodGroup.png"><span class="blood"> A+</span><br>
-              <img src="media/Location.png"><span class="location"> Jawahar Circle, Jaipur</span>
+            	<% Patient patient = (Patient)request.getAttribute("patient"); %>
+              <br><span class="name"><%= patient.getFirstName() +" " + patient.getLastName() %></span><br>
+              <img src="media/gender.png"><span class="details"> <%= patient.getGender() +", " + patient.getAge() %></span><br>
+              <img src="media/bloodGroup.png"><span class="blood"> <%= patient.getBloodGroup() %></span><br>
+              <img src="media/Location.png"><span class="location"> <%= patient.getAddress() %></span>
             </div>
           </div>
 
