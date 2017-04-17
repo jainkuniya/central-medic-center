@@ -24,11 +24,13 @@ DROP TABLE IF EXISTS `appointmentItems`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appointmentItems` (
   `id` int(11) NOT NULL,
-  `date` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
+  `type` int(11) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `appointmentItems_ibfk_1` FOREIGN KEY (`id`) REFERENCES `appointment` (`id`)
+  KEY `type` (`type`),
+  CONSTRAINT `appointmentItems_ibfk_1` FOREIGN KEY (`id`) REFERENCES `appointment` (`id`),
+  CONSTRAINT `appointmentItems_ibfk_2` FOREIGN KEY (`type`) REFERENCES `appointmentItemsType` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  5:20:55
+-- Dump completed on 2017-04-17  7:07:37

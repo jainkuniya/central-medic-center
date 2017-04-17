@@ -16,29 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `PersonType`
+-- Table structure for table `appointmentItemsType`
 --
 
-DROP TABLE IF EXISTS `PersonType`;
+DROP TABLE IF EXISTS `appointmentItemsType`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PersonType` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(45) DEFAULT NULL,
-  `type` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+CREATE TABLE `appointmentItemsType` (
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PersonType`
+-- Dumping data for table `appointmentItemsType`
 --
 
-LOCK TABLES `PersonType` WRITE;
-/*!40000 ALTER TABLE `PersonType` DISABLE KEYS */;
-INSERT INTO `PersonType` VALUES (1,'Patient','Patient'),(2,'Doctor','Doctor');
-/*!40000 ALTER TABLE `PersonType` ENABLE KEYS */;
+LOCK TABLES `appointmentItemsType` WRITE;
+/*!40000 ALTER TABLE `appointmentItemsType` DISABLE KEYS */;
+/*!40000 ALTER TABLE `appointmentItemsType` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  7:07:37
+-- Dump completed on 2017-04-17  7:07:36

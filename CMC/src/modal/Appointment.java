@@ -6,10 +6,10 @@ public class Appointment {
 	private int id;
 	private int doctorId;
 	private int isClosed;
-	private String dateCreated;
+	private long dateCreated;
 	private ArrayList<AppointmentItems> items;
 	
-	public Appointment(int id, int doctorId, int isClosed, String dateCreated, ArrayList<AppointmentItems> items) {
+	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		super();
 		this.id = id;
 		this.doctorId = doctorId;

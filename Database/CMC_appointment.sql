@@ -27,7 +27,7 @@ CREATE TABLE `appointment` (
   `patientId` int(11) NOT NULL,
   `doctorId` int(11) DEFAULT NULL,
   `isClosed` int(11) DEFAULT '0',
-  `dateCreated` varchar(45) DEFAULT NULL,
+  `dateCreated` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `patientId` (`patientId`),
   KEY `doctorId` (`doctorId`),
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  5:20:55
+-- Dump completed on 2017-04-17  7:07:37
