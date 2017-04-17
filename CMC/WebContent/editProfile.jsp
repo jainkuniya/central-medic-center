@@ -25,7 +25,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Edit Profile</a></li>
+        <li class="active"><a href="#">Edit Profile</a></li>
         <li><a href="#">Logout</a></li>
       </ul>
       <form class="navbar-form navbar-right">
@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-sm-3 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="">
+        <li class="active">
           
           <div class="row intro">
             <div class="col-sm-12 col-md-6 col-lg-4">
@@ -56,45 +56,89 @@
           </div>
 
         </li>
-        <li class="active"><a href="bookAppointment.jsp">Book Appointment</a></li>
+        <li><a href="bookAppointment.jsp">Book Appointment</a></li>
         <li><a href="#">Upcoming Appointments</a></li>
         <li><a href="#">Appointment History</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 main">
-      <h1 class="page-header">Book Appointment</h1>
+      <h1 class="page-header"><center>Edit Profile</center></h1>
+      <h4 class="sub-header">Personal Information</h4>
       <form class="form-horizontal">
         <div class="form-group">
-          <label for="name" class="col-sm-2 control-label">Patient Name</label>
+          <label for="firstName" class="col-sm-2 control-label">First Name</label>
           <div class="col-sm-10">
-            <p class="form-control-static">Rakesh Sharma</p>
+            <p class="form-control-static">Rakesh</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="date" class="col-sm-2 control-label">Date of Birth</label>
+          <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">Sharma</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gender" class="col-sm-2 control-label">Gender</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">Male</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date" class="col-sm-2 control-label">Date Of Birth</label>
           <div class="col-sm-10">
             <input type="date" class="form-control" id="date" placeholder="Date">
           </div>
         </div>
         <div class="form-group">
-          <label for="symptons" class="col-sm-2 control-label">Symptons</label>
+          <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
           <div class="col-sm-10">
-            <textarea class="form-control" rows="2" placeholder="chest pain, fatigue, hallucination, swelling"></textarea>
+            <input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="+91 9521113802">
           </div>
         </div>
         <div class="form-group">
-          <label for="disease" class="col-sm-2 control-label">Suspected Disease</label>
+          <label for="address" class="col-sm-2 control-label">Address</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="disease" placeholder="Tuberculosis, Malaria, Acne, Diarrhea">
+            <textarea class="form-control" rows="2" placeholder="BH-3, The LNMIIT"></textarea>
+          </div>
+        </div> 
+        <h4 class="sub-header">Health Information</h4>
+        <div class="form-group">
+          <label for="height" class="col-sm-2 control-label">Height</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="height" placeholder="5' 10&#34;">
           </div>
         </div>
         <div class="form-group">
-          <label for="Documents" class="col-sm-2 control-label">Medical Documents</label>
+          <label for="weight" class="col-sm-2 control-label">Weight</label>
           <div class="col-sm-10">
-            <input type="file" id="Documents">
-            <p class="help-block">Upload relevant documents here for better care.</p>
+            <input type="Number" class="form-control" id="weight" placeholder="in kgs">
           </div>
-        </div>  
+        </div>
+        <div class="form-group">
+          <label for="bloodGroup" class="col-sm-2 control-label">Blood Group</label>
+          <div class="col-sm-10">
+            <input type="string" class="form-control" id="bloodGroup" placeholder="A+">
+          </div>
+        </div>
+        <h4 class="sub-header">Account Information</h4>
+        <div class="form-group">
+          <label for="userName" class="col-sm-2 control-label">User Name</label>
+          <div class="col-sm-10">
+            <input type="string" class="form-control" id="userName" placeholder="rakeshsharma">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input type="Number" class="form-control" id="password" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="emailAddress" class="col-sm-2 control-label">Email Address</label>
+          <div class="col-sm-10">
+            <input type="string" class="form-control" id="emailAddress" placeholder="rakeshsharma.y15@gmail.com">
+          </div>
+        </div>
         <div class="form-group">
           <div class="col-sm-offset-6 col-sm-2">
             <button type="submit" class="btn btn-default">Submit</button>
