@@ -3,11 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Patient Dashboard - Central Medic Center</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/dashboard.css">
-	<link rel="stylesheet" href="css/patient.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Patient Dashboard - Central Medic Center</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
 
@@ -39,8 +39,24 @@
   <div class="row">
     <div class="col-sm-3 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Patient Profile <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Book Appointment</a></li>
+        <li class="active">
+          
+          <div class="row intro">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="">
+                <img class="profilePic" src="media/user.png">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-8 info">
+              <br><span class="name">Mr. Rakesh Sharma</span><br>
+              <img src="media/gender.png"><span class="details"> Male, 19 years</span><br>
+              <img src="media/bloodGroup.png"><span class="blood"> A+</span><br>
+              <img src="media/Location.png"><span class="location"> Jawahar Circle, Jaipur</span>
+            </div>
+          </div>
+
+        </li>
+        <li><a href="bookAppointment.jsp">Book Appointment</a></li>
         <li><a href="#">Upcoming Appointments</a></li>
         <li><a href="#">Appointment History</a></li>
       </ul>

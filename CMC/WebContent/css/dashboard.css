@@ -54,3 +54,17 @@ body {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
+
+.intro{
+	margin:10px;
+	margin-bottom: 25px;
+}
+.profilePic{
+	width: 100px;
+}
+.info{
+	padding-left: 25px;
+}
+.info img{
+	width: 16px;
+}
