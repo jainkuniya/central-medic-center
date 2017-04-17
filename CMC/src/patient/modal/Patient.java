@@ -14,8 +14,7 @@ public class Patient extends  Person {
 	
 	public Patient(int id, String firstName, String lastName, String userName, long dob, int type, String gender,
 			String address, String contactNumber, int height, int weight, String bloodGroup) {
-		super(id, firstName, lastName, userName, dob, type, gender, address, contactNumber);
-		
+		super(id, firstName, lastName, userName, dob, type, gender, address, contactNumber);		
 		this.height = height;
 		this.weight = weight;
 		this.bloodGroup = bloodGroup;
@@ -44,9 +43,4 @@ public class Patient extends  Person {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	
-	
-	
-	
-	
 }

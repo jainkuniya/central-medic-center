@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +17,8 @@
 <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
-
+	<% Patient patient = (Patient)request.getAttribute("patient"); %>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -53,12 +57,12 @@
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-8 info">
-								<br>
-								<span class="name">Mr. Rakesh Sharma</span><br> <img
-									src="media/gender.png"><span class="details">
-									Male, 19 years</span><br> <img src="media/bloodGroup.png"><span
-									class="blood"> A+</span><br> <img src="media/Location.png"><span
-									class="location"> Jawahar Circle, Jaipur</span>
+								<br> <span class="name"><%= patient.getFirstName() +" " + patient.getLastName() %></span><br>
+								<img src="media/gender.png"><span class="details">
+									<%= patient.getGender() +", " + patient.getAge() %></span><br> <img
+									src="media/bloodGroup.png"><span class="blood"> <%= patient.getBloodGroup() %></span><br>
+								<img src="media/Location.png"><span class="location">
+									<%= patient.getAddress() %></span>
 							</div>
 						</div>
 
@@ -71,27 +75,29 @@
 			<div class="col-sm-9 col-sm-offset-3 main">
 				<h1 class="page-header">
 					<center>Edit Profile</center>
-				</h1>
+				</h1> 
 				<h4 class="sub-header">Personal Information</h4>
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="editProfile" method="post">
+				<input type="hidden"  name="patientId"
+								value="<%= patient.getId() %>" />
 					<div class="form-group">
 						<label for="firstName" class="col-sm-2 control-label">First
 							Name</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">Rakesh</p>
+							<p class="form-control-static"><%= patient.getFirstName() %></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="lastName" class="col-sm-2 control-label">Last
 							Name</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">Sharma</p>
+							<p class="form-control-static"><%= patient.getLastName() %></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="gender" class="col-sm-2 control-label">Gender</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">Male</p>
+							<p class="form-control-static"><%= patient.getGender() %></p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -107,37 +113,37 @@
 							Number</label>
 						<div class="col-sm-10">
 							<input type="phoneNumber" class="form-control" id="phoneNumber"
-								placeholder="+91 9521113802">
+								placeholder="+91 9521113802" value="<%= patient.getContactNumber() %>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="address" class="col-sm-2 control-label">Address</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" rows="2"
-								placeholder="BH-3, The LNMIIT"></textarea>
+								placeholder="BH-3, The LNMIIT" value="<%= patient.getAddress() %>" ></textarea>
 						</div>
 					</div>
 					<h4 class="sub-header">Health Information</h4>
 					<div class="form-group">
 						<label for="height" class="col-sm-2 control-label">Height</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="height"
-								placeholder="5' 10&#34;">
+							<input type="text" class="form-control" name="height" id="height"
+								placeholder="in cm" value="<%= patient.getHeight() %>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="weight" class="col-sm-2 control-label">Weight</label>
 						<div class="col-sm-10">
-							<input type="Number" class="form-control" id="weight"
-								placeholder="in kgs">
+							<input type="Number" class="form-control" name="weight" id="weight"
+								placeholder="in kgs" value="<%= patient.getWeight() %>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="bloodGroup" class="col-sm-2 control-label">Blood
 							Group</label>
 						<div class="col-sm-10">
-							<input type="string" class="form-control" id="bloodGroup"
-								placeholder="A+">
+							<input type="string" class="form-control" name="bloodGroup" id="bloodGroup"
+								placeholder="A+" value="<%= patient.getBloodGroup() %>">
 						</div>
 					</div>
 					<h4 class="sub-header">Account Information</h4>
@@ -152,8 +158,8 @@
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label">Password</label>
 						<div class="col-sm-10">
-							<input type="Number" class="form-control" id="password"
-								placeholder="">
+							<input type="password" class="form-control" name="password" id="password"
+								placeholder="password">
 						</div>
 					</div>
 					<div class="form-group">

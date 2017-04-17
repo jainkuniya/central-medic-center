@@ -3,6 +3,8 @@ package database;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import modal.Appointment;
 import modal.AppointmentItems;
 import modal.Person;
@@ -173,5 +175,46 @@ public class DatabaseHelper {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public int updatePatient(int patientId, HttpServletRequest request) {
+		try {
+			//update person
+			updatePerson(patientId, request);
+			
+			//update patient
+			PreparedStatement ps = connection.prepareStatement(
+					"update patient set height=?, weight=?, bloodGroup=? where id=?");
+			ps.setInt(1, Integer.valueOf((String)request.getParameter("height")));
+			ps.setInt(2, Integer.valueOf((String)request.getParameter("weight")));
+			ps.setString(3, request.getParameter("bloodGroup"));
+			ps.setInt(4, patientId);
+
+			return ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	private int updatePerson(int patientId, HttpServletRequest request) {
+		try {
+			//update person
+			PreparedStatement ps = connection.prepareStatement(
+					"update person set password=?, dob=?, address=?, contactNumber=? where id=?");
+			ps.setString(1, request.getParameter("password"));
+			ps.setLong(2, System.currentTimeMillis());
+			ps.setString(3, request.getParameter("address"));
+			ps.setString(4, request.getParameter("contactNumber"));
+			ps.setInt(5, patientId);
+
+			return ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+		
 	}
 }

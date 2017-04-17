@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
-
+	<% Patient patient = (Patient)request.getAttribute("patient"); %>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -31,7 +32,15 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Edit Profile</a></li>
+				<li>
+					<form  action="updatePatientProfile"
+							method="post">
+
+							<input type="hidden"  name="patientId"
+								value="<%= patient.getId() %>" />
+
+							<button  type="submit">Edit Profile</button>
+					</form>
 				<li><a href="#">Logout</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
@@ -54,7 +63,6 @@
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-8 info">
-								<% Patient patient = (Patient)request.getAttribute("patient"); %>
 								<br> <span class="name"><%= patient.getFirstName() +" " + patient.getLastName() %></span><br>
 								<img src="media/gender.png"><span class="details">
 									<%= patient.getGender() +", " + patient.getAge() %></span><br> <img
