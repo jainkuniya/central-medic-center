@@ -28,7 +28,7 @@ CREATE TABLE `person` (
   `lastName` varchar(10) DEFAULT NULL,
   `userName` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `dob` int(11) DEFAULT NULL,
+  `dob` double DEFAULT NULL,
   `token` varchar(10) CHARACTER SET big5 DEFAULT '0',
   `type` int(1) NOT NULL DEFAULT '1',
   `gender` varchar(2) DEFAULT 'NA',
@@ -47,7 +47,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty',1111,'0',1,'NA',NULL,NULL),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty',1111,'1',1,'NA',NULL,NULL),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty',1111,'1',2,'NA',NULL,NULL),(14,'Vishwesh','Jainkuniya','v3','qwerty',1111,'1',2,'NA',NULL,NULL);
+INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty',889236840000,'0',1,'NA',NULL,NULL),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty',889236840000,'1',1,'NA',NULL,NULL),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty',889236840000,'1',2,'NA',NULL,NULL),(14,'Vishwesh','Jainkuniya','v3','qwerty',889236840000,'1',2,'NA',NULL,NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  7:07:36
+-- Dump completed on 2017-04-17 16:48:22

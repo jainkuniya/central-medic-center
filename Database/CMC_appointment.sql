@@ -23,17 +23,21 @@ DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appointment` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `patientId` int(11) NOT NULL,
   `doctorId` int(11) DEFAULT NULL,
   `isClosed` int(11) DEFAULT '0',
-  `dateCreated` int(11) DEFAULT NULL,
+  `dateCreated` double DEFAULT NULL,
+  `symptons` varchar(45) DEFAULT NULL,
+  `disease` varchar(45) DEFAULT NULL,
+  `preferredDate` double DEFAULT NULL,
+  `allocatedDate` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `patientId` (`patientId`),
   KEY `doctorId` (`doctorId`),
   CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `patient` (`id`),
   CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`doctorId`) REFERENCES `doctor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +46,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+INSERT INTO `appointment` VALUES (1,1,NULL,0,1492426867320,'Symptons',' Disease',1492426867320,NULL),(2,1,NULL,0,1492427049030,'Symptons',' Disease',1492427049030,NULL),(3,1,NULL,0,1492427176793,'Symptons',' Disease',1492427176793,NULL),(4,1,NULL,0,1492427265008,'Symptons',' Disease',1492427265008,NULL),(5,1,NULL,0,1492427355113,'Symptons',' Disease',1492427355113,NULL),(6,1,NULL,0,1492427586601,'Symptons',' Disease',1492427586601,NULL),(7,1,NULL,0,1492427777615,'Symptons',' Disease',1492427777615,NULL);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17  7:07:37
+-- Dump completed on 2017-04-17 16:48:22

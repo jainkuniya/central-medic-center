@@ -75,13 +75,16 @@ public class DatabaseHelper {
 		return null;
 	}
 	
-	public int createAppointment(int patientId){
+	public int createAppointment(Appointment appointment){
 		try{
 			//get person from database
 			PreparedStatement ps =connection.prepareStatement					
-					("insert into appointment (patientId, dateCreated) values(?,?)");
-			ps.setInt(1, patientId);			
+					("insert into appointment (patientId, dateCreated, symptons, disease, preferredDate) values(?,?,?,?,?)");
+			ps.setInt(1, appointment.getPatientId());			
 			ps.setLong(2, System.currentTimeMillis());
+			ps.setString(3, appointment.getSymptons());
+			ps.setString(4, appointment.getDisease());
+			ps.setLong(5, System.currentTimeMillis());
 			
 			int status = ps.executeUpdate();
 			//create an item
@@ -98,7 +101,7 @@ public class DatabaseHelper {
 	public int addItemInAppointment(int id, int type, String description){
 		try{
 			PreparedStatement ps = connection.prepareStatement					
-				("insert into appointmentItems (id,type, date, description) values(?,?,?,?)");
+				("insert into appointmentItems (appointmentId,type, date, description) values(?,?,?,?)");
 		ps.setInt(1, id);	
 		ps.setInt(2, 1);
 		ps.setLong(3, System.currentTimeMillis());

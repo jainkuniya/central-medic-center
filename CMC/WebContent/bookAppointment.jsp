@@ -63,29 +63,30 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 main">
       <h1 class="page-header">Book Appointment</h1>
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="post" action="bookAppointment">
         <div class="form-group">
           <label for="name" class="col-sm-2 control-label">Patient Name</label>
           <div class="col-sm-10">
             <p class="form-control-static">Rakesh Sharma</p>
+            <input type="hidden" name="patientId" value="1">
           </div>
         </div>
         <div class="form-group">
-          <label for="date" class="col-sm-2 control-label">Date of Birth</label>
+          <label for="date" class="col-sm-2 control-label">Preferred Date of Appointment</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" id="date" placeholder="Date">
+            <input type="date" class="form-control" id="date" placeholder="Date" name="preferredDate">
           </div>
         </div>
         <div class="form-group">
           <label for="symptons" class="col-sm-2 control-label">Symptons</label>
           <div class="col-sm-10">
-            <textarea class="form-control" rows="2" placeholder="chest pain, fatigue, hallucination, swelling"></textarea>
+            <textarea class="form-control" rows="2" placeholder="chest pain, fatigue, hallucination, swelling" name="symptons"></textarea>
           </div>
         </div>
         <div class="form-group">
           <label for="disease" class="col-sm-2 control-label">Suspected Disease</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="disease" placeholder="Tuberculosis, Malaria, Acne, Diarrhea">
+            <input type="text" class="form-control" id="disease" placeholder="Tuberculosis, Malaria, Acne, Diarrhea" name="disease">
           </div>
         </div>
         <div class="form-group">
