@@ -15,16 +15,14 @@ public class Appointment {
 	private String disease;
 
 	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
-		super();
 		this.setId(id);
 		this.doctorId = doctorId;
 		this.isClosed = isClosed;
 		this.dateCreated = dateCreated;
-		this.setItems(items);
+		this.items = items;
 	}
 
 	public Appointment(int patientId, String symptons, String disease, long preferredDate) {
-		super();
 		this.setPatientId(patientId);
 		this.isClosed = 0;
 		this.dateCreated = System.currentTimeMillis();
@@ -34,7 +32,6 @@ public class Appointment {
 	}
 
 	public Appointment(int id, String symptons) {
-		super();
 		this.setId(id);
 		this.setSymptons(symptons);
 	}

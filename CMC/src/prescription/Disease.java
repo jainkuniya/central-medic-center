@@ -1,5 +1,7 @@
 package prescription;
 
+import java.util.ArrayList;
+
 public class Disease {
 
 	private int diseaseId;
@@ -7,8 +9,8 @@ public class Disease {
 	private String gender;
 	private int age;
 	private int departmentId;
-	private String[] symptoms;
-	private Medicine[] medicines;
-	private Lab[] tests;
-
+	private int[] symptoms;
+	private int[] medicines;
+	private int[] reports;
+	
 }

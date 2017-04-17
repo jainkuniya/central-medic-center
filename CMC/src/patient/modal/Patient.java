@@ -2,21 +2,23 @@ package patient.modal;
 
 import java.sql.Date;
 
-import authentication.Person;
+import modal.Person;
 
-public class Patient extends modal.Person {
+ 
+
+public class Patient extends  Person {
 
 	private int height;
 	private int weight;
 	private String bloodGroup;
-
+	
 	public Patient(int id, String firstName, String lastName, String userName, long dob, int type, String gender,
 			String address, String contactNumber, int height, int weight, String bloodGroup) {
 		super(id, firstName, lastName, userName, dob, type, gender, address, contactNumber);
-
+		
 		this.height = height;
 		this.weight = weight;
-		this.setBloodGroup(bloodGroup);
+		this.bloodGroup = bloodGroup;
 	}
 
 	public String getBloodGroup() {
@@ -27,4 +29,24 @@ public class Patient extends modal.Person {
 		this.bloodGroup = bloodGroup;
 	}
 
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	
+	
+	
+	
 }
