@@ -10,5 +10,5 @@ public class Disease {
 	private String[] symptoms;
 	private Medicine[] medicines;
 	private Lab[] tests;
-	
+
 }

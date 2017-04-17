@@ -11,8 +11,6 @@ public class Person {
 	private String gender;
 	private String address;
 	private String contactNumber;
-	
-	
 
 	public Person(int id, String firstName, String lastName, String userName, long dob, int type, String gender,
 			String address, String contactNumber) {
@@ -100,10 +98,9 @@ public class Person {
 		this.type = userType;
 	}
 
-	public String getAge(){
-		System.out.println(System.currentTimeMillis() +" " + this.dob);
-		return String.valueOf((System.currentTimeMillis() - this.dob)/(60*60*24*365*1000));
+	public String getAge() {
+		System.out.println(System.currentTimeMillis() + " " + this.dob);
+		return String.valueOf((System.currentTimeMillis() - this.dob) / (60 * 60 * 24 * 365 * 1000));
 	}
 
-	 
 }

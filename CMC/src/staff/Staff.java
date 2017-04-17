@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import authentication.Person;
 
-public class Staff extends Person{
+public class Staff extends Person {
 
 	public Staff(String firstName, String lastName, Date dob, String gender, String address, int contactNumber,
 			int userId, String userName, String password, String userType) {

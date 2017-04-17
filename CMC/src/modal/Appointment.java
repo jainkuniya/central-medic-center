@@ -13,16 +13,16 @@ public class Appointment {
 	private ArrayList<AppointmentItems> items;
 	private String symptons;
 	private String disease;
-	
+
 	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		super();
 		this.setId(id);
 		this.doctorId = doctorId;
 		this.isClosed = isClosed;
 		this.dateCreated = dateCreated;
-		this.items = items;
+		this.setItems(items);
 	}
-	
+
 	public Appointment(int patientId, String symptons, String disease, long preferredDate) {
 		super();
 		this.setPatientId(patientId);
@@ -30,7 +30,13 @@ public class Appointment {
 		this.dateCreated = System.currentTimeMillis();
 		this.setSymptons(symptons);
 		this.setDisease(disease);
-		this.preferredDate=preferredDate;
+		this.preferredDate = preferredDate;
+	}
+
+	public Appointment(int id, String symptons) {
+		super();
+		this.setId(id);
+		this.setSymptons(symptons);
 	}
 
 	public int getId() {
@@ -79,5 +85,13 @@ public class Appointment {
 
 	public void setAllocatedDate(long allocatedDate) {
 		this.allocatedDate = allocatedDate;
+	}
+
+	public ArrayList<AppointmentItems> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<AppointmentItems> items) {
+		this.items = items;
 	}
 }

@@ -9,22 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import patient.modal.Patient;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import patient.modal.Patient;
 
 /**
- * Servlet implementation class Patient
+ * Servlet implementation class PatientAppointmentDetails
  */
-@WebServlet("/patient")
-public class PatientServlet extends HttpServlet {
+@WebServlet("/patientAppointmentDetails")
+public class PatientAppointmentDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PatientServlet() {
+	public PatientAppointmentDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,25 +45,24 @@ public class PatientServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// get appointmentDetails from DB
 		try {
-			int personId = (int) request.getAttribute("personId");
-			// get patient details
+			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
+			// get appointment details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
-			Patient patient = databaseHelper.getPatient(personId);
-			ArrayList<Appointment> appointments = databaseHelper.getAppointments(personId);
-			if (patient == null || appointments == null) {
+			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
+			if (apointment == null) {
 				// redirect to login
 				redirectToLogin(request, response);
 				return;
 			}
-			// redirect to person dashboard
-			RequestDispatcher rs = request.getRequestDispatcher("patient.jsp");
-			request.setAttribute("patient", patient);
-			request.setAttribute("appointments", appointments);
+			// redirect to person detailed appointment
+			RequestDispatcher rs = request.getRequestDispatcher("patientDetailedAppointment.jsp");
+			request.setAttribute("apointment", apointment);
 			rs.forward(request, response);
 			return;
 		} catch (Exception e) {
+			e.printStackTrace();
 			// redirect to login
 			redirectToLogin(request, response);
 		}

@@ -1,4 +1,5 @@
 package database;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -11,30 +12,30 @@ public class DatabaseHelper {
 
 	Connection connection;
 
-	public DatabaseHelper(){
+	public DatabaseHelper() {
 		connection = DatabaseConnector.getDatabase();
 	}
 
-	public int[] getPersonType(String userName, String password){
-		int result[] = {-1, 0};
-		
-		if(connection==null) {
+	public int[] getPersonType(String userName, String password) {
+		int result[] = { -1, 0 };
+
+		if (connection == null) {
 			return result;
 		}
 
 		try {
-			PreparedStatement ps =connection.prepareStatement
-					
-					("select * from person where userName=? and password=?");
+			PreparedStatement ps = connection.prepareStatement
+
+			("select * from person where userName=? and password=?");
 
 			ps.setString(1, userName);
 			ps.setString(2, password);
-			
-			ResultSet rs =ps.executeQuery();
-			if(rs.next()) {
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
 				result[0] = rs.getInt("type");
 				result[1] = rs.getInt("id");
-			}else {
+			} else {
 				result[0] = 0;
 			}
 
@@ -48,103 +49,129 @@ public class DatabaseHelper {
 	}
 
 	public Patient getPatient(int id) {
-		try{
-			//get person from database
-			PreparedStatement ps =connection.prepareStatement					
-					("select * from person where id=?");
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select * from person where id=?");
 			ps.setInt(1, id);
-			ResultSet rs =ps.executeQuery();
-			if(rs.next())
-			{				
-				//get patient from database
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// get patient from database
 				ps = connection.prepareStatement("select * from patient where id=?");
 				ps.setInt(1, id);
 				ResultSet rsPatient = ps.executeQuery();
-				if(rsPatient.next())
-				{System.out.println(id);
-					return new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("userName"),
-							rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"), rs.getString("address"), rs.getString("contactNumber"), 
-							rsPatient.getInt("weight"), rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
+				if (rsPatient.next()) {
+					System.out.println(id);
+					return new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
+							rs.getString("address"), rs.getString("contactNumber"), rsPatient.getInt("weight"),
+							rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
 				}
 			}
-			//get patient from database
-		}catch(SQLException e){
+			// get patient from database
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
-	public int createAppointment(Appointment appointment){
-		try{
-			//get person from database
-			PreparedStatement ps =connection.prepareStatement					
-					("insert into appointment (patientId, dateCreated, symptons, disease, preferredDate) values(?,?,?,?,?)");
-			ps.setInt(1, appointment.getPatientId());			
+
+	public int createAppointment(Appointment appointment) {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement(
+					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate) values(?,?,?,?,?)");
+			ps.setInt(1, appointment.getPatientId());
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
 			ps.setLong(5, System.currentTimeMillis());
-			
+
 			int status = ps.executeUpdate();
-			//create an item
-			if(status>0)
-			{
+			// create an item
+			if (status > 0) {
 				return addItemInAppointment(status, 1, "Created");
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return -1;
 	}
-	
-	public int addItemInAppointment(int id, int type, String description){
-		try{
-			PreparedStatement ps = connection.prepareStatement					
-				("insert into appointmentItems (appointmentId,type, date, description) values(?,?,?,?)");
-		ps.setInt(1, id);	
-		ps.setInt(2, 1);
-		ps.setLong(3, System.currentTimeMillis());
-		ps.setString(4, description);
-		
-		return ps.executeUpdate();
-		
-		}catch(SQLException e){
+
+	public int addItemInAppointment(int id, int type, String description) {
+		try {
+			PreparedStatement ps = connection.prepareStatement(
+					"insert into appointmentItems (appointmentId,type, date, description) values(?,?,?,?)");
+			ps.setInt(1, id);
+			ps.setInt(2, 1);
+			ps.setLong(3, System.currentTimeMillis());
+			ps.setString(4, description);
+
+			return ps.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return -1;
 	}
-	
-	public ArrayList<Appointment> getAppointments(int patientId){
+
+	public ArrayList<Appointment> getAppointments(int patientId) {
 		ArrayList<Appointment> arrayList = new ArrayList<Appointment>();
-		try{
-			PreparedStatement ps = connection.prepareStatement					
-				("select * from appointment where patientId=?");
-		ps.setInt(1, patientId);	
-		
-		ResultSet rs =ps.executeQuery();
-		while(rs.next())
-		{	
-			int id = rs.getInt("id");
-			ArrayList<AppointmentItems> items =  new ArrayList<AppointmentItems>();
-			ps = connection.prepareStatement					
-					("select * from appointmentItems where id=?");
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from appointment where patientId=?");
+			ps.setInt(1, patientId);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+
+				Appointment appointment = new Appointment(id, rs.getString("symptons"));
+				arrayList.add(appointment);
+			}
+
+			return arrayList;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<AppointmentItems> getAppointmentsItems(int id) {
+		ArrayList<AppointmentItems> items = new ArrayList<AppointmentItems>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where id=?");
 			ps.setInt(1, id);
 			ResultSet itemSet = ps.executeQuery();
-			while(itemSet.next()){
-				AppointmentItems item = new AppointmentItems(rs.getLong("date"), rs.getInt("type"), rs.getString("dexcription"));
+			while (itemSet.next()) {
+				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getInt("type"),
+						itemSet.getString("dexcription"));
 				items.add(item);
 			}
-			Appointment appointment = new Appointment(id, rs.getInt("doctorId"),rs.getInt("isClosed"), rs.getLong("dateCreated"), items);
-			arrayList.add(appointment);
-		}		
-		
-		return arrayList;
-		
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
+		return null;
+	}
+
+	public Appointment getDetailedAppointment(int appointmentId) {
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from appointment where id=?");
+			ps.setInt(1, appointmentId);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+
+				Appointment appointment = new Appointment(id, rs.getString("symptons"));
+				appointment.setItems(getAppointmentsItems(id));
+				return appointment;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
