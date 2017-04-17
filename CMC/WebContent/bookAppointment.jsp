@@ -64,34 +64,34 @@
     <div class="col-sm-9 col-sm-offset-3 main">
       <h1 class="page-header">Book Appointment</h1>
       <form class="form-horizontal">
-        <div class="row form-group">
-            <label class="col-sm-2 control-label">Patient Name</label>
-            <div class="col-sm-10">
-              <p class="form-control-static">Rakesh Sharma</p>
-            </div>
-        </div>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Date</label>
+          <label for="name" class="col-sm-2 control-label">Patient Name</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Date">
+            <p class="form-control-static">Rakesh Sharma</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Symptons</label>
+          <label for="date" class="col-sm-2 control-label">Date</label>
           <div class="col-sm-10">
-            <textarea class="form-control" rows="2"></textarea>
+            <input type="date" class="form-control" id="date" placeholder="Date">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Suspected Disease</label>
+          <label for="symptons" class="col-sm-2 control-label">Symptons</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Disease">
+            <textarea class="form-control" rows="2" placeholder="Symptons"></textarea>
           </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputFile" class="col-sm-2 control-label">Medical Documents</label>
+          <label for="disease" class="col-sm-2 control-label">Suspected Disease</label>
           <div class="col-sm-10">
-            <input type="file" id="exampleInputFile">
+            <input type="email" class="form-control" id="disease" placeholder="Disease">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Documents" class="col-sm-2 control-label">Medical Documents</label>
+          <div class="col-sm-10">
+            <input type="file" id="Documents">
             <p class="help-block">Upload relevant documents here for better care.</p>
           </div>
         </div>  
