@@ -13,7 +13,7 @@ public class Appointment {
 	private ArrayList<AppointmentItems> items;
 	private String symptons;
 	private String disease;
-
+	private String title;
 	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.setId(id);
 		this.setDoctorId(doctorId);
@@ -114,5 +114,19 @@ public class Appointment {
 
 	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

@@ -33,7 +33,7 @@ CREATE TABLE `appointmentitems` (
   KEY `type` (`type`),
   CONSTRAINT `appointmentItems_ibfk_3` FOREIGN KEY (`appointmentId`) REFERENCES `appointment` (`id`),
   CONSTRAINT `appointmentItems_ibfk_4` FOREIGN KEY (`type`) REFERENCES `appointmentitemstype` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `appointmentitems` (
 
 LOCK TABLES `appointmentitems` WRITE;
 /*!40000 ALTER TABLE `appointmentitems` DISABLE KEYS */;
-INSERT INTO `appointmentitems` VALUES (3,1492427586653,1,'Created',1),(4,1492427777672,1,'Created',1);
+INSERT INTO `appointmentitems` VALUES (3,1492427586653,1,'Created',1),(4,1492427777672,1,'Created',1),(5,1492519085816,1,'Created',1);
 /*!40000 ALTER TABLE `appointmentitems` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-18 16:54:52
+-- Dump completed on 2017-04-18 18:59:46
