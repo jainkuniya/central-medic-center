@@ -2,9 +2,12 @@ package modal;
 
 import java.util.ArrayList;
 
+import staff.modal.Doctor;
+import utils.DateUtils;
+
 public class Appointment {
 	private int id;
-	private int doctorId;
+	private Doctor doctor;
 	private int patientId;
 	private int isClosed;
 	private long preferredDate;
@@ -14,7 +17,7 @@ public class Appointment {
 	private String symptons;
 	private String disease;
 	private String title;
-	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
+	public Appointment(int id, Doctor doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.setId(id);
 		this.setDoctorId(doctorId);
 		this.setIsClosed(isClosed);
@@ -34,6 +37,13 @@ public class Appointment {
 	public Appointment(int id, String symptons) {
 		this.setId(id);
 		this.setSymptons(symptons);
+	}
+
+	public Appointment(int id, Doctor doctor, String title, long dateCreated) {
+		this.id=id;
+		this.doctor= doctor;
+		this.title=title;
+		this.dateCreated = dateCreated;
 	}
 
 	public int getId() {
@@ -95,6 +105,10 @@ public class Appointment {
 	public long getDateCreated() {
 		return dateCreated;
 	}
+	
+	public String getStringDateCreated() {
+		return DateUtils.getStringFromDate(dateCreated);
+	}
 
 	public void setDateCreated(long dateCreated) {
 		this.dateCreated = dateCreated;
@@ -108,12 +122,12 @@ public class Appointment {
 		this.isClosed = isClosed;
 	}
 
-	public int getDoctorId() {
-		return doctorId;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	/**

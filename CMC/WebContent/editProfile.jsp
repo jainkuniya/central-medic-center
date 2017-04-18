@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment"%>
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -67,9 +67,72 @@
 						</div>
 
 					</li>
-					<li><a href="bookAppointment.jsp">Book Appointment</a></li>
-					<li><a href="#">Upcoming Appointments</a></li>
-					<li><a href="#">Appointment History</a></li>
+					<% ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments"); %>
+					<li class=""><a href="openBookAppointment">Book Appointment</a></li>
+					<li class="topic">
+						<span class="upcoming">Upcoming Appointment</span>
+						<% ArrayList<Appointment> appointments = arrayList.get(0);
+			        	for(int i=0; i<appointments.size(); i++)
+			        	{ Appointment appointment = appointments.get(i);
+	        			%>
+	        			<form class="form-signin" action="patientAppointmentDetails" method="post">
+	        			<input type="hidden" class="form-control" name="appointmentId" value="<%= appointment.getId() %>" />
+					</li>
+					<ul>
+						<li class="subtopic">
+							<button class="btn btn-default" type="submit">
+							<div class="row">
+								<div class="col-sm-12 text-left">
+									<b><%= appointment.getTitle() %> </b><br>
+									<% Doctor doctor = appointment.getDoctor();
+										if(doctor==null){
+									%>Wating for doctor approval
+									<% }else{ %>
+									<%= doctor.getFirstName() %>
+									<% } %> 
+									| <%= appointment.getStringDateCreated() %> 
+								</div>
+							</div>
+							</button>
+							</form>
+						</li>
+					</ul>
+					
+						<%  }
+	        %>
+					<li class="topic">
+						Recent Appointment
+						 
+						<% ArrayList<Appointment> appointments2 = arrayList.get(1);
+			        	for(int i=0; i<appointments2.size(); i++)
+			        	{ Appointment appointment = appointments2.get(i);
+	        			%>
+	        			<form class="form-signin" action="patientAppointmentDetails" method="post">
+	        			<input type="hidden" class="form-control" name="appointmentId" value="<%= appointment.getId() %>" />
+					</li>
+					<ul>
+						<li class="subtopic">
+							<button class="btn btn-default" type="submit">
+							<div class="row">
+								<div class="col-sm-12 text-left">
+									<b><%= appointment.getTitle() %> </b><br>
+									<% Doctor doctor = appointment.getDoctor();
+										if(doctor==null){
+									%>Wating for doctor approval
+									<% }else{ %>
+									<%= doctor.getFirstName() %>
+									<% } %> 
+									| <%= appointment.getStringDateCreated() %> 
+								</div>
+							</div>
+							</button>
+							</form>
+						</li>
+					</ul>
+					
+						<%  }
+	        %>
+
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">

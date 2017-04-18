@@ -89,7 +89,6 @@ public class DatabaseHelper {
 				ps.setInt(1, id);
 				ResultSet rsDoctor = ps.executeQuery();
 				if (rsDoctor.next()) {
-					System.out.println(id);
 					return new Doctor(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
 							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"), rsDoctor.getString("degree"),
@@ -143,8 +142,10 @@ public class DatabaseHelper {
 		return -1;
 	}
 
-	public ArrayList<Appointment> getAppointments(int patientId) {
-		ArrayList<Appointment> arrayList = new ArrayList<Appointment>();
+	public ArrayList<ArrayList<Appointment>> getAppointments(int patientId) {
+		ArrayList<ArrayList<Appointment>> arrayList = new ArrayList<ArrayList<Appointment>>();
+		ArrayList<Appointment> upcommingAppointments = new ArrayList<Appointment>();
+		ArrayList<Appointment> closedAppointments = new ArrayList<Appointment>();
 		try {
 			PreparedStatement ps = connection.prepareStatement("select * from appointment where patientId=?");
 			ps.setInt(1, patientId);
@@ -152,11 +153,20 @@ public class DatabaseHelper {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
-
-				Appointment appointment = new Appointment(id, rs.getString("symptons"));
-				arrayList.add(appointment);
+				int isClosed = rs.getInt("isClosed");
+				int doctorId = rs.getInt("doctorId");
+				Doctor doctor = getDoctor(doctorId);
+				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"));
+				if(isClosed==0)
+				{
+					upcommingAppointments.add(appointment);
+				}else{
+					closedAppointments.add(appointment);
+				}				
+				
 			}
-
+			arrayList.add(upcommingAppointments);
+			arrayList.add(closedAppointments);
 			return arrayList;
 
 		} catch (SQLException e) {
@@ -249,7 +259,6 @@ public class DatabaseHelper {
 		try {
 			//update person
 			if(!request.getParameter("password").isEmpty()){
-				System.out.println(request.getParameter("password"));
 				PreparedStatement ps = connection.prepareStatement(
 						"update person set password=?, dob=?, address=?, contactNumber=? where id=?");
 				ps.setString(1, request.getParameter("password"));

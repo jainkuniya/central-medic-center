@@ -1,6 +1,7 @@
 package patient.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
+import modal.Appointment;
 import patient.modal.Patient;
 
 /**
@@ -38,11 +40,14 @@ public class OpenBookAppointment extends HttpServlet {
 			int patientId = (int)session.getAttribute("UserID");
 			if(patientId>0)
 			{
-				Patient patient = new DatabaseHelper().getPatient(patientId);
-				if(patient!=null)
+				DatabaseHelper databaseHelper = new DatabaseHelper();
+				Patient patient = databaseHelper.getPatient(patientId);
+				ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId);
+				if(patient!=null && appointments!=null)
 				{
 					rs = request.getRequestDispatcher("bookAppointment.jsp");
 					request.setAttribute("patient", patient);
+					request.setAttribute("appointments", appointments);
 					rs.forward(request, response);
 				}else
 				{
