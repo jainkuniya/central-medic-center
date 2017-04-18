@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import modal.Appointment;
 import modal.AppointmentItems;
 import patient.modal.Patient;
+import staff.modal.Doctor;
 
 public class DatabaseHelper {
 
@@ -66,6 +67,33 @@ public class DatabaseHelper {
 							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"), rsPatient.getInt("weight"),
 							rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
+				}
+			}
+			// get patient from database
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	public Doctor getDoctor(int id) {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select * from person where id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// get patient from database
+				ps = connection.prepareStatement("select * from doctor where id=?");
+				ps.setInt(1, id);
+				ResultSet rsDoctor = ps.executeQuery();
+				if (rsDoctor.next()) {
+					System.out.println(id);
+					return new Doctor(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
+							rs.getString("address"), rs.getString("contactNumber"), rsDoctor.getString("degree"),
+							rsDoctor.getString("specialization"));
 				}
 			}
 			// get patient from database
@@ -188,6 +216,26 @@ public class DatabaseHelper {
 			ps.setInt(2, Integer.valueOf((String)request.getParameter("weight")));
 			ps.setString(3, request.getParameter("bloodGroup"));
 			ps.setInt(4, patientId);
+
+			return ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int updateDoctor(int doctorId, HttpServletRequest request) {
+		try {
+			//update person
+			updatePerson(doctorId, request);
+			
+			//update patient
+			PreparedStatement ps = connection.prepareStatement(
+					"update doctor set degree=?, specialization=? where id=?");
+			ps.setString(1, (String)request.getParameter("degree"));
+			ps.setString(2, (String)request.getParameter("specialization"));
+			ps.setInt(3, doctorId);
 
 			return ps.executeUpdate();
 
