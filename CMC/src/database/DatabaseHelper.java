@@ -113,7 +113,7 @@ public class DatabaseHelper {
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
-			ps.setLong(5, System.currentTimeMillis());
+			ps.setLong(5, appointment.getPreferredDate());
 
 			int status = ps.executeUpdate();
 			// create an item

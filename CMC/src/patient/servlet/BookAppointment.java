@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import utils.DateUtils;
 
 /**
  * Servlet implementation class BookAppointment
@@ -45,7 +46,8 @@ public class BookAppointment extends HttpServlet {
 			throws ServletException, IOException {
 
 		Appointment appointment = new Appointment(Integer.valueOf(request.getParameter("patientId")),
-				(String) request.getParameter("symptons"), (String) request.getParameter("disease"), 1234566);
+				(String) request.getParameter("symptons"), (String) request.getParameter("disease"),
+				DateUtils.getLongFromDate((String)request.getParameter("preferredDate")));
 
 		// insert in DB
 		int status = new DatabaseHelper().createAppointment(appointment);
