@@ -80,7 +80,7 @@
 						<label for="name" class="col-sm-2 control-label">Patient
 							Name</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">Rakesh Sharma</p>
+							<p class="form-control-static"><%= patient.getFirstName() +" " + patient.getLastName() %></p>
 							<input type="hidden" name="patientId" value="1">
 						</div>
 					</div>

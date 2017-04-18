@@ -66,7 +66,7 @@
 						</div>
 
 					</li>
-					<li><a href="bookAppointment.jsp">Book Appointment</a></li>
+					<li><a href="openBookAppointment">Book Appointment</a></li>
 					<li><h3>Recent appointments</h3></li>
 					<% ArrayList<Appointment> appointments = (ArrayList<Appointment>)request.getAttribute("appointments");
         	for(int i=0; i<appointments.size(); i++)
