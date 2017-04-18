@@ -42,7 +42,7 @@ public class UpdateDoctorProfile extends HttpServlet {
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(doctorId);
-			ArrayList<Appointment> appointments = databaseHelper.getAppointments(doctorId);
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId);
 			if (doctor == null || appointments == null) {
 				// redirect to login
 				redirectToLogin(request, response);

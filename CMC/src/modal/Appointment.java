@@ -19,7 +19,7 @@ public class Appointment {
 	private String title;
 	public Appointment(int id, Doctor doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.setId(id);
-		this.setDoctorId(doctorId);
+		this.doctor= doctor;
 		this.setIsClosed(isClosed);
 		this.setDateCreated(dateCreated);
 		this.items = items;

@@ -47,7 +47,7 @@ public class DoctorServlet extends HttpServlet {
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(personId);
-			ArrayList<Appointment> appointments = databaseHelper.getAppointments(personId);
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId);
 			if (doctor == null || appointments == null) {
 				// redirect to login
 				redirectToLogin(request, response);
