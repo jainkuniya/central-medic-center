@@ -68,55 +68,30 @@
 					</li>
 					<li class=""><a href="openBookAppointment">Book Appointment</a></li>
 					<li class="topic">
-						<span class="upcoming">Upcoming Appointment</span>
+						Recent Appointment
 						<% ArrayList<Appointment> appointments = (ArrayList<Appointment>)request.getAttribute("appointments");
 			        	for(int i=0; i<appointments.size(); i++)
 			        	{ Appointment appointment = appointments.get(i);
-	        			%>
+	        			%>-->
 	        			<form class="form-signin" action="patientAppointmentDetails" method="post">
-	        			<input type="hidden" class="form-control" name="appointmentId" value="<%= appointment.getId() %>" />
-					</li>
-					<ul>
-						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
-							<div class="row">
-								<div class="col-sm-12 text-left">
-									<b>Title </b><br>
-									Dr. Name | Date 
+						<input type="hidden" class="form-control" name="appointmentId" value="<%= appointment.getId() %>" />
+						<ul class="">
+							<li>	
+								<button class="btn btn-default" type="submit">
+								<div class="row appoint">
+									<div class="col-sm-12 text-left">
+										<b>Title</b> <br>
+										Dr. Name ||<div class="text-right">Date </div>
+									</div>
 								</div>
-							</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-					
+								</button>
+								</form>
+							</li>
+							<button class="btn btn-default" type="submit"><%= appointment.getSymptons() %></button>	
+							</li>
+						</ul>
 						<%  }
-	        %>
-					<li class="topic">
-						Recent Appointment
-						<% ArrayList<Appointment> appointments2 = (ArrayList<Appointment>)request.getAttribute("appointments");
-			        	for(int i=0; i<appointments2.size(); i++)
-			        	{ Appointment appointment = appointments2.get(i);
-	        			%>
-	        			<form class="form-signin" action="patientAppointmentDetails" method="post">
-	        			<input type="hidden" class="form-control" name="appointmentId" value="<%= appointment.getId() %>" />
-					</li>
-					<ul>
-						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
-							<div class="row">
-								<div class="col-sm-12 text-left">
-									<b><%= appointment.getSymptons() %> </b><br>
-									Dr. Name | Date 
-								</div>
-							</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-					
-						<%  }
-	        %>
+        %>			</li>
 
 				</ul>
 			</div>
