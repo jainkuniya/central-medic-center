@@ -1,6 +1,7 @@
 package patient.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import patient.modal.Patient;
 
 /**
  * Servlet implementation class PatientAppointmentDetails
@@ -45,11 +48,15 @@ public class PatientAppointmentDetails extends HttpServlet {
 			throws ServletException, IOException {
 		// get appointmentDetails from DB
 		try {
+			HttpSession session = request.getSession();
+			int patientId = (int) session.getAttribute("UserID");
 			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
 			// get appointment details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
-			if (apointment == null) {
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId);
+			Patient patient = databaseHelper.getPatient(patientId);
+			if (apointment == null || patient == null || appointments == null) {
 				// redirect to login
 				redirectToLogin(request, response);
 				return;
@@ -57,6 +64,8 @@ public class PatientAppointmentDetails extends HttpServlet {
 			// redirect to person detailed appointment
 			RequestDispatcher rs = request.getRequestDispatcher("patientDetailedAppointment.jsp");
 			request.setAttribute("apointment", apointment);
+			request.setAttribute("patient", patient);
+			request.setAttribute("appointments", appointments);
 			rs.forward(request, response);
 			return;
 		} catch (Exception e) {
@@ -70,7 +79,7 @@ public class PatientAppointmentDetails extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 		request.setAttribute("error", "Please login again");
-		rs.forward(request, response);
+		//rs.forward(request, response);
 	}
 
 }

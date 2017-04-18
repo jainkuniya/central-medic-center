@@ -197,18 +197,20 @@ public class DatabaseHelper {
 
 		return null;
 	}
+	
 
 	public ArrayList<AppointmentItems> getAppointmentsItems(int id) {
 		ArrayList<AppointmentItems> items = new ArrayList<AppointmentItems>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where appointmentId=?");
 			ps.setInt(1, id);
 			ResultSet itemSet = ps.executeQuery();
 			while (itemSet.next()) {
 				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getInt("type"),
-						itemSet.getString("dexcription"));
+						itemSet.getString("description"));
 				items.add(item);
 			}
+			return items;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -224,8 +226,10 @@ public class DatabaseHelper {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				int id = rs.getInt("id");
-
-				Appointment appointment = new Appointment(id, rs.getString("symptons"));
+				int doctorId = rs.getInt("doctorId");
+				Doctor doctor = getDoctor(doctorId);
+				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
+						rs.getString("symptons"), rs.getString("disease"));
 				appointment.setItems(getAppointmentsItems(id));
 				return appointment;
 			}
