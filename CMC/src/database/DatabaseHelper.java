@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import modal.Appointment;
 import modal.AppointmentItems;
-import modal.Person;
 import patient.modal.Patient;
 
 public class DatabaseHelper {

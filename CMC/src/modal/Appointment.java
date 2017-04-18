@@ -16,16 +16,16 @@ public class Appointment {
 
 	public Appointment(int id, int doctorId, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.setId(id);
-		this.doctorId = doctorId;
-		this.isClosed = isClosed;
-		this.dateCreated = dateCreated;
+		this.setDoctorId(doctorId);
+		this.setIsClosed(isClosed);
+		this.setDateCreated(dateCreated);
 		this.items = items;
 	}
 
 	public Appointment(int patientId, String symptons, String disease, long preferredDate) {
 		this.setPatientId(patientId);
-		this.isClosed = 0;
-		this.dateCreated = System.currentTimeMillis();
+		this.setIsClosed(0);
+		this.setDateCreated(System.currentTimeMillis());
 		this.setSymptons(symptons);
 		this.setDisease(disease);
 		this.preferredDate = preferredDate;
@@ -90,5 +90,29 @@ public class Appointment {
 
 	public void setItems(ArrayList<AppointmentItems> items) {
 		this.items = items;
+	}
+
+	public long getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(long dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public int getIsClosed() {
+		return isClosed;
+	}
+
+	public void setIsClosed(int isClosed) {
+		this.isClosed = isClosed;
+	}
+
+	public int getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 }

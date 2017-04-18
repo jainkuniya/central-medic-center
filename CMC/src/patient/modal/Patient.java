@@ -1,6 +1,5 @@
 package patient.modal;
 
-import java.sql.Date;
 
 import modal.Person;
 

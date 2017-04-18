@@ -1,7 +1,6 @@
 package patient.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DatabaseHelper;
-import modal.Appointment;
-import patient.modal.Patient;
 
 /**
  * Servlet implementation class EditProfile
