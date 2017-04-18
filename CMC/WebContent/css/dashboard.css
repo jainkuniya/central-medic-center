@@ -70,6 +70,7 @@ ul {
 
 .main {
 	padding: 20px;
+	height: 100%;
 }
 
 @media ( min-width : 768px) {
@@ -81,6 +82,7 @@ ul {
 
 .main .page-header {
 	margin-top: 0;
+	text-align: center;
 }
 
 .sub-header {
