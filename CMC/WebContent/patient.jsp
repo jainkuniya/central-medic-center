@@ -3,6 +3,13 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment"%>
+	<%  
+		if(request.getAttribute("patient")==null){
+			 response.sendRedirect("patient"); 
+		}
+		else{
+			Patient patient = (Patient)request.getAttribute("patient");
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +23,7 @@
 <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
-	<% Patient patient = (Patient)request.getAttribute("patient"); %>
+	
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -137,3 +144,6 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+<%
+		}
+%>

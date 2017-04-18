@@ -105,8 +105,8 @@
 							Birth</label>
 						<div class="col-sm-10">
 							<input type="date" class="form-control" name="dob" id="date"
-								placeholder="Date" value="<%= patient.getStringDob() %>" >>
-								<h1><%= patient.getStringDob() %></h1>
+								placeholder="Date" value="<%= patient.getStringDob() %>" >
+								
 						</div>
 					</div>
 					<div class="form-group">
