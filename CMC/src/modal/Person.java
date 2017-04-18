@@ -1,5 +1,7 @@
 package modal;
 
+import utils.DateUtils;
+
 public class Person {
 
 	private int id;
@@ -48,8 +50,12 @@ public class Person {
 		return dob;
 	}
 
-	public long setDob(long dob) {
-		return this.dob;
+	public void setDob(long dob) {
+		this.dob=dob;
+	}
+	
+	public String getStringDob() {
+		return DateUtils.getStringFromDate(dob);
 	}
 
 	public String getGender() {
@@ -101,8 +107,7 @@ public class Person {
 	}
 
 	public String getAge(){
-		System.out.println(System.currentTimeMillis() +" " + this.dob);
-		return String.valueOf((System.currentTimeMillis() - this.dob)/(60*60*24*365*1000));
+		return String.valueOf(DateUtils.getYearsFromLong(dob)) + ", years";
 	}
 
 	 

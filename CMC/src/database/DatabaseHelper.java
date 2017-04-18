@@ -9,6 +9,7 @@ import modal.Appointment;
 import modal.AppointmentItems;
 import patient.modal.Patient;
 import staff.modal.Doctor;
+import utils.DateUtils;
 
 public class DatabaseHelper {
 
@@ -62,7 +63,6 @@ public class DatabaseHelper {
 				ps.setInt(1, id);
 				ResultSet rsPatient = ps.executeQuery();
 				if (rsPatient.next()) {
-					System.out.println(id);
 					return new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
 							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"), rsPatient.getInt("weight"),
@@ -253,7 +253,7 @@ public class DatabaseHelper {
 				PreparedStatement ps = connection.prepareStatement(
 						"update person set password=?, dob=?, address=?, contactNumber=? where id=?");
 				ps.setString(1, request.getParameter("password"));
-				ps.setLong(2, System.currentTimeMillis());
+				ps.setLong(2, DateUtils.getLongFromDate(request.getParameter("dob")));
 				ps.setString(3, request.getParameter("address"));
 				ps.setString(4, request.getParameter("contactNumber"));
 				ps.setInt(5, patientId);
@@ -266,6 +266,7 @@ public class DatabaseHelper {
 				ps.setLong(1, System.currentTimeMillis());
 				ps.setString(2, request.getParameter("address"));
 				ps.setString(3, request.getParameter("contactNumber"));
+				System.out.println(request.getParameter("contactNumber"));
 				ps.setInt(4, patientId);
 				return ps.executeUpdate();	
 			}

@@ -104,23 +104,24 @@
 						<label for="date" class="col-sm-2 control-label">Date Of
 							Birth</label>
 						<div class="col-sm-10">
-							<input type="date" class="form-control" id="date"
-								placeholder="Date">
+							<input type="date" class="form-control" name="dob" id="date"
+								placeholder="Date" value="<%= patient.getStringDob() %>" >>
+								<h1><%= patient.getStringDob() %></h1>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="phoneNumber" class="col-sm-2 control-label">Phone
 							Number</label>
 						<div class="col-sm-10">
-							<input type="phoneNumber" class="form-control" id="phoneNumber"
+							<input type="phoneNumber" class="form-control" name="contactNumber" id="phoneNumber"
 								placeholder="+91 9521113802" value="<%= patient.getContactNumber() %>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="address" class="col-sm-2 control-label">Address</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="2"
-								placeholder="BH-3, The LNMIIT" value="<%= patient.getAddress() %>" ></textarea>
+							<textarea class="form-control" name="address" rows="2"
+								placeholder="BH-3, The LNMIIT" value="" ><%= patient.getAddress() %></textarea>
 						</div>
 					</div>
 					<h4 class="sub-header">Health Information</h4>
