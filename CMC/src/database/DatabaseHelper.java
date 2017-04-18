@@ -201,15 +201,30 @@ public class DatabaseHelper {
 	private int updatePerson(int patientId, HttpServletRequest request) {
 		try {
 			//update person
-			PreparedStatement ps = connection.prepareStatement(
-					"update person set password=?, dob=?, address=?, contactNumber=? where id=?");
-			ps.setString(1, request.getParameter("password"));
-			ps.setLong(2, System.currentTimeMillis());
-			ps.setString(3, request.getParameter("address"));
-			ps.setString(4, request.getParameter("contactNumber"));
-			ps.setInt(5, patientId);
-
-			return ps.executeUpdate();
+			if(!request.getParameter("password").isEmpty()){
+				System.out.println(request.getParameter("password"));
+				PreparedStatement ps = connection.prepareStatement(
+						"update person set password=?, dob=?, address=?, contactNumber=? where id=?");
+				ps.setString(1, request.getParameter("password"));
+				ps.setLong(2, System.currentTimeMillis());
+				ps.setString(3, request.getParameter("address"));
+				ps.setString(4, request.getParameter("contactNumber"));
+				ps.setInt(5, patientId);
+				return ps.executeUpdate();	
+				
+			}
+			else{
+				PreparedStatement ps = connection.prepareStatement(
+						"update person set dob=?, address=?, contactNumber=? where id=?");
+				ps.setLong(1, System.currentTimeMillis());
+				ps.setString(2, request.getParameter("address"));
+				ps.setString(3, request.getParameter("contactNumber"));
+				ps.setInt(4, patientId);
+				return ps.executeUpdate();	
+			}
+			
+			
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

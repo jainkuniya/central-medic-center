@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
@@ -34,16 +35,9 @@ public class UpdatePatientProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//update patient
 		try {
-			int patientId = Integer.valueOf((String)request.getParameter("patientId"));
+			HttpSession session = request.getSession();
+			int patientId = (int) session.getAttribute("UserID");
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Patient patient = databaseHelper.getPatient(patientId);
@@ -63,6 +57,14 @@ public class UpdatePatientProfile extends HttpServlet {
 			// redirect to login
 			redirectToLogin(request, response);
 		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//update patient
+		doGet(request,response);
 	}
 	
 	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response)

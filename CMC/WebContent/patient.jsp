@@ -32,16 +32,8 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Dashboard</a></li>
-				<li>
-					<form  action="updatePatientProfile"
-							method="post">
-
-							<input type="hidden"  name="patientId"
-								value="<%= " "+ patient.getId() %>" />
-
-							<button  type="submit">Edit Profile</button>
-					</form>
+				<li class="active"><a href="#">Dashboard</a></li>
+				<li><a href="updatePatientProfile">Edit Profile</a>
 				<li><a href="logout">Logout</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">

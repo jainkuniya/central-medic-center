@@ -29,6 +29,9 @@ else{
 <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+	<br>
+	<br>
+	<h1><center>Central Medic Center</center> </h1>
 	<div class="wrapper">
 		<form class="form-signin" action="login" method="post">
 			<h2 class="form-signin-heading"><center>Please login</center></h2>

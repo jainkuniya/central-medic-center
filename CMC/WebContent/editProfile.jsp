@@ -33,9 +33,9 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Dashboard</a></li>
+				<li><a href="patient">Dashboard</a></li>
 				<li class="active"><a href="#">Edit Profile</a></li>
-				<li><a href="#">Logout</a></li>
+				<li><a href="logout">Logout</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -79,7 +79,7 @@
 				<h4 class="sub-header">Personal Information</h4>
 				<form class="form-horizontal" action="editProfile" method="post">
 				<input type="hidden"  name="patientId"
-								value="<%= ""+ patient.getId() %>" />
+								value="<%= ""+ session.getAttribute("UserID") %>" />
 					<div class="form-group">
 						<label for="firstName" class="col-sm-2 control-label">First
 							Name</label>
@@ -152,7 +152,7 @@
 							Name</label>
 						<div class="col-sm-10">
 							<input type="string" class="form-control" id="userName"
-								placeholder="rakeshsharma">
+								placeholder="rakeshsharma" value="<%= patient.getUserName() %>">
 						</div>
 					</div>
 					<div class="form-group">
@@ -162,14 +162,14 @@
 								placeholder="password">
 						</div>
 					</div>
-					<div class="form-group">
+				<!-- 	<div class="form-group">
 						<label for="emailAddress" class="col-sm-2 control-label">Email
 							Address</label>
 						<div class="col-sm-10">
 							<input type="string" class="form-control" id="emailAddress"
-								placeholder="rakeshsharma.y15@gmail.com">
+								placeholder="rakeshsharma.y15@gmail.com" value="">
 						</div>
-					</div>
+					</div>-->
 					<div class="form-group">
 						<div class="col-sm-offset-6 col-sm-2">
 							<button type="submit" class="btn btn-default">Submit</button>
