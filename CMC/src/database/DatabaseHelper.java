@@ -313,7 +313,7 @@ public class DatabaseHelper {
 
 	}
 
-	private int createPerson(HttpServletRequest request) {
+	public int createPerson(HttpServletRequest request) {
 		try {
 			PreparedStatement ps,ts,ps1,ps2;
 			int c1=0,c2=0,c3=0;

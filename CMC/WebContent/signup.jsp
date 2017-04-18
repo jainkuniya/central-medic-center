@@ -33,38 +33,38 @@ else{
 	<br>
 	<h1><center>Central Medic Center</center> </h1>
 	<div class="container">
-        <form class="form-horizontal form-signup" role="form">
+        <form class="form-horizontal form-signup" role="form" action="signup" method="post">
             <h2 class="form-signin-heading"><center>Please register</center></h2>
             <br>
             <div class="form-group">
                 <label for="firstName" class="col-sm-3 control-label">First Name</label>
                 <div class="col-sm-9">
-                    <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+                    <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus required>
                     <span class="help-block">First Name, eg.: Shubham, Vishwesh, Vishal</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastName" class="col-sm-3 control-label">Last Name</label>
                 <div class="col-sm-9">
-                    <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus>
+                    <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="username" class="col-sm-3 control-label">Username</label>
+                <label for="username" class="col-sm-3 control-label ">Username</label>
                 <div class="col-sm-9">
-                    <input type="username" id="username" placeholder="Username" class="form-control">
+                    <input type="username" id="userName" placeholder="Username" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-9">
-                    <input type="password" id="password" placeholder="Password" class="form-control">
+                    <input type="password" id="password" placeholder="Password" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
                 <div class="col-sm-9">
-                    <input type="date" id="birthDate" class="form-control">
+                    <input type="date" id="dob" class="form-control" required>
                 </div>
             </div>
             
@@ -72,19 +72,19 @@ else{
                 <label class="control-label col-sm-3">Gender</label>
                 <div class="col-sm-6">
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="radio col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="femaleRadio" value="Female">Female
+                                <input name="gender" type="radio" id="femaleRadio" value="F">Female
                             </label>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="radio col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="maleRadio" value="Male">Male
+                                <input name="gender" type="radio" id="maleRadio" value="M" checked>Male
                             </label>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="radio col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="uncknownRadio" value="Unknown">Unknown
+                                <input name="gender" type="radio" id="unknownRadio" value="U">Unknown
                             </label>
                         </div>
                     </div>
@@ -93,23 +93,23 @@ else{
             <div class="form-group">
                 <label for="address" class="col-sm-3 control-label">Address</label>
                 <div class="col-sm-9">
-                    <input type="address" id="address" placeholder="BH3, The LNMIIT, Jaipur" class="form-control">
+                    <input type="address" id="address" placeholder="BH3, The LNMIIT, Jaipur" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="number" class="col-sm-3 control-label">Phone Number</label>
                 <div class="col-sm-9">
-                    <input type="number" id="number" placeholder="9521113802" class="form-control">
+                    <input type="number" id="contactNumber" placeholder="9521113802" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="userType" class="col-sm-3 control-label">User Type</label>
                 <div class="col-sm-9">
-                    <select id="userType" name="userType" class="form-control">
-                        <option >Choose One</option>
-                        <option value="Patient">Patient</option>
-                        <option value="Doctor">Doctor</option>
-                        <option value="Admin">Admin</option>
+                    <select id="userType" name="userType" class="form-control" required>
+                        <option value="" selected disabled>Choose One</option>
+                        <option value="1">Patient</option>
+                        <option value="2">Doctor</option>
+                        <option value="3">Admin</option>
                     </select>
                 </div>
             </div>
@@ -130,7 +130,7 @@ else{
                 <div class="form-group">
                 <label for="BloodGroup" class="col-sm-3 control-label">Blood Group</label>
                 <div class="col-sm-9">
-                    <input type="string" id="BloodGroup" placeholder="A+" class="form-control">
+                    <input type="string" id="bloodGroup" placeholder="A+" class="form-control">
                 </div>
                 </div>
             </div>
@@ -138,13 +138,13 @@ else{
                 <div class="form-group">
                 <label for="Degree" class="col-sm-3 control-label">Degree</label>
                 <div class="col-sm-9">
-                    <input type="string" id="Degree" placeholder="MBBS" class="form-control">
+                    <input type="string" id="degree" placeholder="MBBS" class="form-control">
                 </div>
                 </div>
                 <div class="form-group">
                 <label for="Specialization" class="col-sm-3 control-label">Specialization</label>
                 <div class="col-sm-9">
-                    <input type="string" id="Specialization" placeholder="Cardiologist" class="form-control">
+                    <input type="string" id="specialization" placeholder="Cardiologist" class="form-control">
                 </div>
                 </div>
             </div>
@@ -165,17 +165,17 @@ else{
                 $('#userType').on('change',function(){
                 var selection = $(this).val();
                 switch(selection){
-                case "Patient":
+                case "1":
                 $("#Patient").show()
                 $("#Doctor").hide()
                 $("#Admin").hide()
                 break;
-                case "Doctor":
+                case "2":
                 $("#Patient").hide()
                 $("#Doctor").show()
                 $("#Admin").hide()
                 break;
-                case "Admin":
+                case "3":
                 $("#Patient").hide()
                 $("#Doctor").hide()
                 $("#Admin").show()
