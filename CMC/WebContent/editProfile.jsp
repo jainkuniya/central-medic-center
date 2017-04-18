@@ -79,7 +79,7 @@
 				<h4 class="sub-header">Personal Information</h4>
 				<form class="form-horizontal" action="editProfile" method="post">
 				<input type="hidden"  name="patientId"
-								value="<%= patient.getId() %>" />
+								value="<%= ""+ patient.getId() %>" />
 					<div class="form-group">
 						<label for="firstName" class="col-sm-2 control-label">First
 							Name</label>

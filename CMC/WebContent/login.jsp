@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.io.*,java.util.*"%>
+<%
+ 
+if (!session.isNew() && session.getAttribute("UserID")!=null){
+   Date lastAccessTime = new Date(session.getLastAccessedTime());
+   session.setAttribute("LastAccess", lastAccessTime);
+   String type = (String) session.getAttribute("UserType");
+ 
+  if(type.equals("patient")){
+	   response.sendRedirect("patient"); 
+   }
+   else if(type.equals("doctor")){
+	   response.sendRedirect("doctor"); 
+   }
+  
+ }
+else{
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,21 +31,28 @@
 <body>
 	<div class="wrapper">
 		<form class="form-signin" action="login" method="post">
-			<h2 class="form-signin-heading">Please login</h2>
+			<h2 class="form-signin-heading"><center>Please login</center></h2>
+			<br>
 			<input type="text" class="form-control" name="username"
-				placeholder="Username" required="true" autofocus="" /> <input
+				placeholder="Username" required="true" autofocus="" /> 
+			<br>
+			<input
 				type="password" class="form-control" name="password"
 				placeholder="Password" required="true" />
 			<%
 		    String message = (String)request.getAttribute("error");
 		    if (message!=null) {
 		  %>
-			<h3><%= message %></h3>
+			<h4><%= message %></h4>
 			<%
 		    } 
 		 %>
+		 	<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 		</form>
 	</div>
 </body>
 </html>
+<% 
+}
+%>

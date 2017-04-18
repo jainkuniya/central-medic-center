@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
@@ -37,11 +38,11 @@
 							method="post">
 
 							<input type="hidden"  name="patientId"
-								value="<%= patient.getId() %>" />
+								value="<%= " "+ patient.getId() %>" />
 
 							<button  type="submit">Edit Profile</button>
 					</form>
-				<li><a href="#">Logout</a></li>
+				<li><a href="logout">Logout</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">

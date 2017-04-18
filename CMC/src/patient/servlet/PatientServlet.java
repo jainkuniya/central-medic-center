@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import patient.modal.Patient;
 
 import database.DatabaseHelper;
@@ -20,7 +22,7 @@ import modal.Appointment;
 @WebServlet("/patient")
 public class PatientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	HttpSession session;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -36,18 +38,15 @@ public class PatientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 		try {
-			int personId = (int) request.getAttribute("personId");
+			session = request.getSession();
+			if (session.isNew()){
+				redirectToLogin(request, response);
+				 }
+			else{
+			
+			int personId = (int) session.getAttribute("UserID");
+			System.out.print(personId);
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Patient patient = databaseHelper.getPatient(personId);
@@ -63,11 +62,26 @@ public class PatientServlet extends HttpServlet {
 			request.setAttribute("appointments", appointments);
 			rs.forward(request, response);
 			return;
+			}
 		} catch (Exception e) {
 			// redirect to login
 			redirectToLogin(request, response);
 		}
+		}
+	
+
+	
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request,response);
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+ 
 
 	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
