@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: CMC
+-- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,8 +36,9 @@ CREATE TABLE `person` (
   `contactNumber` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName_UNIQUE` (`userName`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `type` (`type`),
-  CONSTRAINT `person_ibfk_1` FOREIGN KEY (`type`) REFERENCES `PersonType` (`id`)
+  CONSTRAINT `person_ibfk_1` FOREIGN KEY (`type`) REFERENCES `persontype` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,7 +48,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty',889236840000,'0',1,'NA',NULL,NULL),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty',889236840000,'1',1,'NA',NULL,NULL),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty',889236840000,'1',2,'NA',NULL,NULL),(14,'Vishwesh','Jainkuniya','v3','qwerty',889236840000,'1',2,'NA',NULL,NULL);
+INSERT INTO `person` VALUES (1,'Vishwesh','Jainkuniya','vishwesh3','qwerty',889236840000,'0',1,'NA',NULL,NULL),(10,'Vishwesh','Jainkuniya','vishwesh33','qwerty',889236840000,'1',1,'NA',NULL,NULL),(12,'Vishwesh','Jainkuniya','vishwesh333','qwerty',1492514421289,'1',2,'NA',NULL,NULL),(14,'Vishwesh','Jainkuniya','v3','qwerty',889236840000,'1',2,'NA',NULL,NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 16:48:22
+-- Dump completed on 2017-04-18 16:54:51

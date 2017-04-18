@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: CMC
+-- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `PersonType`
+-- Table structure for table `persontype`
 --
 
-DROP TABLE IF EXISTS `PersonType`;
+DROP TABLE IF EXISTS `persontype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PersonType` (
+CREATE TABLE `persontype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(45) DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
@@ -32,13 +32,13 @@ CREATE TABLE `PersonType` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PersonType`
+-- Dumping data for table `persontype`
 --
 
-LOCK TABLES `PersonType` WRITE;
-/*!40000 ALTER TABLE `PersonType` DISABLE KEYS */;
-INSERT INTO `PersonType` VALUES (1,'Patient','Patient'),(2,'Doctor','Doctor');
-/*!40000 ALTER TABLE `PersonType` ENABLE KEYS */;
+LOCK TABLES `persontype` WRITE;
+/*!40000 ALTER TABLE `persontype` DISABLE KEYS */;
+INSERT INTO `persontype` VALUES (1,'Patient','Patient'),(2,'Doctor','Doctor');
+/*!40000 ALTER TABLE `persontype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 16:48:22
+-- Dump completed on 2017-04-18 16:54:52

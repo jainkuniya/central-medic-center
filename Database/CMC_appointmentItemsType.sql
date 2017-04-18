@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: CMC
+-- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `appointmentItemsType`
+-- Table structure for table `appointmentitemstype`
 --
 
-DROP TABLE IF EXISTS `appointmentItemsType`;
+DROP TABLE IF EXISTS `appointmentitemstype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `appointmentItemsType` (
+CREATE TABLE `appointmentitemstype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -30,13 +30,13 @@ CREATE TABLE `appointmentItemsType` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `appointmentItemsType`
+-- Dumping data for table `appointmentitemstype`
 --
 
-LOCK TABLES `appointmentItemsType` WRITE;
-/*!40000 ALTER TABLE `appointmentItemsType` DISABLE KEYS */;
-INSERT INTO `appointmentItemsType` VALUES (1,'Show message');
-/*!40000 ALTER TABLE `appointmentItemsType` ENABLE KEYS */;
+LOCK TABLES `appointmentitemstype` WRITE;
+/*!40000 ALTER TABLE `appointmentitemstype` DISABLE KEYS */;
+INSERT INTO `appointmentitemstype` VALUES (1,'Show message');
+/*!40000 ALTER TABLE `appointmentitemstype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-17 16:48:21
+-- Dump completed on 2017-04-18 16:54:51
