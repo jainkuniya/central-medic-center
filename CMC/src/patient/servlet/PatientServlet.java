@@ -37,7 +37,7 @@ public class PatientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		try {
 			session = request.getSession();
 			if (session.isNew()){

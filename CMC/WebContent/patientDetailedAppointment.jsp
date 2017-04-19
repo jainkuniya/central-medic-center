@@ -208,11 +208,13 @@
 				</div>
 				<% } }%>
 				<div class="">
-					<form class="form-inline">
+					<form class="form-inline" action="newAppointmentItem" method="post">
 					<div class="row ">
+						<input type="hidden" name="type" value="2" />
+						<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
 						<div class="col-sm-9 form-group">
 							<label class="sr-only" for="exampleInputEmail3">Email address</label>
-						    <textarea class="form-control textman" rows="3"></textarea>
+						    <textarea class="form-control textman" name="description" rows="3", placeholder="Type your message here"></textarea>
 						</div>
 						<div class="col-sm-3">
 						  	<button type="submit" class="send btn btn-success">Send</button>

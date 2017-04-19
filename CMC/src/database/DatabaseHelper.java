@@ -152,7 +152,7 @@ public class DatabaseHelper {
 			PreparedStatement ps = connection.prepareStatement(
 					"insert into appointmentItems (appointmentId,type, date, description) values(?,?,?,?)");
 			ps.setInt(1, id);
-			ps.setInt(2, 1);
+			ps.setInt(2, type);
 			ps.setLong(3, System.currentTimeMillis());
 			ps.setString(4, description);
 
@@ -206,8 +206,8 @@ public class DatabaseHelper {
 			ps.setInt(1, id);
 			ResultSet itemSet = ps.executeQuery();
 			while (itemSet.next()) {
-				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getInt("type"),
-						itemSet.getString("description"));
+				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getString("description"), 
+						itemSet.getInt("type"), itemSet.getInt("appointmentId"));
 				items.add(item);
 			}
 			return items;

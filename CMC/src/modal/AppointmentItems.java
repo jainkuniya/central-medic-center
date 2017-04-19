@@ -8,11 +8,11 @@ public class AppointmentItems {
 	private String description;
 	private int appointmentId;
 	
-	public AppointmentItems(long date, int type, String description) {
-		 
-		this.setDate(date);
-		this.setType(type);
-		this.setDescription(description);
+	public AppointmentItems(long date, String description,int type, int appointmentId) {		 
+		this.date = date;
+		this.type =type;
+		this.description = description;
+		this.appointmentId = appointmentId;
 	}
 
 	public long getDate() {
