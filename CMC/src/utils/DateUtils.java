@@ -38,4 +38,3 @@ public class DateUtils    {
 	    return currentCal.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
 	}
 }
-

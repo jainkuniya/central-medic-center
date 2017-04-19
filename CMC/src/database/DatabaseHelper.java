@@ -37,8 +37,8 @@ public class DatabaseHelper {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				result[0] = rs.getInt("type");
-				result[1] = rs.getInt("id");
+				result[0] = rs.getInt("personType");
+				result[1] = rs.getInt("personId");
 			} else {
 				result[0] = 0;
 			}
@@ -75,17 +75,17 @@ public class DatabaseHelper {
 	public Patient getPatient(int id) {
 		try {
 			// get person from database
-			PreparedStatement ps = connection.prepareStatement("select * from person where id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from person where personId=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				// get patient from database
-				ps = connection.prepareStatement("select * from patient where id=?");
+				ps = connection.prepareStatement("select * from patient where patientId=?");
 				ps.setInt(1, id);
 				ResultSet rsPatient = ps.executeQuery();
 				if (rsPatient.next()) {
-					return new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
+					return new Patient(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"), rsPatient.getInt("weight"),
 							rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
 				}
@@ -101,17 +101,17 @@ public class DatabaseHelper {
 	public Doctor getDoctor(int id) {
 		try {
 			// get person from database
-			PreparedStatement ps = connection.prepareStatement("select * from person where id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from person where personId=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				// get patient from database
-				ps = connection.prepareStatement("select * from doctor where id=?");
+				ps = connection.prepareStatement("select * from doctor where doctorId=?");
 				ps.setInt(1, id);
 				ResultSet rsDoctor = ps.executeQuery();
 				if (rsDoctor.next()) {
-					return new Doctor(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
+					return new Doctor(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"), rsDoctor.getString("degree"),
 							rsDoctor.getString("specialization"));
 				}
@@ -127,12 +127,12 @@ public class DatabaseHelper {
 	public Person getPerson(int id) {
 		try {
 			// get person from database
-			PreparedStatement ps = connection.prepareStatement("select * from person where id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from person where personId=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-					return new Person(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("type"), rs.getString("gender"),
+					return new Person(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
 							rs.getString("address"), rs.getString("contactNumber"));
 				}
 			
@@ -170,7 +170,7 @@ public class DatabaseHelper {
 	public int addItemInAppointment(int id, int type, String description) {
 		try {
 			PreparedStatement ps = connection.prepareStatement(
-					"insert into appointmentItems (appointmentId,type, date, description) values(?,?,?,?)");
+					"insert into appointmentItems (appointmentId, typeId, date, description) values(?,?,?,?)");
 			ps.setInt(1, id);
 			ps.setInt(2, type);
 			ps.setLong(3, System.currentTimeMillis());
@@ -195,7 +195,7 @@ public class DatabaseHelper {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("appointmentId");
 				int isClosed = rs.getInt("isClosed");
 				int doctorId = rs.getInt("doctorId");
 				int patientId = rs.getInt("patientId");
@@ -236,7 +236,7 @@ public class DatabaseHelper {
 			ResultSet itemSet = ps.executeQuery();
 			while (itemSet.next()) {
 				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getString("description"), 
-						itemSet.getInt("type"), itemSet.getInt("appointmentId"));
+						itemSet.getInt("typeId"), itemSet.getInt("appointmentId"));
 				items.add(item);
 			}
 			return items;
@@ -249,12 +249,12 @@ public class DatabaseHelper {
 
 	public Appointment getDetailedAppointment(int appointmentId) {
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointment where id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from appointment where appointmentId=?");
 			ps.setInt(1, appointmentId);
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("appointmentId");
 				int doctorId = rs.getInt("doctorId");
 				int patientId = rs.getInt("patientId");
 				Doctor doctor = getDoctor(doctorId);
@@ -278,7 +278,7 @@ public class DatabaseHelper {
 
 			// update patient
 			PreparedStatement ps = connection
-					.prepareStatement("update patient set height=?, weight=?, bloodGroup=? where id=?");
+					.prepareStatement("update patient set height=?, weight=?, bloodGroup=? where patientId=?");
 			ps.setInt(1, Integer.valueOf((String) request.getParameter("height")));
 			ps.setInt(2, Integer.valueOf((String) request.getParameter("weight")));
 			ps.setString(3, request.getParameter("bloodGroup"));
@@ -299,7 +299,7 @@ public class DatabaseHelper {
 
 			// update patient
 			PreparedStatement ps = connection
-					.prepareStatement("update doctor set degree=?, specialization=? where id=?");
+					.prepareStatement("update doctor set degree=?, specialization=? where doctorId=?");
 			ps.setString(1, (String) request.getParameter("degree"));
 			ps.setString(2, (String) request.getParameter("specialization"));
 			ps.setInt(3, doctorId);
@@ -318,7 +318,7 @@ public class DatabaseHelper {
 			if (!request.getParameter("password").isEmpty()) {
 				System.out.println(request.getParameter("password"));
 				PreparedStatement ps = connection
-						.prepareStatement("update person set password=?, dob=?, address=?, contactNumber=? where id=?");
+						.prepareStatement("update person set password=?, dob=?, address=?, contactNumber=? where personId=?");
 				ps.setString(1, request.getParameter("password"));
 				ps.setLong(2, DateUtils.getLongFromDate(request.getParameter("dob")));
 				ps.setString(3, request.getParameter("address"));
@@ -328,7 +328,7 @@ public class DatabaseHelper {
 
 			} else {
 				PreparedStatement ps = connection
-						.prepareStatement("update person set dob=?, address=?, contactNumber=? where id=?");
+						.prepareStatement("update person set dob=?, address=?, contactNumber=? where personId=?");
 				ps.setLong(1, System.currentTimeMillis());
 				ps.setString(2, request.getParameter("address"));
 				ps.setString(3, request.getParameter("contactNumber"));
@@ -347,13 +347,13 @@ public class DatabaseHelper {
 		try {
 			PreparedStatement ps,ts,ps1,ps2;
 			ps = connection.prepareStatement(
-					"insert into person(firstName,lastName,userName,password,dob,token,type,gender,address,contactNumber) values(?,?,?,?,?,?,?,?,?,?)");
+					"insert into person(firstName,lastName,userName,password,dob,token,personType,gender,address,contactNumber) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, request.getParameter("firstName"));
 			ps.setString(2, request.getParameter("lastName"));
 			ps.setString(3, request.getParameter("userName"));
 			ps.setString(4, request.getParameter("password"));
 			ps.setLong(5,  DateUtils.getLongFromDate(request.getParameter("dob")));
-			ps.setString(6, "0");
+			ps.setString(6, "1");
 			ps.setInt(7, Integer.parseInt(request.getParameter("userType")) );
 			ps.setString(8, request.getParameter("gender"));
 			ps.setString(9, request.getParameter("address"));
@@ -361,17 +361,17 @@ public class DatabaseHelper {
 			ps.executeUpdate();
 			
 			ts = connection.prepareStatement(
-					"Select id from person where userName=?");
+					"Select personId from person where userName=?");
 			ts.setString(1, request.getParameter("userName"));
 			ResultSet rs = ts.executeQuery();
 			int userId=0;
 			if (rs.next()) {
-				userId = rs.getInt("id");
+				userId = rs.getInt("personId");
 			} 
 			int uType = Integer.parseInt(request.getParameter("userType"));
 			if (uType == 1) {
 				ps1 = connection
-						.prepareStatement("insert into patient(id,height,weight,bloodGroup) values(?,?,?,?)");
+						.prepareStatement("insert into patient(patientId,height,weight,bloodGroup) values(?,?,?,?)");
 				ps1.setInt(1, userId);
 				ps1.setString(2, request.getParameter("height"));
 				ps1.setString(3, request.getParameter("weight"));
@@ -379,7 +379,7 @@ public class DatabaseHelper {
 				 ps1.executeUpdate();
 			} else if (uType == 2) {
 				ps2 = connection
-						.prepareStatement("insert into doctor(id,degree,specialization) values(?,?,?)");
+						.prepareStatement("insert into doctor(doctorId,degree,specialization) values(?,?,?)");
 				ps2.setInt(1, userId);
 				ps2.setString(2, request.getParameter("degree"));
 				ps2.setString(3, request.getParameter("specialization"));

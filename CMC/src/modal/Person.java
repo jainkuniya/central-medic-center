@@ -111,7 +111,7 @@ public class Person {
 	}
 
 	public String getAge(){
-		return String.valueOf(DateUtils.getYearsFromLong(dob)) + ", years";
+		return String.valueOf(DateUtils.getYearsFromLong(dob)) + " years";
 	}
 
 	 
