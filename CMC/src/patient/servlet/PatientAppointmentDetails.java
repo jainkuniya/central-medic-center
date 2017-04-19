@@ -54,7 +54,7 @@ public class PatientAppointmentDetails extends HttpServlet {
 			// get appointment details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
-			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId);
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId, "patientId");
 			Patient patient = databaseHelper.getPatient(patientId);
 			if (apointment == null || patient == null || appointments == null) {
 				// redirect to login

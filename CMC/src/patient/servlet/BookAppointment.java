@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import patient.modal.Patient;
 import utils.DateUtils;
 
 /**
@@ -45,7 +46,8 @@ public class BookAppointment extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Appointment appointment = new Appointment(Integer.valueOf(request.getParameter("patientId")),
+		Patient patient = new Patient(Integer.valueOf(request.getParameter("patientId")));
+		Appointment appointment = new Appointment(patient,
 				(String) request.getParameter("symptons"), (String) request.getParameter("disease"),
 				DateUtils.getLongFromDate((String)request.getParameter("preferredDate")));
 
@@ -56,7 +58,7 @@ public class BookAppointment extends HttpServlet {
 			// redirect to dashboard
 			RequestDispatcher rs;
 			rs = request.getRequestDispatcher("patient");
-			request.setAttribute("personId", appointment.getPatientId());
+			request.setAttribute("personId", appointment.getPatient().getId());
 			rs.forward(request, response);
 		} else {
 			// error

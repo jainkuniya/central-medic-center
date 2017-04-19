@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
-import patient.modal.Patient;
 import staff.modal.Doctor;
 
 /**
@@ -42,7 +41,7 @@ public class UpdateDoctorProfile extends HttpServlet {
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(doctorId);
-			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId);
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId, "doctorId");
 			if (doctor == null || appointments == null) {
 				// redirect to login
 				redirectToLogin(request, response);

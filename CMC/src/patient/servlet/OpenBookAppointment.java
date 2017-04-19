@@ -42,7 +42,7 @@ public class OpenBookAppointment extends HttpServlet {
 			{
 				DatabaseHelper databaseHelper = new DatabaseHelper();
 				Patient patient = databaseHelper.getPatient(patientId);
-				ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId);
+				ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId, "patientId");
 				if(patient!=null && appointments!=null)
 				{
 					rs = request.getRequestDispatcher("bookAppointment.jsp");

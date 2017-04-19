@@ -19,6 +19,10 @@ public class Patient extends  Person {
 		this.bloodGroup = bloodGroup;
 	}
 
+	public Patient(int id) {
+		super(id);
+	}
+
 	public String getBloodGroup() {
 		return bloodGroup;
 	}

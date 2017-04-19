@@ -2,13 +2,14 @@ package modal;
 
 import java.util.ArrayList;
 
+import patient.modal.Patient;
 import staff.modal.Doctor;
 import utils.DateUtils;
 
 public class Appointment {
 	private int id;
 	private Doctor doctor;
-	private int patientId;
+	private Patient patient;
 	private int isClosed;
 	private long preferredDate;
 	private long allocatedDate;
@@ -25,8 +26,8 @@ public class Appointment {
 		this.items = items;
 	}
 
-	public Appointment(int patientId, String symptons, String disease, long preferredDate) {
-		this.setPatientId(patientId);
+	public Appointment(Patient patient, String symptons, String disease, long preferredDate) {
+		this.setPatient(patient);
 		this.setIsClosed(0);
 		this.setDateCreated(System.currentTimeMillis());
 		this.setSymptons(symptons);
@@ -39,11 +40,12 @@ public class Appointment {
 		this.setSymptons(symptons);
 	}
 
-	public Appointment(int id, Doctor doctor, String title, long dateCreated) {
+	public Appointment(int id, Doctor doctor, String title, long dateCreated, Patient patient) {
 		this.id=id;
 		this.doctor= doctor;
 		this.title=title;
 		this.dateCreated = dateCreated;
+		this.patient=patient;
 	}
 
 	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease) {
@@ -63,12 +65,12 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public int getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	public String getSymptons() {

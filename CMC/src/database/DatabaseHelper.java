@@ -150,7 +150,7 @@ public class DatabaseHelper {
 			// get person from database
 			PreparedStatement ps = connection.prepareStatement(
 					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate) values(?,?,?,?,?)");
-			ps.setInt(1, appointment.getPatientId());
+			ps.setInt(1, appointment.getPatient().getId());
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
@@ -184,31 +184,40 @@ public class DatabaseHelper {
 		return -1;
 	}
 
-	public ArrayList<ArrayList<Appointment>> getAppointments(int patientId) {
+	public ArrayList<ArrayList<Appointment>> getAppointments(int personId, String mactingColumn) {
 		ArrayList<ArrayList<Appointment>> arrayList = new ArrayList<ArrayList<Appointment>>();
 		ArrayList<Appointment> upcommingAppointments = new ArrayList<Appointment>();
 		ArrayList<Appointment> closedAppointments = new ArrayList<Appointment>();
+		ArrayList<Appointment> unconfirmedAppointments = new ArrayList<Appointment>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointment where patientId=? order by dateCreated desc");
-			ps.setInt(1, patientId);
+			PreparedStatement ps = connection.prepareStatement("select * from appointment where " + mactingColumn +" =? order by dateCreated desc");
+			ps.setInt(1, personId);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int isClosed = rs.getInt("isClosed");
 				int doctorId = rs.getInt("doctorId");
+				int patientId = rs.getInt("patientId");
 				Doctor doctor = getDoctor(doctorId);
-				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"));
-				if(isClosed==0)
+				Patient patient = getPatient(patientId);
+				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"), patient);
+				if(rs.getLong("allocatedDate") == 0 && mactingColumn.equals("doctorId"))
+				{
+					unconfirmedAppointments.add(appointment);
+				}else if(isClosed==0)
 				{
 					upcommingAppointments.add(appointment);
-				}else{
+				}else {
 					closedAppointments.add(appointment);
-				}				
+				}
 				
 			}
 			arrayList.add(upcommingAppointments);
 			arrayList.add(closedAppointments);
+			if(mactingColumn.equals("doctorId")){
+				arrayList.add(unconfirmedAppointments);
+			}
 			return arrayList;
 
 		} catch (SQLException e) {

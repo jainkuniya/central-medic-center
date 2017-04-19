@@ -30,6 +30,10 @@ public class Person {
 		this.contactNumber = contactNumber;
 	}
 
+	public Person(int id) {
+		this.id=id;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
