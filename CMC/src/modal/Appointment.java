@@ -48,13 +48,14 @@ public class Appointment {
 		this.patient=patient;
 	}
 
-	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease) {
+	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease, Patient patient) {
 		this.id=id;
 		this.doctor= doctor;
 		this.title=title;
 		this.dateCreated = dateCreated;
 		this.symptons=symptons;
 		this.disease =disease;
+		this.patient = patient;
 	}
 
 	public int getId() {

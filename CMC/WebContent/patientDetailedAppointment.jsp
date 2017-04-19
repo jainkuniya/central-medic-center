@@ -5,7 +5,7 @@
 	
 	<%  
 		if(request.getAttribute("patient")==null || request.getAttribute("appointments")==null || request.getAttribute("apointment") == null){
-			 //response.sendRedirect("patient"); 
+			 response.sendRedirect("patient"); 
 		}
 		else{
 			Patient patient = (Patient)request.getAttribute("patient");
@@ -186,6 +186,8 @@
 								Doctor
 								<%}else if(item.getType()==2) {%>
 								You
+								<% }else if(item.getType()==6) { %>
+								System
 								<% } %>
 							</div>
 						</div>
@@ -211,6 +213,7 @@
 					<form class="form-inline" action="newAppointmentItem" method="post">
 					<div class="row ">
 						<input type="hidden" name="type" value="2" />
+						<input type="hidden" name="requestDispatcher" value="patientAppointmentDetails" />
 						<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
 						<div class="col-sm-9 form-group">
 							<label class="sr-only" for="exampleInputEmail3">Email address</label>

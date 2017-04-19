@@ -1,4 +1,4 @@
-package patient.servlet;
+package staff.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,19 +13,19 @@ import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
-import patient.modal.Patient;
+import staff.modal.Doctor;
 
 /**
- * Servlet implementation class PatientAppointmentDetails
+ * Servlet implementation class DoctorAppointmentDetails
  */
-@WebServlet("/patientAppointmentDetails")
-public class PatientAppointmentDetails extends HttpServlet {
+@WebServlet("/doctorAppointmentDetails")
+public class DoctorAppointmentDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PatientAppointmentDetails() {
+	public DoctorAppointmentDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -49,22 +49,22 @@ public class PatientAppointmentDetails extends HttpServlet {
 		// get appointmentDetails from DB
 		try {
 			HttpSession session = request.getSession();
-			int patientId = (int) session.getAttribute("UserID");
+			int doctorId = (int) session.getAttribute("UserID");
 			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
 			// get appointment details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
-			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId, "patientId");
-			Patient patient = databaseHelper.getPatient(patientId);
-			if (apointment == null || patient == null || appointments == null) {
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId, "doctorId");
+			Doctor doctor = databaseHelper.getDoctor(doctorId);
+			if (apointment == null || doctor == null || appointments == null) {
 				// redirect to login
 				redirectToLogin(request, response);
 				return;
 			}
 			// redirect to person detailed appointment
-			RequestDispatcher rs = request.getRequestDispatcher("patientDetailedAppointment.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("doctorDetailedAppointment.jsp");
 			request.setAttribute("apointment", apointment);
-			request.setAttribute("patient", patient);
+			request.setAttribute("doctor", doctor);
 			request.setAttribute("appointments", appointments);
 			rs.forward(request, response);
 			return;

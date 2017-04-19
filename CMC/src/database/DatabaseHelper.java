@@ -159,7 +159,7 @@ public class DatabaseHelper {
 			int status = ps.executeUpdate();
 			// create an item
 			if (status > 0) {
-				return addItemInAppointment(status, 1, "Created");
+				return addItemInAppointment(status, 6, "Created");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -202,7 +202,7 @@ public class DatabaseHelper {
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
 				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"), patient);
-				if(rs.getLong("allocatedDate") == 0 && mactingColumn.equals("doctorId"))
+				if(rs.getLong("allocatedDate") == 0 && mactingColumn.equals("admin"))
 				{
 					unconfirmedAppointments.add(appointment);
 				}else if(isClosed==0)
@@ -256,9 +256,11 @@ public class DatabaseHelper {
 			if (rs.next()) {
 				int id = rs.getInt("id");
 				int doctorId = rs.getInt("doctorId");
+				int patientId = rs.getInt("patientId");
 				Doctor doctor = getDoctor(doctorId);
+				Patient patient = getPatient(patientId);
 				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
-						rs.getString("symptons"), rs.getString("disease"));
+						rs.getString("symptons"), rs.getString("disease"), patient);
 				appointment.setItems(getAppointmentsItems(id));
 				return appointment;
 			}
@@ -330,7 +332,6 @@ public class DatabaseHelper {
 				ps.setLong(1, System.currentTimeMillis());
 				ps.setString(2, request.getParameter("address"));
 				ps.setString(3, request.getParameter("contactNumber"));
-				System.out.println(request.getParameter("contactNumber"));
 				ps.setInt(4, patientId);
 				return ps.executeUpdate();
 			}

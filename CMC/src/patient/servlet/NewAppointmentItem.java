@@ -49,7 +49,7 @@ public class NewAppointmentItem extends HttpServlet {
 				// successfully inserted
 				// redirect to detailedPatientAppointment
 				RequestDispatcher rs;
-				rs = request.getRequestDispatcher("patientAppointmentDetails");
+				rs = request.getRequestDispatcher((String)request.getParameter("requestDispatcher"));
 				request.setAttribute("appointmentId", appointmentId);
 				rs.forward(request, response);
 			} else {

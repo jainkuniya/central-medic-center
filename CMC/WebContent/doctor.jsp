@@ -73,44 +73,12 @@
 						</div>
 
 					</li>
-					<li class="topic"><span class="upcoming">Wating for approval
-							</span> <% ArrayList<Appointment> uncomfirmedAppointments = arrayList.get(2);
-			        	for(int i=0; i<uncomfirmedAppointments.size(); i++)
-			        	{ Appointment appointment = uncomfirmedAppointments.get(i);
-	        			%>
-						<form class="form-signin" action="patientAppointmentDetails"
-							method="post">
-							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /></li>
-					<ul>
-						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
-								<div class="row">
-									<div class="col-sm-12 text-left">
-										<b><%= appointment.getTitle() %> </b><br>
-										<% Patient patient = appointment.getPatient();
-										if(patient==null){
-									%>Wating for doctor approval
-										<% }else{ %>
-										<%= patient.getFirstName() %>
-										<% } %>
-										|
-										<%= appointment.getStringDateCreated() %>
-									</div>
-								</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-
-					<%  }
-	        %>
 					<li class="topic"><span class="upcoming">Upcoming
 							Appointment</span> <% ArrayList<Appointment> upcomingAppointments = arrayList.get(0);
 			        	for(int i=0; i<upcomingAppointments.size(); i++)
 			        	{ Appointment appointment = upcomingAppointments.get(i);
 	        			%>
-						<form class="form-signin" action="patientAppointmentDetails"
+						<form class="form-signin" action="doctorAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
 								value="<%= appointment.getId() %>" /></li>
@@ -141,7 +109,7 @@
 			        	for(int i=0; i<appointments2.size(); i++)
 			        	{ Appointment appointment = appointments2.get(i);
 	        			%>
-						<form class="form-signin" action="patientAppointmentDetails"
+						<form class="form-signin" action="doctorAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
 								value="<%= appointment.getId() %>" /></li>

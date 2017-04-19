@@ -1,29 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
-<%  
-		if(request.getAttribute("doctor")==null || request.getAttribute("appointments")==null){
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor"%>
+		
+	<%  
+		if(request.getAttribute("doctor")==null || request.getAttribute("appointments")==null || request.getAttribute("apointment") == null){
 			 response.sendRedirect("doctor"); 
 		}
 		else{
 			Doctor doctor = (Doctor)request.getAttribute("doctor");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
-	%>	
+			Appointment detailedAppointment = ((Appointment)request.getAttribute("apointment"));
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Book Appointment - Patient Dashboard - Central Medic
-	Center</title>
+<title>Patient Dashboard - Central Medic Center</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="css/patient.css">
+<link rel="stylesheet" href="css/appointment.css">
 </head>
 <body>
+
 	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -39,8 +41,8 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="doctor">Dashboard</a></li>
-				<li class="active"><a href="#">Edit Profile</a></li>
+				<li><a href="patient">Dashboard</a></li>
+				<li><a href="updateDoctorProfile">Edit Profile</a>
 				<li><a href="logout">Logout</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
@@ -52,7 +54,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3 sidebar">
+				<div class="col-sm-3 sidebar">
 				<ul class="nav nav-sidebar">
 					<li class="active">
 
@@ -139,101 +141,87 @@
 
 				</ul>
 			</div>
-
 			<div class="col-sm-9 col-sm-offset-3 main">
-				<h1 class="page-header">
-					<center>Edit Profile</center>
-				</h1> 
-				<h4 class="sub-header">Personal Information</h4>
-				<form class="form-horizontal" action="editDoctorProfile" method="post">
-					<div class="form-group">
-						<label for="firstName" class="col-sm-2 control-label">First
-							Name</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><%= doctor.getFirstName() %></p>
+				<h1 class="page-header"><%= detailedAppointment.getTitle() %></h1>
+				<div class="content">
+					<div class="row ">
+						<div class="col-sm-3">
+						<b>Appointment ID: <%= detailedAppointment.getId() %></b>
+						</div>
+						<div class="col-sm-5">
+						<b>Doctor Name: </b> 
+						<% if(detailedAppointment.getDoctor()!=null) { %>
+							<%= detailedAppointment.getDoctor().getFirstName() + " " + detailedAppointment.getDoctor().getLastName() %>
+							<% }else{ %>
+							Wating for doctor approval
+						<% } %>
+						</div>
+						<div class="col-sm-4">
+						<b>Date Created:</b> <%= detailedAppointment.getStringDateCreated() %>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="lastName" class="col-sm-2 control-label">Last
-							Name</label>
-						<div class="col-sm-10">
-							<p class="form-control-static"><%= doctor.getLastName() %></p>
+					<br>
+					<div class="row ">
+						<div class="col-sm-8">
+						<b>Symptons: </b> <%= detailedAppointment.getSymptons() %>
+						</div>
+						<div class="col-sm-4">
+						<b>Suspected Disease </b><%= detailedAppointment.getDisease() %>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="gender" class="col-sm-2 control-label">Gender</label>
+				</div>
+				<% if(detailedAppointment.getItems()!=null) {%>
+				<% for(int i=0; i<detailedAppointment.getItems().size(); i++) { 
+					AppointmentItems item = detailedAppointment.getItems().get(i);
+				%>
+				<div class="content" style="">
+					<div class="row ">
+						<div class="col-sm-2">
+							<div class="messageFrom">
+								<% if(item.getType()==1){ 	%>
+								<%= detailedAppointment.getPatient().getFirstName() %>
+								
+								<%}else if(item.getType()==2) {%>
+								You
+								<% }else if(item.getType()==6) { %>
+								System
+								<% } %>
+							</div>
+						</div>
 						<div class="col-sm-10">
-							<p class="form-control-static"><%= doctor.getGender() %></p>
+							<div class="message">
+								<%= item.getDescription() %>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label">Date Of
-							Birth</label>
+					
+					<div class="row">
 						<div class="col-sm-10">
-							<input type="date" class="form-control" name="dob" id="date"
-								placeholder="Date" value="<%= doctor.getStringDob() %>" >
+						</div>
+						<div class="col-sm-2">
+							<div class="" style="font-size:11px;">
+								<%= item.getStringDate() %>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="phoneNumber" class="col-sm-2 control-label">Phone
-							Number</label>
-						<div class="col-sm-10">
-							<input type="phoneNumber" class="form-control" name="contactNumber" id="phoneNumber"
-								placeholder="+91 9521113802" value="<%= doctor.getContactNumber() %>">
+				</div>
+				<% } }%>
+				<div class="">
+					<form class="form-inline" action="newAppointmentItem" method="post">
+					<div class="row ">
+						<input type="hidden" name="type" value="1" />
+						<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
+						<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
+						<div class="col-sm-9 form-group">
+							<label class="sr-only" for="exampleInputEmail3">Email address</label>
+						    <textarea class="form-control textman" name="description" rows="3", placeholder="Type your message here"></textarea>
+						</div>
+						<div class="col-sm-3">
+						  	<button type="submit" class="send btn btn-success">Send</button>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="address" class="col-sm-2 control-label">Address</label>
-						<div class="col-sm-10">
-							<textarea class="form-control" rows="2" name="address"
-								placeholder="BH-3, The LNMIIT" value="<%= doctor.getAddress() %>" ></textarea>
-						</div>
-					</div>
-					<h4 class="sub-header">Medical Information</h4>
-					<div class="form-group">
-						<label for="dgree" class="col-sm-2 control-label">Degree</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="degree" id="degree"
-								placeholder="MBBS etc." value="<%= doctor.getDegree() %>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="specialization" class="col-sm-2 control-label">Specialization</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="specialization" id="specialization"
-								placeholder="Dermatalogist etc." value="<%= doctor.getSpecialization() %>">
-						</div>
-					</div>
-					<h4 class="sub-header">Account Information</h4>
-					<div class="form-group">
-						<label for="userName" class="col-sm-2 control-label">User
-							Name</label>
-						<div class="col-sm-10">
-							<input type="string" class="form-control" id="userName"
-								placeholder="rakeshsharma" value="<%= doctor.getUserName() %>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="password" class="col-sm-2 control-label">Password</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control" name="password" id="password"
-								placeholder="password">
-						</div>
-					</div>
-				<!-- 	<div class="form-group">
-						<label for="emailAddress" class="col-sm-2 control-label">Email
-							Address</label>
-						<div class="col-sm-10">
-							<input type="string" class="form-control" id="emailAddress"
-								placeholder="rakeshsharma.y15@gmail.com" value="">
-						</div>
-					</div>-->
-					<div class="form-group">
-						<div class="col-sm-offset-6 col-sm-2">
-							<button type="submit" class="btn btn-default">Submit</button>
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
