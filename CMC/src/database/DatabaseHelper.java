@@ -169,7 +169,7 @@ public class DatabaseHelper {
 		ArrayList<Appointment> upcommingAppointments = new ArrayList<Appointment>();
 		ArrayList<Appointment> closedAppointments = new ArrayList<Appointment>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointment where patientId=?");
+			PreparedStatement ps = connection.prepareStatement("select * from appointment where patientId=? order by dateCreated desc");
 			ps.setInt(1, patientId);
 
 			ResultSet rs = ps.executeQuery();
@@ -202,7 +202,7 @@ public class DatabaseHelper {
 	public ArrayList<AppointmentItems> getAppointmentsItems(int id) {
 		ArrayList<AppointmentItems> items = new ArrayList<AppointmentItems>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where appointmentId=?");
+			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where appointmentId=? order by date asc");
 			ps.setInt(1, id);
 			ResultSet itemSet = ps.executeQuery();
 			while (itemSet.next()) {
