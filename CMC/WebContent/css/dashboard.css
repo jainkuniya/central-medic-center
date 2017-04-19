@@ -42,19 +42,13 @@ ul {
 	padding-top: 0px;
 	padding-bottom: 10px;
 }
-.subtopic{
-	padding-left:20px;
-}
-.upcoming{
-	
-}
 .btn-default{
 	width: 95%;
 	background-color: #F5F5F5;
 	border-style: none;
 }
-.appoint{
-	
+.activeAppointment{
+	background-color: #E6E6E6;
 }
 .text-left{
 	text-align: left;

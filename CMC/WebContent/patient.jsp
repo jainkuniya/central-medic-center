@@ -21,7 +21,7 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="css/patient.css">
+
 </head>
 <body>
 
@@ -87,9 +87,10 @@
 								value="<%= appointment.getId() %>" /></li>
 					<ul>
 						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
+							<button class="btn btn-default activeAppointment" type="submit">
 								<div class="row">
 									<div class="col-sm-12 text-left">
+									<div>
 										<b><%= appointment.getTitle() %> </b><br>
 										<% Doctor doctor = appointment.getDoctor();
 										if(doctor==null){
@@ -99,6 +100,7 @@
 										<% } %>
 										|
 										<%= appointment.getStringDateCreated() %>
+									</div>
 									</div>
 								</div>
 							</button>
