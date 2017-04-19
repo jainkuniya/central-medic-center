@@ -56,7 +56,8 @@ public class BookAppointment extends HttpServlet {
 			Appointment appointment = new Appointment(patient, (String) request.getParameter("symptons"),
 					(String) request.getParameter("disease"),
 					DateUtils.getLongFromDate((String) request.getParameter("preferredDate")),
-					(String) request.getParameter("title"));
+					(String)request.getParameter("title"));
+
 
 			// insert in DB
 			int status = new DatabaseHelper().createAppointment(appointment);
@@ -80,5 +81,4 @@ public class BookAppointment extends HttpServlet {
 		request.setAttribute("error", "Please login again");
 		rs.forward(request, response);
 	}
-
 }

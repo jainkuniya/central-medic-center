@@ -86,7 +86,11 @@
 								value="<%= appointment.getId() %>" /></li>
 					<ul>
 						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
+						<%if(detailedAppointment.getId()==appointment.getId()){ %>
+							<button class="btn btn-default activeAppointment" type="submit">
+						<%}else{ %>
+							<button class="btn btn-default " type="submit">
+						<%} %>
 								<div class="row">
 									<div class="col-sm-12 text-left">
 										<b><%= appointment.getTitle() %> </b><br>
@@ -117,7 +121,11 @@
 								value="<%= appointment.getId() %>" /></li>
 					<ul>
 						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
+						<%if(detailedAppointment.getId()==appointment.getId()){ %>
+							<button class="btn btn-default activeAppointment" type="submit">
+						<%}else{ %>
+							<button class="btn btn-default " type="submit">
+						<%} %>
 								<div class="row">
 									<div class="col-sm-12 text-left">
 										<b><%= appointment.getTitle() %> </b><br>

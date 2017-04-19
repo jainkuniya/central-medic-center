@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.04.2
+-- Server version	5.7.17-0ubuntu0.16.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,39 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `person`
+-- Table structure for table `patient`
 --
 
-DROP TABLE IF EXISTS `person`;
+DROP TABLE IF EXISTS `patient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `person` (
-  `personId` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(10) NOT NULL,
-  `lastName` varchar(10) DEFAULT NULL,
-  `userName` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `dob` double DEFAULT NULL,
-  `token` varchar(10) CHARACTER SET big5 DEFAULT '0',
-  `personType` int(1) NOT NULL DEFAULT '1',
-  `gender` varchar(2) DEFAULT 'NA',
-  `address` varchar(45) DEFAULT NULL,
-  `contactNumber` varchar(14) DEFAULT NULL,
-  PRIMARY KEY (`personId`),
-  UNIQUE KEY `userName_UNIQUE` (`userName`),
-  KEY `type` (`personType`),
-  CONSTRAINT `person_ibfk_1` FOREIGN KEY (`personType`) REFERENCES `persontype` (`typeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+CREATE TABLE `patient` (
+  `patientId` int(11) NOT NULL,
+  `height` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `bloodGroup` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`patientId`),
+  UNIQUE KEY `id_UNIQUE` (`patientId`),
+  CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `person` (`personId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `person`
+-- Dumping data for table `patient`
 --
 
-LOCK TABLES `person` WRITE;
-/*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Vishal','Sanghai','vishal','qwerty',925842600000,'1',1,'M','Dover Terrace, Kolkata','9521113802'),(2,'Shubham ','Mangal','shubham','qwerty',925842600000,'1',1,'M','Mansarovar, Jaipur','9571620779'),(3,'Satyam','Shubham','satyam','qwerty',925842600000,'1',1,'M','Bihar Sharif, Nalanda','8981000909'),(4,'Harsh','Modi','harsh','qwerty',925842600000,'1',1,'M','Jaipuria Marg, Indore','8981000899'),(5,'Hemant','Verma','hemant','qwerty',925842600000,'1',1,'M','Pagal Gali, Ganganagar','8981001717'),(6,'Anmol','Ratnam','anmol','qwerty',925842600000,'1',1,'M','Panchawati Chowk, Hazaribagh','9521113806'),(7,'Utsav','Singh','utsav','qwerty',925842600000,'1',1,'M','Ram Gali, Patna','9521113816'),(8,'Akshat','Mathur','akshat','qwerty',925842600000,'1',1,'M','Jai Baba, Ajmer','9163990299'),(9,'Rishabh','Tiwari','rishabh','qwerty',925842600000,'1',1,'M','Ankur Villa, Gurgaon','9830085588'),(10,'Vishwesh','Jainkuniya','vishwesh','qwerty',889236840000,'1',1,'M','Park Street, Pratapgarh','8100055671'),(11,'Dr. Rachit','Sharma','rachit','qwerty',925842600000,'1',2,'M','Billu Marg, Jaipur','8114487323'),(12,'Dr. Gourav','Khatri','gourav','qwerty',889236840000,'1',2,'M','Howrah, Kolkata','8240558662'),(13,'Dr. Ankur','Arora','ankur','qwerty',925842600000,'1',2,'M','Hauz Kauz, Delhi','9521356402'),(14,'Dr. Vivek','Tewari','vivek','qwerty',889236840000,'1',2,'M','Jheel, Hazaribagh','8987213127'),(15,'Dr. Manas','Jain','manas','qwerty',925842600000,'1',2,'M','Boli Marg, Udaipur','8898645151');
-/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+LOCK TABLES `patient` WRITE;
+/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,60,178,'A+'),(2,165,80,'A+'),(3,171,49,'A-'),(4,180,51,'O+'),(5,175,59,'O-'),(6,176,75,'B+'),(7,170,80,'B+'),(8,165,100,'B-'),(9,166,120,'B-'),(10,159,69,'AB+');
+/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -60,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20  4:03:53
+-- Dump completed on 2017-04-20  5:27:25
