@@ -21,6 +21,7 @@ public class DateUtils    {
 	
 	public static String getStringFromDate(long longDate){
         Date date=new Date(longDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd, hh:mm:aa");
         return simpleDateFormat.format(date);
 	}
 	
