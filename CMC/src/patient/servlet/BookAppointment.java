@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
@@ -46,23 +47,37 @@ public class BookAppointment extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Patient patient = new Patient(Integer.valueOf(request.getParameter("patientId")));
-		Appointment appointment = new Appointment(patient,
-				(String) request.getParameter("symptons"), (String) request.getParameter("disease"),
-				DateUtils.getLongFromDate((String)request.getParameter("preferredDate")));
-
-		// insert in DB
-		int status = new DatabaseHelper().createAppointment(appointment);
-		if (status > 0) {
-			// successfully inserted
-			// redirect to dashboard
-			RequestDispatcher rs;
-			rs = request.getRequestDispatcher("patient");
-			request.setAttribute("personId", appointment.getPatient().getId());
-			rs.forward(request, response);
+		HttpSession session;
+		session = request.getSession();
+		if (session.isNew()) {
+			redirectToLogin(request, response);
 		} else {
-			// error
+			Patient patient = new Patient((int) session.getAttribute("UserID"));
+			Appointment appointment = new Appointment(patient, (String) request.getParameter("symptons"),
+					(String) request.getParameter("disease"),
+					DateUtils.getLongFromDate((String) request.getParameter("preferredDate")));
+
+			// insert in DB
+			int status = new DatabaseHelper().createAppointment(appointment);
+			if (status > 0) {
+				// successfully inserted
+				// redirect to dashboard
+				RequestDispatcher rs;
+				rs = request.getRequestDispatcher("patient");
+				request.setAttribute("personId", appointment.getPatient().getId());
+				rs.forward(request, response);
+			} else {
+				// error
+				redirectToLogin(request, response);
+			}
 		}
+	}
+
+	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
+		request.setAttribute("error", "Please login again");
+		rs.forward(request, response);
 	}
 
 }

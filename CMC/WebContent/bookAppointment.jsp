@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, utils.DateUtils"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -151,7 +151,7 @@
 							Date of Appointment</label>
 						<div class="col-sm-10">
 							<input type="date" class="form-control" id="date"
-								placeholder="Date" name="preferredDate">
+								placeholder="Date" name="preferredDate" value="<%= DateUtils.getStringFromDate(System.currentTimeMillis()) %>">
 						</div>
 					</div>
 					<div class="form-group">
