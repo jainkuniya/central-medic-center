@@ -119,7 +119,7 @@ public class Appointment {
 	}
 	
 	public String getStringDateCreated() {
-		return DateUtils.getStringFromDate(dateCreated);
+		return DateUtils.getDateTtimeSringFromDate(dateCreated);
 	}
 
 	public void setDateCreated(long dateCreated) {

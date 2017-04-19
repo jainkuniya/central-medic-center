@@ -20,7 +20,7 @@ public class AppointmentItems {
 	}
 	
 	public String getStringDate() {
-		return DateUtils.getStringFromDate(date);
+		return DateUtils.getDateTtimeSringFromDate(date);
 	}
 
 	public void setDate(long date) {
