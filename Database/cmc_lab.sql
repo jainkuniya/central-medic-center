@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: CMC
+-- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient`
+-- Table structure for table `lab`
 --
 
-DROP TABLE IF EXISTS `patient`;
+DROP TABLE IF EXISTS `lab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `patient` (
-  `id` int(11) NOT NULL,
-  `height` int(11) DEFAULT NULL,
-  `weight` int(11) DEFAULT NULL,
-  `bloodGroup` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`id`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `lab` (
+  `labId` int(11) NOT NULL,
+  `labName` varchar(45) NOT NULL,
+  `testFor` varchar(45) NOT NULL,
+  `labResult` varchar(45) NOT NULL,
+  `reportFile` varchar(45) DEFAULT NULL,
+  `itemId` int(11) NOT NULL,
+  PRIMARY KEY (`labId`),
+  KEY `labfk1_idx` (`itemId`),
+  CONSTRAINT `labfk1` FOREIGN KEY (`itemId`) REFERENCES `appointmentitems` (`itemId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient`
+-- Dumping data for table `lab`
 --
 
-LOCK TABLES `patient` WRITE;
-/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,1080,454,'O+');
-/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+LOCK TABLES `lab` WRITE;
+/*!40000 ALTER TABLE `lab` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20  0:23:58
+-- Dump completed on 2017-04-20  2:18:34
