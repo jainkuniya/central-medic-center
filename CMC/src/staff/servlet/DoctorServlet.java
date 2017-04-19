@@ -43,7 +43,6 @@ public class DoctorServlet extends HttpServlet {
 			else{
 			
 			int personId = (int) session.getAttribute("UserID");
-			System.out.print(personId);
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(personId);

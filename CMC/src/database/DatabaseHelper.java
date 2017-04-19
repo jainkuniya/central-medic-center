@@ -316,7 +316,6 @@ public class DatabaseHelper {
 		try {
 			// update person
 			if (!request.getParameter("password").isEmpty()) {
-				System.out.println(request.getParameter("password"));
 				PreparedStatement ps = connection
 						.prepareStatement("update person set password=?, dob=?, address=?, contactNumber=? where personId=?");
 				ps.setString(1, request.getParameter("password"));
