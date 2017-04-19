@@ -14,7 +14,6 @@ public class DateUtils    {
 		    return  d.getTime();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(stringDate + " fdafdsa fdsafdsafd");
 		    return 0;
 		}
 	}

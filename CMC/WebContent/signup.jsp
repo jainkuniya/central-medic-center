@@ -33,38 +33,37 @@ else{
 	<br>
 	<h1><center>Central Medic Center</center> </h1>
 	<div class="container">
-        <form class="form-horizontal form-signup" role="form" action="signup" method="post">
+        <form class="form-horizontal form-signup" id="mainForm" role="form" action="signup" method="post" autocomplete="off">
             <h2 class="form-signin-heading"><center>Please register</center></h2>
             <br>
             <div class="form-group">
                 <label for="firstName" class="col-sm-3 control-label">First Name</label>
                 <div class="col-sm-9">
-                    <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus required>
-                    <span class="help-block">First Name, eg.: Shubham, Vishwesh, Vishal</span>
+                    <input type="text" name="firstName" placeholder="First Name" class="form-control" maxlength="10" autofocus required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastName" class="col-sm-3 control-label">Last Name</label>
                 <div class="col-sm-9">
-                    <input type="text" id="lastName" placeholder="Last Name" class="form-control" autofocus required>
+                    <input type="text" name="lastName" placeholder="Last Name" class="form-control" maxlength="10" autofocus required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="username" class="col-sm-3 control-label ">Username</label>
                 <div class="col-sm-9">
-                    <input type="username" id="userName" placeholder="Username" class="form-control" required>
+                    <input type="username" name="userName" placeholder="Username" class="form-control" maxlength="20" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-9">
-                    <input type="password" id="password" placeholder="Password" class="form-control" required>
+                    <input type="password" name="password" placeholder="Password" class="form-control" maxlength="20" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="birthDate" class="col-sm-3 control-label">Date of Birth</label>
                 <div class="col-sm-9">
-                    <input type="date" id="dob" class="form-control" required>
+                    <input type="date" name="dob" class="form-control" required>
                 </div>
             </div>
             
@@ -93,13 +92,13 @@ else{
             <div class="form-group">
                 <label for="address" class="col-sm-3 control-label">Address</label>
                 <div class="col-sm-9">
-                    <input type="address" id="address" placeholder="BH3, The LNMIIT, Jaipur" class="form-control" required>
+                    <input type="address" name="address" placeholder="BH3, The LNMIIT, Jaipur" class="form-control" maxlength="40" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="number" class="col-sm-3 control-label">Phone Number</label>
                 <div class="col-sm-9">
-                    <input type="number" id="contactNumber" placeholder="9521113802" class="form-control" required>
+                    <input type="number" name="contactNumber" placeholder="9521113802" class="form-control" maxlength="13" required>
                 </div>
             </div>
             <div class="form-group">
@@ -118,19 +117,19 @@ else{
                 <div class="form-group">
                 <label for="Height" class="col-sm-3 control-label">Height</label>
                 <div class="col-sm-9">
-                    <input type="number" id="height" placeholder="in cms" class="form-control">
+                    <input type="number" name="height" placeholder="in cms" class="form-control">
                 </div>
                 </div>
                 <div class="form-group">
                 <label for="Weight" class="col-sm-3 control-label">Weight</label>
                 <div class="col-sm-9">
-                    <input type="number" id="weight" placeholder="in kgs" class="form-control">
+                    <input type="number" name="weight" placeholder="in kgs" class="form-control">
                 </div>
                 </div>
                 <div class="form-group">
                 <label for="BloodGroup" class="col-sm-3 control-label">Blood Group</label>
                 <div class="col-sm-9">
-                    <input type="string" id="bloodGroup" placeholder="A+" class="form-control">
+                    <input type="string" name="bloodGroup" placeholder="A+" class="form-control" maxlength="3">
                 </div>
                 </div>
             </div>
@@ -138,18 +137,27 @@ else{
                 <div class="form-group">
                 <label for="Degree" class="col-sm-3 control-label">Degree</label>
                 <div class="col-sm-9">
-                    <input type="string" id="degree" placeholder="MBBS" class="form-control">
+                    <input type="string" name="degree" placeholder="MBBS" class="form-control">
                 </div>
                 </div>
                 <div class="form-group">
                 <label for="Specialization" class="col-sm-3 control-label">Specialization</label>
                 <div class="col-sm-9">
-                    <input type="string" id="specialization" placeholder="Cardiologist" class="form-control">
+                    <input type="string" name="specialization" placeholder="Cardiologist" class="form-control">
                 </div>
                 </div>
             </div>
+            
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
+			         <%
+					    String message = (String)request.getAttribute("error");
+					    if (message!=null) {
+					  %>
+						<h4><%= message %></h4>
+						<%
+					    } 
+					 %>
                     <button type="submit" class="btn btn-primary btn-block">Register</button>
                 </div>
             </div>
@@ -162,28 +170,28 @@ else{
     <script
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-                $('#userType').on('change',function(){
+                $('#userType').on('click',function(){
                 var selection = $(this).val();
                 switch(selection){
                 case "1":
-                $("#Patient").show()
-                $("#Doctor").hide()
-                $("#Admin").hide()
+                $("#Patient").show();
+                $("#Doctor").hide();
+                $("#Admin").hide();
                 break;
                 case "2":
-                $("#Patient").hide()
-                $("#Doctor").show()
-                $("#Admin").hide()
+                $("#Patient").hide();
+                $("#Doctor").show();
+                $("#Admin").hide();
                 break;
                 case "3":
-                $("#Patient").hide()
-                $("#Doctor").hide()
-                $("#Admin").show()
+                $("#Patient").hide();
+                $("#Doctor").hide();
+                $("#Admin").show();
                 break;
                 default:
-                $("#Patient").hide()
-                $("#Doctor").hide()
-                $("#Admin").hide()
+                $("#Patient").hide();
+                $("#Doctor").hide();
+                $("#Admin").hide();
                 }
             });
     </script>

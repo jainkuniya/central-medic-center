@@ -51,6 +51,26 @@ public class DatabaseHelper {
 		return result;
 
 	}
+	public int checkPerson(String username) {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select * from person where userName=?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return 0;
+			}
+			else {
+				return 1;
+			}
+			// get patient from database
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+
+		
+	}
 
 	public Patient getPatient(int id) {
 		try {
@@ -313,10 +333,9 @@ public class DatabaseHelper {
 
 	}
 
-	public int createPerson(HttpServletRequest request) {
+	public void createPerson(HttpServletRequest request) {
 		try {
 			PreparedStatement ps,ts,ps1,ps2;
-			int c1=0,c2=0,c3=0;
 			ps = connection.prepareStatement(
 					"insert into person(firstName,lastName,userName,password,dob,token,type,gender,address,contactNumber) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, request.getParameter("firstName"));
@@ -324,12 +343,12 @@ public class DatabaseHelper {
 			ps.setString(3, request.getParameter("userName"));
 			ps.setString(4, request.getParameter("password"));
 			ps.setLong(5,  DateUtils.getLongFromDate(request.getParameter("dob")));
-			ps.setString(6, request.getParameter("token"));
-			ps.setInt(7, Integer.parseInt(request.getParameter("type")) );
+			ps.setString(6, "0");
+			ps.setInt(7, Integer.parseInt(request.getParameter("userType")) );
 			ps.setString(8, request.getParameter("gender"));
 			ps.setString(9, request.getParameter("address"));
 			ps.setString(10, request.getParameter("contactNumber"));
-			c1 = ps.executeUpdate();
+			ps.executeUpdate();
 			
 			ts = connection.prepareStatement(
 					"Select id from person where userName=?");
@@ -339,31 +358,29 @@ public class DatabaseHelper {
 			if (rs.next()) {
 				userId = rs.getInt("id");
 			} 
-			String uType = (String) request.getParameter("userType");
-			if (uType.equals("patient")) {
+			int uType = Integer.parseInt(request.getParameter("userType"));
+			if (uType == 1) {
 				ps1 = connection
 						.prepareStatement("insert into patient(id,height,weight,bloodGroup) values(?,?,?,?)");
 				ps1.setInt(1, userId);
 				ps1.setString(2, request.getParameter("height"));
 				ps1.setString(3, request.getParameter("weight"));
 				ps1.setString(4, request.getParameter("bloodGroup"));
-				c2 = ps1.executeUpdate();
-			} else if (uType.equals("doctor")) {
+				 ps1.executeUpdate();
+			} else if (uType == 2) {
 				ps2 = connection
 						.prepareStatement("insert into doctor(id,degree,specialization) values(?,?,?)");
 				ps2.setInt(1, userId);
 				ps2.setString(2, request.getParameter("degree"));
 				ps2.setString(3, request.getParameter("specialization"));
-				c3 = ps2.executeUpdate();
+				 ps2.executeUpdate();
 			} 
-			if(c1==1 && (c2==1 || c3==1)){
-				return 1;
-			}
+			 
 			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return -1;
+		 
 	}
 }

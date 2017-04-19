@@ -33,8 +33,7 @@ public class Signup extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int personType = new DatabaseHelper().createPerson(request);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+		request.getRequestDispatcher("signup.jsp").forward(request, response);
 		
 	}
 
@@ -42,8 +41,27 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// TODO Auto-generated method stub	
+		String username = request.getParameter("userName");
+		int check = new DatabaseHelper().checkPerson(username);
+		 
+		switch(check){
+		case 0:
+			request.setAttribute("error", "user already exist");
+			request.getRequestDispatcher("signup.jsp").forward(request, response);
+			 
+			break;
+		case 1:
+			new DatabaseHelper().createPerson(request);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			break;
+		default:
+			request.setAttribute("error", "error in signup");
+			request.getRequestDispatcher("signup.jsp").forward(request, response);
+			break;
+			
+		}
+		 
 	}
 
 }
