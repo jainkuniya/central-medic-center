@@ -152,7 +152,7 @@
 						<div class="col-sm-3">
 						<b>Appointment ID: <%= detailedAppointment.getId() %></b>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-5">
 						<b>Doctor Name: </b> 
 						<% if(detailedAppointment.getDoctor()!=null) { %>
 							<%= detailedAppointment.getDoctor().getFirstName() + " " + detailedAppointment.getDoctor().getLastName() %>
@@ -160,16 +160,16 @@
 							Wating for doctor approval
 						<% } %>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 						<b>Date Created:</b> <%= detailedAppointment.getStringDateCreated() %>
 						</div>
 					</div>
 					<br>
 					<div class="row ">
-						<div class="col-sm-6">
+						<div class="col-sm-8">
 						<b>Symptons: </b> <%= detailedAppointment.getSymptons() %>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 						<b>Suspected Disease </b><%= detailedAppointment.getDisease() %>
 						</div>
 					</div>
@@ -178,7 +178,7 @@
 				<% for(int i=0; i<detailedAppointment.getItems().size(); i++) { 
 					AppointmentItems item = detailedAppointment.getItems().get(i);
 				%>
-				<div class="content">
+				<div class="content" style="">
 					<div class="row ">
 						<div class="col-sm-2">
 							<div class="messageFrom">
@@ -195,12 +195,12 @@
 							</div>
 						</div>
 					</div>
-					<br>
+					
 					<div class="row">
 						<div class="col-sm-10">
 						</div>
 						<div class="col-sm-2">
-							<div class="">
+							<div class="" style="font-size:11px;">
 								<%= item.getStringDate() %>
 							</div>
 						</div>

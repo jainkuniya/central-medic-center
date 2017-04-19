@@ -11,6 +11,10 @@
 .content:hover {
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+.messageBox{
+	padding: 0px !important;
+}
+
 .messageFrom{
 	border-style: solid;
 	border-width: 1px;
@@ -24,6 +28,9 @@
 	border-width: 1px;
 	padding: 10px;
 	margin-left:-10px;
+}
+.dateStamp{
+	font-size: 2px;
 }
 .form-control{
 	width: 100% !important;
