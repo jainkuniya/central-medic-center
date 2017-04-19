@@ -59,15 +59,15 @@
 						<div class="row intro">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<div class="">
-									<img class="profilePic" src="media/user.png">
+									<img class="profilePic" src="media/doctor.png">
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-8 info">
 								<br> <span class="name"><%= doctor.getFirstName() +" " + doctor.getLastName() %></span><br>
 								<img src="media/gender.png"><span class="details">
 									<%= doctor.getGender() +", " + doctor.getAge() %></span><br> <img
-									src="media/bloodGroup.png"><span class="blood"> <%= doctor.getDegree() %></span><br>
-								<img src="media/Location.png"><span class="location">
+									src="media/degree.png"><span class="blood"> <%= doctor.getDegree() %></span><br>
+								<img src="media/specialization.png"><span class="location">
 									<%= doctor.getSpecialization() %></span>
 							</div>
 						</div>

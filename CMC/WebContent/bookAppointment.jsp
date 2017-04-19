@@ -147,6 +147,13 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="title" class="col-sm-2 control-label">Appointment Title</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="date"
+								placeholder="Acute Stomach Ache" name="title" required>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="date" class="col-sm-2 control-label">Preferred
 							Date of Appointment</label>
 						<div class="col-sm-10">

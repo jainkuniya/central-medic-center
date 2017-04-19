@@ -55,7 +55,8 @@ public class BookAppointment extends HttpServlet {
 			Patient patient = new Patient((int) session.getAttribute("UserID"));
 			Appointment appointment = new Appointment(patient, (String) request.getParameter("symptons"),
 					(String) request.getParameter("disease"),
-					DateUtils.getLongFromDate((String) request.getParameter("preferredDate")));
+					DateUtils.getLongFromDate((String) request.getParameter("preferredDate")),
+					(String) request.getParameter("title"));
 
 			// insert in DB
 			int status = new DatabaseHelper().createAppointment(appointment);

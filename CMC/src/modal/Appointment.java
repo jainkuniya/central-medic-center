@@ -26,13 +26,14 @@ public class Appointment {
 		this.items = items;
 	}
 
-	public Appointment(Patient patient, String symptons, String disease, long preferredDate) {
+	public Appointment(Patient patient, String symptons, String disease, long preferredDate, String title) {
 		this.setPatient(patient);
 		this.setIsClosed(0);
 		this.setDateCreated(System.currentTimeMillis());
 		this.setSymptons(symptons);
 		this.setDisease(disease);
 		this.preferredDate = preferredDate;
+		this.title = title;
 	}
 
 	public Appointment(int id, String symptons) {

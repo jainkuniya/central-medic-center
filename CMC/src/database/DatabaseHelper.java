@@ -149,12 +149,14 @@ public class DatabaseHelper {
 		try {
 			// get person from database
 			PreparedStatement ps = connection.prepareStatement(
-					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate) values(?,?,?,?,?)");
+					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate, "
+					+ "title) values(?,?,?,?,?,?)");
 			ps.setInt(1, appointment.getPatient().getId());
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
 			ps.setLong(5, appointment.getPreferredDate());
+			ps.setString(6, appointment.getTitle());
 
 			int status = ps.executeUpdate();
 			// create an item
