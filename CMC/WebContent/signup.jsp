@@ -108,7 +108,6 @@ else{
                         <option value="" selected disabled>Choose One</option>
                         <option value="1">Patient</option>
                         <option value="2">Doctor</option>
-                        <option value="3">Admin</option>
                     </select>
                 </div>
             </div>
@@ -176,22 +175,14 @@ else{
                 case "1":
                 $("#Patient").show();
                 $("#Doctor").hide();
-                $("#Admin").hide();
                 break;
                 case "2":
                 $("#Patient").hide();
                 $("#Doctor").show();
-                $("#Admin").hide();
-                break;
-                case "3":
-                $("#Patient").hide();
-                $("#Doctor").hide();
-                $("#Admin").show();
                 break;
                 default:
                 $("#Patient").hide();
                 $("#Doctor").hide();
-                $("#Admin").hide();
                 }
             });
     </script>

@@ -52,6 +52,8 @@ else{
 		 %>
 		 	<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<br>
+			<center><a href="signup">Not Registered yet, Click to Signup!</a></center>
 		</form>
 	</div>
 </body>
