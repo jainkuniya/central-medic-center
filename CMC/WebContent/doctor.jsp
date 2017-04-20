@@ -186,7 +186,7 @@
 								Last Login
 							</div>
 							<div class="panel-body">
-								03/05/2017 10:11 PM
+								<%= session.getAttribute("LastAccess") %>
 							</div>
 						</div>
 					</div>

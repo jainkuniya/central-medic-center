@@ -122,6 +122,19 @@
 						</table>
 					</div>
 				</div>
+				<br>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Last Login
+							</div>
+							<div class="panel-body">
+								<%= session.getAttribute("LastAccess") %>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
