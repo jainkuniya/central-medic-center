@@ -20,6 +20,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/lab.css">
+<link rel="stylesheet" href="css/appointment.css">
 
 </head>
 <body>
@@ -73,7 +74,7 @@
 						</div>
 
 					</li>
-					<li class=""><a href="labReportOpen">Open Lab Reports</a></li>
+					<li class="activeAppointment"><a href="#">Open Lab Reports</a></li>
 					<li class=""><a href="labReportClosed.jsp">Closed Lab Reports</a></li>
 				</ul>
 			</div>

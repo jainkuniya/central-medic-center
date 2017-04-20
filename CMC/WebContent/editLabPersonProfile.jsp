@@ -19,6 +19,7 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
+
 </head>
 <body>
 
@@ -70,7 +71,7 @@
 						</div>
 
 					</li>
-					<li class=""><a href="labReportOpen">Open Lab Reports</a></li>
+					<li class=""><a href="labPerson">Open Lab Reports</a></li>
 					<li class=""><a href="labReportClosed">Closed Lab Reports</a></li>
 				</ul>
 			</div>
