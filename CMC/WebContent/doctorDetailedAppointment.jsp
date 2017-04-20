@@ -262,6 +262,7 @@
 						<div class="row ">
 							<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
 							<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
+							<input type="hidden" name="doctorId" value="<%= doctor.getId()%>" />
 							<div class="col-sm-9 form-group" id="Message" >
 								<textarea class="form-control textman" name="description"
 									rows="3" placeholder="Type your message here"></textarea>

@@ -604,14 +604,15 @@ public class DatabaseHelper {
 		}
 	}
 	
-	public int addLab(String labName, String testFor, int itemId) {
+	public int addLab(String labName, String testFor, int itemId, int doctorId) {
 		try {
 			PreparedStatement ps = connection.prepareStatement(
-					"insert into lab (labName, testFor, itemId) values(?,?,?)");
+					"insert into lab (labName, testFor, itemId, doctorId) values(?,?,?,?)");
 			ps.setString(1, labName);
 			ps.setString(2, testFor);
 			ps.setInt(3, itemId);
-
+			ps.setInt(4, doctorId);
+			
 			return ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -666,6 +667,50 @@ public class DatabaseHelper {
 			if(status>0)
 			{
 				return addItemInAppointment(appointmentId, 6, "Date Allocated :- " + DateUtils.getStringFromDate(allocatedDate));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int updateLabReport(int labReportId, String result, int itemId) {
+		try {
+			//get appointment item 
+			PreparedStatement ps = connection.prepareStatement("SELECT appointmentId from appointmentItems where itemId=?");
+			ps.setInt(1, itemId);
+			ResultSet rs = ps.executeQuery();
+			System.out.println("qwerty1 " + itemId);
+			if(rs.next())
+			{
+				System.out.println("qwerty1 " + itemId);
+				//create appointment item 
+				int status = addItemInAppointment(rs.getInt("appointmentId"), 4, "Lab Report arrived");
+				if(status>0)
+				{
+					//update in lab table
+					ps = connection.prepareStatement("update lab set labResult=?, itemId=? where labId=?");
+					ps.setString(1, result);
+					ps.setInt(2, getMaxAppointmentItemId());
+					ps.setInt(3, labReportId);
+					
+					return ps.executeUpdate();			
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	private int getMaxAppointmentItemId() {
+		try {
+			// update appointment
+			PreparedStatement ps = connection.prepareStatement("select max(itemId) as itemId from appointmentItems");
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt("itemId");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

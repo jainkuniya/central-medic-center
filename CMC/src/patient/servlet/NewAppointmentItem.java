@@ -66,7 +66,8 @@ public class NewAppointmentItem extends HttpServlet {
 				}
 				else if(sendType == 5){
 					new DatabaseHelper().addLab(request.getParameter("labName"),
-							request.getParameter("testFor"),status);
+							request.getParameter("testFor"),status,
+							Integer.parseInt((String)(request.getParameter("doctorId"))));
 				}
 				RequestDispatcher rs;
 				rs = request.getRequestDispatcher((String)request.getParameter("requestDispatcher"));

@@ -36,8 +36,9 @@ public class BookAppointment extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// error 
+		//redirect to login
+		redirectToLogin(request, response);
 	}
 
 	/**
@@ -69,7 +70,8 @@ public class BookAppointment extends HttpServlet {
 				request.setAttribute("personId", appointment.getPatient().getId());
 				rs.forward(request, response);
 			} else {
-				// error
+				// error 
+				//redirect to login
 				redirectToLogin(request, response);
 			}
 		}
