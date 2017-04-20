@@ -10,6 +10,7 @@ import modal.AppointmentItems;
 import modal.Person;
 import patient.modal.Patient;
 import staff.modal.Doctor;
+import staff.modal.Staff;
 import utils.DateUtils;
 
 public class DatabaseHelper {
@@ -53,7 +54,7 @@ public class DatabaseHelper {
 	}
 	public int checkPerson(String username) {
 		try {
-			// get person from database
+			// check person in database
 			PreparedStatement ps = connection.prepareStatement("select * from person where userName=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -63,7 +64,6 @@ public class DatabaseHelper {
 			else {
 				return 1;
 			}
-			// get patient from database
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
@@ -105,7 +105,7 @@ public class DatabaseHelper {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				// get patient from database
+				// get doctor from database
 				ps = connection.prepareStatement("select * from doctor where doctorId=?");
 				ps.setInt(1, id);
 				ResultSet rsDoctor = ps.executeQuery();
@@ -116,7 +116,7 @@ public class DatabaseHelper {
 							rsDoctor.getString("specialization"));
 				}
 			}
-			// get patient from database
+			// get doctor from database
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -136,7 +136,27 @@ public class DatabaseHelper {
 							rs.getString("address"), rs.getString("contactNumber"));
 				}
 			
-			// get patient from database
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	public Staff getStaff(int id) {
+		try {
+			// get staff from database
+			PreparedStatement ps = connection.prepareStatement("select * from person where personId=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+					return new Staff(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
+							rs.getString("address"), rs.getString("contactNumber"));
+				}
+			
+			// get staff from database
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +167,7 @@ public class DatabaseHelper {
 
 	public int createAppointment(Appointment appointment) {
 		try {
-			// get person from database
+			// create appointment in database
 			PreparedStatement ps = connection.prepareStatement(
 					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate, "
 					+ "title) values(?,?,?,?,?,?)");
@@ -314,7 +334,7 @@ public class DatabaseHelper {
 		return -1;
 	}
 
-	private int updatePerson(int patientId, HttpServletRequest request) {
+	public int updatePerson(int patientId, HttpServletRequest request) {
 		try {
 			// update person
 			if (!request.getParameter("password").isEmpty()) {
@@ -330,7 +350,7 @@ public class DatabaseHelper {
 			} else {
 				PreparedStatement ps = connection
 						.prepareStatement("update person set dob=?, address=?, contactNumber=? where personId=?");
-				ps.setLong(1, System.currentTimeMillis());
+				ps.setLong(1, DateUtils.getLongFromDate(request.getParameter("dob")));
 				ps.setString(2, request.getParameter("address"));
 				ps.setString(3, request.getParameter("contactNumber"));
 				ps.setInt(4, patientId);

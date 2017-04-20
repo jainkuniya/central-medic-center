@@ -187,7 +187,7 @@
 						<label for="address" class="col-sm-2 control-label">Address</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" name="address" rows="2"
-								placeholder="BH-3, The LNMIIT" ><%= patient.getAddress() %>"</textarea>
+								placeholder="BH-3, The LNMIIT" ><%= patient.getAddress() %></textarea>
 						</div>
 					</div>
 					<h4 class="sub-header">Health Information</h4>

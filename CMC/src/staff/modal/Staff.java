@@ -1,4 +1,4 @@
-package staff;
+package staff.modal;
 
 
 import modal.Person;

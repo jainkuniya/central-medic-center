@@ -1,7 +1,6 @@
 package staff.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import database.DatabaseHelper;
+import staff.modal.Staff;
 
 /**
- * Servlet implementation class EditProfile
+ * Servlet implementation class DoctorServlet
  */
-@WebServlet("/editDoctorProfile")
-public class EditDoctorProfile extends HttpServlet {
+@WebServlet("/admin")
+public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	HttpSession session;   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditDoctorProfile() {
+    public AdminServlet() {
         super();
        
     }
@@ -32,35 +31,40 @@ public class EditDoctorProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			session = request.getSession();
+			if (session.isNew()){
+				redirectToLogin(request, response);
+				 }
+			else{
+			
+			int personId = (int) session.getAttribute("UserID");
+			// get patient details
+			DatabaseHelper databaseHelper = new DatabaseHelper();
+			Staff admin = databaseHelper.getStaff(personId);
+			if (admin == null) {
+				// redirect to login
+				redirectToLogin(request, response);
+				return;
+			}
+			// redirect to person dashboard
+			RequestDispatcher rs = request.getRequestDispatcher("admin.jsp");
+			request.setAttribute("admin", admin);
+			rs.forward(request, response);
+			return;
+			}
+		} catch (Exception e) {
+			// redirect to login
+			redirectToLogin(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//get doctor
-		try {
-			HttpSession session = request.getSession();
-			int doctorId = (int) session.getAttribute("UserID");
-			// get doctor details
-			DatabaseHelper databaseHelper = new DatabaseHelper();
-			int status = databaseHelper.updateDoctor(doctorId, request);
-			if(status>0)
-			{
-				//successfully updated
-				request.getRequestDispatcher("doctor").forward(request, response);
-				return;
-			}else
-			{
-				// redirect to login
-				redirectToLogin(request, response);
-			}
-			return;
-		} catch (Exception e) {
-			// redirect to login
-			redirectToLogin(request, response);
-		}
+		
+		doGet(request, response);
 	}
 	
 	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response)
@@ -69,6 +73,4 @@ public class EditDoctorProfile extends HttpServlet {
 		request.setAttribute("error", "Please login again");
 		rs.forward(request, response);
 	}
-
-
 }

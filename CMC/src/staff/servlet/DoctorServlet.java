@@ -43,7 +43,7 @@ public class DoctorServlet extends HttpServlet {
 			else{
 			
 			int personId = (int) session.getAttribute("UserID");
-			// get patient details
+			// get doctor details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(personId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, "doctorId");
@@ -52,7 +52,7 @@ public class DoctorServlet extends HttpServlet {
 				redirectToLogin(request, response);
 				return;
 			}
-			// redirect to person dashboard
+			// redirect to doctor dashboard
 			RequestDispatcher rs = request.getRequestDispatcher("doctor.jsp");
 			request.setAttribute("doctor", doctor);
 			request.setAttribute("appointments", appointments);

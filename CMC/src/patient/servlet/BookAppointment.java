@@ -63,7 +63,7 @@ public class BookAppointment extends HttpServlet {
 			int status = new DatabaseHelper().createAppointment(appointment);
 			if (status > 0) {
 				// successfully inserted
-				// redirect to dashboard
+				// redirect to patient dashboard
 				RequestDispatcher rs;
 				rs = request.getRequestDispatcher("patient");
 				request.setAttribute("personId", appointment.getPatient().getId());

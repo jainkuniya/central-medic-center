@@ -13,6 +13,15 @@ if (!session.isNew() && session.getAttribute("UserID")!=null){
    else if(type.equals("doctor")){
 	   response.sendRedirect("doctor"); 
    }
+   else if(type.equals("admin")){
+	   response.sendRedirect("admin"); 
+   }
+   else if(type.equals("labPerson")){
+	   response.sendRedirect("labPerson"); 
+   }
+   else if(type.equals("receptionist")){
+	   response.sendRedirect("receptionist"); 
+   }
   
  }
 else{

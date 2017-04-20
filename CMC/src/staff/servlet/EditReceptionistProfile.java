@@ -15,14 +15,14 @@ import database.DatabaseHelper;
 /**
  * Servlet implementation class EditProfile
  */
-@WebServlet("/editDoctorProfile")
-public class EditDoctorProfile extends HttpServlet {
+@WebServlet("/editReceptionistProfile")
+public class EditReceptionistProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditDoctorProfile() {
+    public EditReceptionistProfile() {
         super();
        
     }
@@ -39,17 +39,17 @@ public class EditDoctorProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//get doctor
+		//get admin
 		try {
 			HttpSession session = request.getSession();
-			int doctorId = (int) session.getAttribute("UserID");
-			// get doctor details
+			int receptionistId = (int) session.getAttribute("UserID");
+			// get receptionist details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
-			int status = databaseHelper.updateDoctor(doctorId, request);
+			int status = databaseHelper.updatePerson(receptionistId, request);
 			if(status>0)
 			{
 				//successfully updated
-				request.getRequestDispatcher("doctor").forward(request, response);
+				request.getRequestDispatcher("receptionist").forward(request, response);
 				return;
 			}else
 			{

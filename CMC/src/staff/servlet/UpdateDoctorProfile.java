@@ -38,7 +38,7 @@ public class UpdateDoctorProfile extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			int doctorId = (int) session.getAttribute("UserID");
-			// get patient details
+			// get doctor details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Doctor doctor = databaseHelper.getDoctor(doctorId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId, "doctorId");
@@ -47,7 +47,7 @@ public class UpdateDoctorProfile extends HttpServlet {
 				redirectToLogin(request, response);
 				return;
 			}
-			// redirect to person dashboard
+			// redirect to doctor dashboard
 			RequestDispatcher rs = request.getRequestDispatcher("editDoctorProfile.jsp");
 			request.setAttribute("doctor", doctor);
 			request.setAttribute("appointments", appointments);
