@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Patient Dashboard - Central Medic Center</title>
+<title>Doctor Appointment Dashboard - Central Medic Center</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -214,6 +214,24 @@
 					</div>
 				</div>
 				<% } }%>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+						    Message
+						  </label>
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+						    Lab Report
+						  </label>
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+						    Prescription
+						  </label>
+						</div>						
+					</div>
+				</div>
 				<div class="">
 					<form class="form-inline" action="newAppointmentItem" method="post">
 					<div class="row ">
@@ -221,7 +239,7 @@
 						<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
 						<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
 						<div class="col-sm-9 form-group">
-							<label class="sr-only" for="exampleInputEmail3">Email address</label>
+							
 						    <textarea class="form-control textman" name="description" rows="3", placeholder="Type your message here"></textarea>
 						</div>
 						<div class="col-sm-3">

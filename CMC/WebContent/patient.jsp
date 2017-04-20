@@ -21,6 +21,7 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/patient.css">
 
 </head>
 <body>
@@ -146,6 +147,40 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
 				<h1 class="page-header">Dashboard</h1>
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/appointment.png">
+							</div>
+							<div class="cardText">4 Appointments</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/bmi.png">
+							</div>
+							<div class="cardText">BMI : 19</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/prescription.png">
+							</div>
+							<div class="cardText">4 Medicines</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/edit.png">
+							</div>
+							<div class="cardText">90% Profile</div>
+						</div>
+					</div>
+				</div>
 				<h2 class="sub-header">Section title</h2>
 			</div>
 		</div>

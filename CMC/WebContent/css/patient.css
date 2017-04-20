@@ -1,0 +1,19 @@
+.card{
+	border-width:1px;
+	border-style:solid;
+}
+.cardImage{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+.cardText{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222222;
+	color:white;
+	padding:20px;
+	font-size:larger;
+}
