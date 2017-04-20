@@ -193,10 +193,10 @@
 					<div class="row ">
 						<div class="col-sm-2">
 							<div class="messageFrom">
-								<% if(item.getType()==1){ 	%>
+								<% if(item.getType()==2){ 	%>
 								<%= detailedAppointment.getPatient().getFirstName() %>
 
-								<%}else if(item.getType()==2) {%>
+								<%}else if(item.getType()==1) {%>
 								You
 								<% }else if(item.getType()==6) { %>
 								System

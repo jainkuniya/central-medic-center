@@ -239,7 +239,7 @@
 								<%
 									if (item.getType() == 1) {
 								%>
-								Doctor
+								<%= detailedAppointment.getDoctor().getFirstName() %>
 								<%
 									} else if (item.getType() == 2) {
 								%>
