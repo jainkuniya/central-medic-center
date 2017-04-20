@@ -68,13 +68,13 @@
 									<%= labPerson.getGender() +", " + labPerson.getAge() %></span><br> <img
 									src="media/degree.png"><span class="degree"> Lab Person</span><br>
 								<img src="media/Location.png"><span class="location">
-									<%= labPerson.getAddress() %></span>
+									<%= labPerson.getAddress() %>sdgs</span>
 							</div>
 						</div>
 
 					</li>
-					<li class=""><a href="labReportOpen">Open Lab Reports</a></li>
-					<li class=""><a href="labReportClosed.jsp">Closed Lab Reports</a></li>
+					<li class="active"><a href="labReportOpen">Open Lab Reports</a></li>
+					<li class=""><a href="labReportClosed">Closed Lab Reports</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
@@ -99,25 +99,7 @@
 									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
 									<td><button type="submit" class="btn btn-default">Submit</button></td>
 									</form>
-								</tr>
-								<tr>
-									<td class="padding-up">Doctor Name</td>
-									<td class="padding-up">Lab Name</td>
-									<td class="padding-up">Test For</td>
-									<form>
-									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
-									<td><button type="submit" class="btn btn-default">Submit</button></td>
-									</form>
-								</tr>	
-								<tr>
-									<td class="padding-up">Doctor Name</td>
-									<td class="padding-up">Lab Name</td>
-									<td class="padding-up">Test For</td>
-									<form>
-									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
-									<td><button type="submit" class="btn btn-default">Submit</button></td>
-									</form>
-								</tr>									
+								</tr>								
 							</tbody>
 						</table>
 					</div>

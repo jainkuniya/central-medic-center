@@ -19,7 +19,6 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
 
@@ -64,13 +63,15 @@
 								<br> <span class="name"><%= labPerson.getFirstName() +" " + labPerson.getLastName() %></span><br>
 								<img src="media/gender.png"><span class="details">
 									<%= labPerson.getGender() +", " + labPerson.getAge() %></span><br> <img
-									src="media/degree.png"><span class="degree"> LabPerson</span><br>
+									src="media/degree.png"><span class="degree"> Lab Person</span><br>
 								<img src="media/Location.png"><span class="location">
 									<%= labPerson.getAddress() %></span>
 							</div>
 						</div>
 
 					</li>
+					<li class=""><a href="labReportOpen">Open Lab Reports</a></li>
+					<li class=""><a href="labReportClosed">Closed Lab Reports</a></li>
 				</ul>
 			</div>
 
