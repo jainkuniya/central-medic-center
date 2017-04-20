@@ -23,16 +23,19 @@ DROP TABLE IF EXISTS `lab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lab` (
-  `labId` int(11) NOT NULL,
+  `labId` int(11) NOT NULL AUTO_INCREMENT,
   `labName` varchar(45) NOT NULL,
   `testFor` varchar(45) NOT NULL,
-  `labResult` varchar(45) NOT NULL,
+  `labResult` varchar(45) DEFAULT NULL,
   `reportFile` varchar(45) DEFAULT NULL,
   `itemId` int(11) NOT NULL,
+  `doctorId` int(11) NOT NULL,
   PRIMARY KEY (`labId`),
   KEY `labfk1_idx` (`itemId`),
-  CONSTRAINT `labfk1` FOREIGN KEY (`itemId`) REFERENCES `appointmentitems` (`itemId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `labfk2_idx` (`doctorId`),
+  CONSTRAINT `labfk1` FOREIGN KEY (`itemId`) REFERENCES `appointmentitems` (`itemId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `labfk11` FOREIGN KEY (`doctorId`) REFERENCES `doctor` (`doctorId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +44,7 @@ CREATE TABLE `lab` (
 
 LOCK TABLES `lab` WRITE;
 /*!40000 ALTER TABLE `lab` DISABLE KEYS */;
-INSERT INTO `lab` VALUES (1,'Urine Test','Blood Sugar','High Sugar',NULL,12);
+INSERT INTO `lab` VALUES (1,'Urine Test','Blood Sugar','High',NULL,12,12),(3,'Blood Test','Haemoglobin',NULL,NULL,41,12),(4,'Kidney Test','Stones','Low',NULL,46,12);
 /*!40000 ALTER TABLE `lab` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 22:38:20
+-- Dump completed on 2017-04-21  3:47:43

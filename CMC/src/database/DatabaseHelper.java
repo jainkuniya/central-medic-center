@@ -552,7 +552,7 @@ public class DatabaseHelper {
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Lab> labs = new ArrayList<Lab>();
 			while (rs.next()) {
-				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"));
+				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"),rs.getInt("doctorId"));
 				labs.add(lab);
 			}
 			return labs;

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (11,'MBBS MD','Neurologist'),(12,'MBBS BDS','Physician'),(13,'MBBS BDS','Dermatologist'),(14,'MBBS BHBS MD','Cardiologist'),(15,'MBBS MD BDS','Gynecologist');
+INSERT INTO `doctor` VALUES (11,'MBBS MD BHHS','Neurologist'),(12,'MBBS BDS','Physician'),(13,'MBBS BDS','Dermatologist'),(14,'MBBS BHBS MD','Cardiologist'),(15,'MBBS MD BDS','Gynecologist');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 22:01:20
+-- Dump completed on 2017-04-21  3:47:43

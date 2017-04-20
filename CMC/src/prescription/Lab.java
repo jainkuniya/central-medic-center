@@ -8,25 +8,27 @@ public class Lab {
 	private String labResult;
 	private String reportFile;
 	private int itemId;
+	private int doctorId;
 	
-	
-	public Lab(int labId, String labName, String testFor, String labResult, String reportFile, int itemId) {
+	public Lab(int labId, String labName, String testFor, String labResult, String reportFile, int itemId, int doctorId) {
 		this.labId = labId;
 		this.labName = labName;
 		this.testFor = testFor;
 		this.labResult = labResult;
 		this.reportFile = reportFile;
 		this.itemId = itemId;
+		this.doctorId = doctorId;
 	}
 	
 	
 	
-	public Lab(String labName, String testFor, String labResult, String reportFile, int itemId) {
+	public Lab(String labName, String testFor, String labResult, String reportFile, int itemId, int doctorId) {
 		this.labName = labName;
 		this.testFor = testFor;
 		this.labResult = labResult;
 		this.reportFile = reportFile;
 		this.itemId = itemId;
+		this.doctorId = doctorId;
 	}
 
 
@@ -63,6 +65,18 @@ public class Lab {
 	}
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
+	}
+
+
+
+	public int getDoctorId() {
+		return doctorId;
+	}
+
+
+
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 	
 }
