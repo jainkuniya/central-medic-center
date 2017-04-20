@@ -184,7 +184,19 @@
 						</div>
 					</div>
 				</div>
-				<h2 class="sub-header">Section title</h2>
+				<br>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Last Login
+							</div>
+							<div class="panel-body">
+								03/05/2017 10:11 PM
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

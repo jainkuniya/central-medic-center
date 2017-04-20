@@ -21,7 +21,7 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="css/patient.css">
+<link rel="stylesheet" href="css/doctor.css">
 </head>
 <body>
 
@@ -144,8 +144,55 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
 				<h1 class="page-header">Dashboard</h1>
-				<h2 class="sub-header">Section title</h2>
-			</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/appointment.png">
+							</div>
+							<div class="cardText" style="padding-left:10px; padding-right:10px;">4 Appointments today</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/patient.png">
+							</div>
+							<div class="cardText">x Patients Treated</div>
+						</div>
+					</div>
+<!-- 				<div class="col-sm-4">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/prescription.png">
+							</div>
+							<div class="cardText">4 Medicines</div>
+						</div>
+					</div>-->
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/edit.png">
+							</div>
+							<div class="cardText">90% Profile</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Last Login
+							</div>
+							<div class="panel-body">
+								03/05/2017 10:11 PM
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>	
 		</div>
 	</div>
 
