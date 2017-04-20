@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
 -- Host: localhost    Database: cmc
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.17-0ubuntu0.16.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `appointment` (
   KEY `appointment_ibfk_2_idx` (`doctorId`),
   CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patientId`) REFERENCES `patient` (`patientId`),
   CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`doctorId`) REFERENCES `doctor` (`doctorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,1,12,1,1492426867320,'Cough',' Tubercolosis',1492426867320,1492426867320,'Tubercolosis in Cough'),(2,1,11,0,1492427049030,'Heart Pain',' Heart Attack',1492427049030,1492427049030,'Heart Attack and pain'),(3,2,12,1,1492427176793,'Headache',' Brain Tumor',1492427176793,1492427176793,'Tumour in Brain'),(4,2,11,0,1492427265008,'Headache','Migraine',1492427265008,1492427265008,'Migraine'),(5,3,12,1,1492427355113,'Pain in Bones',' Bone Fracture',1492427355113,1492427355113,'Bone Broken'),(6,3,11,0,1492427586601,'Pain in Left Ear','Ear Drum Rupture',1492427586601,1492427586601,'Left Ear Damage'),(7,4,12,1,1492427777615,'Pain in eye','Eye Infection',1492427777615,1492427777615,'Eye Problem'),(8,4,11,0,1492519085680,'Sneezing','Cold',1492519085680,1492519085680,'Cold and Sneeze'),(9,5,12,1,1492620672132,'Nose Bleeding','Nose Cancer',1492540200020,1492519085681,'Nose Problem'),(10,5,11,0,1492633630915,'Constipation','Mental Pressure',1492540200040,1492519089681,'Acute Constipation Problem');
+INSERT INTO `appointment` VALUES (1,1,12,1,1492426867320,'Cough',' Tubercolosis',1492426867320,1492426867320,'Tubercolosis in Cough'),(2,1,11,0,1492427049030,'Heart Pain',' Heart Attack',1492427049030,1492427049030,'Heart Attack and pain'),(3,2,12,1,1492427176793,'Headache',' Brain Tumor',1492427176793,1492427176793,'Tumour in Brain'),(4,2,11,0,1492427265008,'Headache','Migraine',1492427265008,1492427265008,'Migraine'),(5,3,12,1,1492427355113,'Pain in Bones',' Bone Fracture',1492427355113,1492427355113,'Bone Broken'),(6,3,11,0,1492427586601,'Pain in Left Ear','Ear Drum Rupture',1492427586601,1492427586601,'Left Ear Damage'),(7,4,12,1,1492427777615,'Pain in eye','Eye Infection',1492427777615,1492427777615,'Eye Problem'),(8,4,11,0,1492519085680,'Sneezing','Cold',1492519085680,1492519085680,'Cold and Sneeze'),(9,5,12,1,1492620672132,'Nose Bleeding','Nose Cancer',1492540200020,1492519085681,'Nose Problem'),(10,5,11,0,1492633630915,'Constipation','Mental Pressure',1492540200040,1492519089681,'Acute Constipation Problem'),(11,10,NULL,0,1492705805529,'pata nahi','pata hota to ye form nahi barata',1492626600000,0,'kuch to huaa he');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 15:38:11
+-- Dump completed on 2017-04-20 22:01:20
