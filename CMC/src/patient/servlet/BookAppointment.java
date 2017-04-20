@@ -52,7 +52,7 @@ public class BookAppointment extends HttpServlet {
 		if (session.isNew()) {
 			redirectToLogin(request, response);
 		} else {
-			Patient patient = new Patient((int) session.getAttribute("UserID"));
+			Patient patient = new DatabaseHelper().getPatient((int) session.getAttribute("UserID"));
 			Appointment appointment = new Appointment(patient, (String) request.getParameter("symptons"),
 					(String) request.getParameter("disease"),
 					DateUtils.getLongFromDate((String) request.getParameter("preferredDate")),

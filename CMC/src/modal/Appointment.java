@@ -33,6 +33,24 @@ public class Appointment {
 		this.disease = disease;
 		this.title = title;
 	}
+	
+	
+
+	public Appointment(Doctor doctor, Patient patient, int isClosed, long preferredDate, long allocatedDate,
+			long dateCreated, ArrayList<AppointmentItems> items, String symptons, String disease, String title) {
+		this.doctor = doctor;
+		this.patient = patient;
+		this.isClosed = isClosed;
+		this.preferredDate = preferredDate;
+		this.allocatedDate = allocatedDate;
+		this.dateCreated = dateCreated;
+		this.items = items;
+		this.symptons = symptons;
+		this.disease = disease;
+		this.title = title;
+	}
+
+
 
 	public Appointment(int id, Doctor doctor, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.id = id;
@@ -50,11 +68,6 @@ public class Appointment {
 		this.setDisease(disease);
 		this.preferredDate = preferredDate;
 		this.title = title;
-	}
-
-	public Appointment(int id, String symptons) {
-		this.setId(id);
-		this.setSymptons(symptons);
 	}
 
 	public Appointment(int id, Doctor doctor, String title, long dateCreated, Patient patient) {
@@ -77,10 +90,6 @@ public class Appointment {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Patient getPatient() {
@@ -107,16 +116,16 @@ public class Appointment {
 		this.disease = disease;
 	}
 
-	public long getPreferredDate() {
-		return preferredDate;
+	public String getPreferredDate() {
+		return DateUtils.getDateTtimeSringFromDate(preferredDate);
 	}
 
 	public void setPreferredDate(long preferredDate) {
 		this.preferredDate = preferredDate;
 	}
 
-	public long getAllocatedDate() {
-		return allocatedDate;
+	public String getAllocatedDate() {
+		return DateUtils.getDateTtimeSringFromDate(allocatedDate);
 	}
 
 	public void setAllocatedDate(long allocatedDate) {
@@ -131,9 +140,6 @@ public class Appointment {
 		this.items = items;
 	}
 
-	public long getDateCreated() {
-		return dateCreated;
-	}
 	
 	public String getStringDateCreated() {
 		return DateUtils.getDateTtimeSringFromDate(dateCreated);
@@ -159,16 +165,12 @@ public class Appointment {
 		this.doctor = doctor;
 	}
 
-	/**
-	 * @return the title
-	 */
+	 
 	public String getTitle() {
 		return title;
 	}
 
-	/**
-	 * @param title the title to set
-	 */
+ 
 	public void setTitle(String title) {
 		this.title = title;
 	}

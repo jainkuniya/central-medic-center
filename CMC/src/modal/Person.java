@@ -29,9 +29,20 @@ public class Person {
 		this.address = address;
 		this.contactNumber = contactNumber;
 	}
+	
+	
 
-	public Person(int id) {
-		this.id=id;
+	public Person(String firstName, String lastName, String userName, long dob, int type, String gender, String address,
+			String contactNumber) {
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.dob = dob;
+		this.type = type;
+		this.gender = gender;
+		this.address = address;
+		this.contactNumber = contactNumber;
 	}
 
 	public String getFirstName() {
@@ -48,10 +59,6 @@ public class Person {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public long getDob() {
-		return dob;
 	}
 
 	public void setDob(long dob) {
@@ -88,10 +95,6 @@ public class Person {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int userId) {
-		this.id = userId;
 	}
 
 	public String getUserName() {

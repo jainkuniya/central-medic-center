@@ -11,11 +11,16 @@ public class PersonType {
 		this.description = description;
 		this.type = type;
 	}
+	
+	
+	public PersonType(String description, String type) {
+		this.description = description;
+		this.type = type;
+	}
+
+
 	public int getTypeId() {
 		return typeId;
-	}
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
 	}
 	public String getDescription() {
 		return description;

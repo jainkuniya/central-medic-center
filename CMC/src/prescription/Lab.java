@@ -1,0 +1,68 @@
+package prescription;
+
+public class Lab {
+
+	private int labId;
+	private String labName;
+	private String testFor;
+	private String labResult;
+	private String reportFile;
+	private int itemId;
+	
+	
+	public Lab(int labId, String labName, String testFor, String labResult, String reportFile, int itemId) {
+		this.labId = labId;
+		this.labName = labName;
+		this.testFor = testFor;
+		this.labResult = labResult;
+		this.reportFile = reportFile;
+		this.itemId = itemId;
+	}
+	
+	
+	
+	public Lab(String labName, String testFor, String labResult, String reportFile, int itemId) {
+		this.labName = labName;
+		this.testFor = testFor;
+		this.labResult = labResult;
+		this.reportFile = reportFile;
+		this.itemId = itemId;
+	}
+
+
+
+	public int getLabId() {
+		return labId;
+	}
+	public String getLabName() {
+		return labName;
+	}
+	public void setLabName(String labName) {
+		this.labName = labName;
+	}
+	public String getTestFor() {
+		return testFor;
+	}
+	public void setTestFor(String testFor) {
+		this.testFor = testFor;
+	}
+	public String getLabResult() {
+		return labResult;
+	}
+	public void setLabResult(String labResult) {
+		this.labResult = labResult;
+	}
+	public String getReportFile() {
+		return reportFile;
+	}
+	public void setReportFile(String reportFile) {
+		this.reportFile = reportFile;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	
+}

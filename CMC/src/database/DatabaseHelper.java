@@ -173,7 +173,7 @@ public class DatabaseHelper {
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
-			ps.setLong(5, appointment.getPreferredDate());
+			ps.setLong(5, DateUtils.getLongFromDate(appointment.getPreferredDate()));
 			ps.setString(6, appointment.getTitle());
 
 			int status = ps.executeUpdate();

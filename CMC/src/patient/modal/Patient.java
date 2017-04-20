@@ -18,10 +18,18 @@ public class Patient extends  Person {
 		this.weight = weight;
 		this.bloodGroup = bloodGroup;
 	}
+	
+	
 
-	public Patient(int id) {
-		super(id);
+	public Patient(String firstName, String lastName, String userName, long dob, int type, String gender,
+			String address, String contactNumber, int height, int weight, String bloodGroup) {
+		super(firstName, lastName, userName, dob, type, gender, address, contactNumber);
+		this.height = height;
+		this.weight = weight;
+		this.bloodGroup = bloodGroup;
 	}
+
+
 
 	public String getBloodGroup() {
 		return bloodGroup;

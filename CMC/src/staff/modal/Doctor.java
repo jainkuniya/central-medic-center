@@ -15,9 +15,18 @@ public class Doctor extends Person{
 		this.degree = degree;
 		this.specialization = specialization;
 	}
-	/**
-	 * @return the degree
-	 */
+	
+	
+	
+	public Doctor(String firstName, String lastName, String userName, long dob, int type, String gender, String address,
+			String contactNumber, String degree, String specialization) {
+		super(firstName, lastName, userName, dob, type, gender, address, contactNumber);
+		this.degree = degree;
+		this.specialization = specialization;
+	}
+
+
+
 	public String getDegree() {
 		return degree;
 	}
