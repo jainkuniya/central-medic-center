@@ -42,6 +42,8 @@ public class AppointmentItems {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
-	
+
+	public int getAppointmentId() {
+		return appointmentId;
+	}
 }

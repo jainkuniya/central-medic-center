@@ -1,19 +1,21 @@
-.card{
-	border-width:1px;
-	border-style:solid;
+.card {
+	border-width: 1px;
+	border-style: solid;
 }
-.cardImage{
+
+.cardImage {
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    padding:20px;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
 }
-.cardText{
+
+.cardText {
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #222222;
-	color:white;
-	padding:20px;
-	font-size:larger;
+	justify-content: center;
+	align-items: center;
+	background-color: #222222;
+	color: white;
+	padding: 20px;
+	font-size: larger;
 }

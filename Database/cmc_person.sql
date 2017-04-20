@@ -38,7 +38,7 @@ CREATE TABLE `person` (
   UNIQUE KEY `userName_UNIQUE` (`userName`),
   KEY `type` (`personType`),
   CONSTRAINT `person_ibfk_1` FOREIGN KEY (`personType`) REFERENCES `persontype` (`typeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Vishal','Sanghai','vishal','qwerty',925842600000,'1',1,'M','Dover Terrace, Kolkata','9521113802'),(2,'Shubham ','Mangal','shubham','qwerty',925842600000,'1',1,'M','Mansarovar, Jaipur','9571620779'),(3,'Satyam','Shubham','satyam','qwerty',925842600000,'1',1,'M','Bihar Sharif, Nalanda','8981000909'),(4,'Harsh','Modi','harsh','qwerty',925842600000,'1',1,'M','Jaipuria Marg, Indore','8981000899'),(5,'Hemant','Verma','hemant','qwerty',925842600000,'1',1,'M','Pagal Gali, Ganganagar','8981001717'),(6,'Anmol','Ratnam','anmol','qwerty',925842600000,'1',1,'M','Panchawati Chowk, Hazaribagh','9521113806'),(7,'Utsav','Singh','utsav','qwerty',925842600000,'1',1,'M','Ram Gali, Patna','9521113816'),(8,'Akshat','Mathur','akshat','qwerty',925842600000,'1',1,'M','Jai Baba, Ajmer','9163990299'),(9,'Rishabh','Tiwari','rishabh','qwerty',925842600000,'1',1,'M','Ankur Villa, Gurgaon','9830085588'),(10,'Vishwesh','Jainkuniya','vishwesh','qwerty',889236840000,'1',1,'M','Park Street, Pratapgarh','8100055671'),(11,'Rachit','Sharma','rachit','qwerty',925842600000,'1',2,'M','Billu Marg, Jaipur','8114487323'),(12,'Gourav','Khatri','gourav','qwerty',889236840000,'1',2,'M','Howrah, Kolkata','8240558662'),(13,'Ankur','Arora','ankur','qwerty',925842600000,'1',2,'M','Hauz Kauz, Delhi','9521356402'),(14,'Vivek','Tewari','vivek','qwerty',889236840000,'1',2,'M','Jheel, Hazaribagh','8987213127'),(15,'Manas','Jain','manas','qwerty',925842600000,'1',2,'M','Boli Marg, Udaipur','8898645151');
+INSERT INTO `person` VALUES (1,'Vishal','Sanghai','vishal','qwerty',925842600000,'1',1,'M','Dover Terrace, Kolkata','9521113802'),(2,'Shubham ','Mangal','shubham','qwerty',925842600000,'1',1,'M','Mansarovar, Jaipur','9571620779'),(3,'Satyam','Shubham','satyam','qwerty',925842600000,'1',1,'M','Bihar Sharif, Nalanda','8981000909'),(4,'Harsh','Modi','harsh','qwerty',925842600000,'1',1,'M','Jaipuria Marg, Indore','8981000899'),(5,'Hemant','Verma','hemant','qwerty',925842600000,'1',1,'M','Pagal Gali, Ganganagar','8981001717'),(6,'Anmol','Ratnam','anmol','qwerty',925842600000,'1',1,'M','Panchawati Chowk, Hazaribagh','9521113806'),(7,'Utsav','Singh','utsav','qwerty',925842600000,'1',1,'M','Ram Gali, Patna','9521113816'),(8,'Akshat','Mathur','akshat','qwerty',925842600000,'1',1,'M','Jai Baba, Ajmer','9163990299'),(9,'Rishabh','Tiwari','rishabh','qwerty',925842600000,'1',1,'M','Ankur Villa, Gurgaon','9830085588'),(10,'Vishwesh','Jainkuniya','vishwesh','qwerty',889236840000,'1',1,'M','Park Street, Pratapgarh','8100055671'),(11,'Rachit','Sharma','rachit','qwerty',925842600000,'1',2,'M','Billu Marg, Jaipur','8114487323'),(12,'Gourav','Khatri','gourav','qwerty',889236840000,'1',2,'M','Howrah, Kolkata','8240558662'),(13,'Ankur','Arora','ankur','qwerty',925842600000,'1',2,'M','Hauz Kauz, Delhi','9521356402'),(14,'Vivek','Tewari','vivek','qwerty',889236840000,'1',2,'M','Jheel, Hazaribagh','8987213127'),(15,'Manas','Jain','manas','qwerty',925842600000,'1',2,'M','Boli Marg, Udaipur','8898645151'),(16,'Ruchika','Sharma','ruchika','qwerty',925842600000,'1',3,'F',NULL,'8574878596'),(17,'Ritu','Jain','ritu','qwerty',925842600000,'1',4,'F',NULL,'8574875485'),(18,'Karishma','Chawla','karishma','qwerty',925842600000,'1',5,'F',NULL,'9865478521');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20  2:18:34
+-- Dump completed on 2017-04-20 15:38:12

@@ -17,7 +17,7 @@ if (!session.isNew() && session.getAttribute("UserID")!=null){
  }
 else{
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,20 +28,21 @@ else{
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
+<body >
 	<br>
 	<br>
-	<h1><center>Central Medic Center</center> </h1>
+	<h1 style="text-align: center">
+		 Central Medic Center
+	</h1>
 	<div class="wrapper">
-		<form class="form-signin" action="login" method="post">
-			<h2 class="form-signin-heading"><center>Please login</center></h2>
-			<br>
-			<input type="text" class="form-control" name="username"
-				placeholder="Username" required="true" autofocus="" /> 
-			<br>
-			<input
+		<form class="form-signin" action="login" method="post" id="loginForm">
+			<h2 class="form-signin-heading" style="text-align: center">
+				Please login
+			</h2>
+			<br> <input type="text" class="form-control" name="username"
+				placeholder="Username" required autofocus/> <br> <input
 				type="password" class="form-control" name="password"
-				placeholder="Password" required="true" />
+				placeholder="Password" required/>
 			<%
 		    String message = (String)request.getAttribute("error");
 		    if (message!=null) {
@@ -50,10 +51,12 @@ else{
 			<%
 		    } 
 		 %>
-		 	<br>
+			<br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 			<br>
-			<center><a href="signup">Not Registered yet, Click to Signup!</a></center>
+			<div style="text-align: center">
+				<a href="signup">Not Registered yet, Click to Signup!</a>
+			</div>
 		</form>
 	</div>
 </body>

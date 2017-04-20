@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.DatabaseHelper;
-import modal.AppointmentItems;
-import utils.DateUtils;
 
 /**
  * Servlet implementation class NewAppointmentItem
@@ -25,7 +23,7 @@ public class NewAppointmentItem extends HttpServlet {
      */
     public NewAppointmentItem() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**

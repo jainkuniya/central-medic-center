@@ -27,7 +27,7 @@ public class OpenBookAppointment extends HttpServlet {
      */
     public OpenBookAppointment() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**

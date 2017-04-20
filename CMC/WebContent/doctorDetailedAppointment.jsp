@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor"%>
-		
-	<%  
+
+<%  
 		if(request.getAttribute("doctor")==null || request.getAttribute("appointments")==null || request.getAttribute("apointment") == null){
 			 response.sendRedirect("doctor"); 
 		}
@@ -12,7 +12,7 @@
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
 			Appointment detailedAppointment = ((Appointment)request.getAttribute("apointment"));
 	%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,35 +26,35 @@
 </head>
 <body>
 
-	
+
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="patient">Central Medic Center</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="patient">Central Medic Center</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="patient">Dashboard</a></li>
+					<li><a href="updateDoctorProfile">Edit Profile</a>
+					<li><a href="logout">Logout</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search...">
+				</form>
+			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="patient">Dashboard</a></li>
-				<li><a href="updateDoctorProfile">Edit Profile</a>
-				<li><a href="logout">Logout</a></li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
-		</div>
-	</div>
 	</nav>
 
 	<div class="container-fluid">
 		<div class="row">
-				<div class="col-sm-3 sidebar">
+			<div class="col-sm-3 sidebar">
 				<ul class="nav nav-sidebar">
 					<li class="active">
 
@@ -75,6 +75,7 @@
 						</div>
 
 					</li>
+					
 					<li class="topic"><span class="upcoming">Upcoming
 							Appointment</span> <% ArrayList<Appointment> upcomingAppointments = arrayList.get(0);
 			        	for(int i=0; i<upcomingAppointments.size(); i++)
@@ -83,98 +84,103 @@
 						<form class="form-signin" action="doctorAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /></li>
-					<ul>
-						<li class="subtopic">
-						<%if(detailedAppointment.getId()==appointment.getId()){ %>
-							<button class="btn btn-default activeAppointment" type="submit">
-						<%}else{ %>
-							<button class="btn btn-default " type="submit">
-						<%} %>
-								<div class="row">
-									<div class="col-sm-12 text-left">
-										<b><%= appointment.getTitle() %> </b><br>
-										<% Patient patient = appointment.getPatient();
-										if(patient==null){
-									%>Wating for doctor approval
-										<% }else{ %>
-										<%= patient.getFirstName() %>
-										<% } %>
-										|
-										<%= appointment.getStringDateCreated() %>
-									</div>
-								</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-
-					<%  }
-	        %>
-					<li class="topic">Recent Appointment <% ArrayList<Appointment> appointments2 = arrayList.get(1);
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<%if(detailedAppointment.getId()==appointment.getId()){ %>
+									<button class="btn btn-default activeAppointment" type="submit">
+										<%}else{ %>
+										<button class="btn btn-default" type="submit">
+											<% } %>
+											<div class="row">
+												<div class="col-sm-12 text-left">
+													<b><%= appointment.getTitle() %> </b><br>
+													<% Patient patient = appointment.getPatient();
+												if(patient==null){
+											%>Wating for doctor approval
+													<% }else{ %>
+													<%= patient.getFirstName() %>
+													<% } %>
+													|
+													<%= appointment.getStringDateCreated() %>
+												</div>
+											</div>
+										</button>
+									</button>
+										
+								</li>
+							</ul>
+					</form>
+				
+								<%  }
+				        %>
+	        	</li>
+				<li class="topic">Recent Appointment <% ArrayList<Appointment> appointments2 = arrayList.get(1);
 			        	for(int i=0; i<appointments2.size(); i++)
 			        	{ Appointment appointment = appointments2.get(i);
 	        			%>
 						<form class="form-signin" action="doctorAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /></li>
-					<ul>
-						<li class="subtopic">
-						<%if(detailedAppointment.getId()==appointment.getId()){ %>
-							<button class="btn btn-default activeAppointment" type="submit">
-						<%}else{ %>
-							<button class="btn btn-default " type="submit">
-						<%} %>
-								<div class="row">
-									<div class="col-sm-12 text-left">
-										<b><%= appointment.getTitle() %> </b><br>
-										<% Patient patient = appointment.getPatient();
-										if(patient==null){
-									%>Wating for doctor approval
-										<% }else{ %>
-										<%= patient.getFirstName() %>
-										<% } %>
-										|
-										<%= appointment.getStringDateCreated() %>
-									</div>
-								</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-
-					<%  }
-	        %>
-
-				</ul>
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<%if(detailedAppointment.getId()==appointment.getId()){ %>
+									<button class="btn btn-default activeAppointment" type="submit">
+										<%}else{ %>
+										<button class="btn btn-default " type="submit">
+											<%} %>
+											<div class="row">
+												<div class="col-sm-12 text-left">
+													<b><%= appointment.getTitle() %> </b><br>
+													<% Patient patient = appointment.getPatient();
+												if(patient==null){
+											%>Wating for doctor approval
+													<% }else{ %>
+													<%= patient.getFirstName() %>
+													<% } %>
+													|
+													<%= appointment.getStringDateCreated() %>
+												</div>
+											</div>
+										</button>
+									</button>
+								</li>
+							</ul>
+						</form>
+								<%  }
+				        %>
+				</li>
+			</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
 				<h1 class="page-header"><%= detailedAppointment.getTitle() %></h1>
 				<div class="content">
 					<div class="row ">
 						<div class="col-sm-3">
-						<b>Appointment ID: <%= detailedAppointment.getId() %></b>
+							<b>Appointment ID: <%= detailedAppointment.getId() %></b>
 						</div>
 						<div class="col-sm-5">
-						<b>Patient Name: </b> 
-						<% if(detailedAppointment.getPatient()!=null) { %>
+							<b>Patient Name: </b>
+							<% if(detailedAppointment.getPatient()!=null) { %>
 							<%= detailedAppointment.getPatient().getFirstName() + " " + detailedAppointment.getPatient().getLastName() %>
 							<% }else{ %>
 							Wating for doctor approval
-						<% } %>
+							<% } %>
 						</div>
 						<div class="col-sm-4">
-						<b>Date Created:</b> <%= detailedAppointment.getStringDateCreated() %>
+							<b>Date Created:</b>
+							<%= detailedAppointment.getStringDateCreated() %>
 						</div>
 					</div>
 					<br>
 					<div class="row ">
 						<div class="col-sm-8">
-						<b>Symptons: </b> <%= detailedAppointment.getSymptons() %>
+							<b>Symptons: </b>
+							<%= detailedAppointment.getSymptons() %>
 						</div>
 						<div class="col-sm-4">
-						<b>Suspected Disease </b><%= detailedAppointment.getDisease() %>
+							<b>Suspected Disease </b><%= detailedAppointment.getDisease() %>
 						</div>
 					</div>
 				</div>
@@ -188,7 +194,7 @@
 							<div class="messageFrom">
 								<% if(item.getType()==1){ 	%>
 								<%= detailedAppointment.getPatient().getFirstName() %>
-								
+
 								<%}else if(item.getType()==2) {%>
 								You
 								<% }else if(item.getType()==6) { %>
@@ -202,12 +208,11 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row">
-						<div class="col-sm-10">
-						</div>
+						<div class="col-sm-10"></div>
 						<div class="col-sm-2">
-							<div class="" style="font-size:11px;">
+							<div class="" style="font-size: 11px;">
 								<%= item.getStringDate() %>
 							</div>
 						</div>
@@ -217,35 +222,32 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="radio">
-						  <label>
-						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-						    Message
-						  </label>
-						  <label>
-						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						    Lab Report
-						  </label>
-						  <label>
-						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-						    Prescription
-						  </label>
-						</div>						
+							<label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1" checked> Message
+							</label> <label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> Lab Report
+							</label> <label> <input type="radio" name="optionsRadios"
+								id="optionsRadios1" value="option1"> Prescription
+							</label>
+						</div>
 					</div>
 				</div>
 				<div class="">
 					<form class="form-inline" action="newAppointmentItem" method="post">
-					<div class="row ">
-						<input type="hidden" name="type" value="1" />
-						<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
-						<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
-						<div class="col-sm-9 form-group">
-							
-						    <textarea class="form-control textman" name="description" rows="3", placeholder="Type your message here"></textarea>
+						<div class="row ">
+							<input type="hidden" name="type" value="1" /> <input
+								type="hidden" name="requestDispatcher"
+								value="doctorAppointmentDetails" /> <input type="hidden"
+								name="appointmentId" value="<%= detailedAppointment.getId()%>" />
+							<div class="col-sm-9 form-group">
+
+								<textarea class="form-control textman" name="description"
+									rows="3" placeholder="Type your message here"></textarea>
+							</div>
+							<div class="col-sm-3">
+								<button type="submit" class="send btn btn-success">Send</button>
+							</div>
 						</div>
-						<div class="col-sm-3">
-						  	<button type="submit" class="send btn btn-success">Send</button>
-						</div>
-					</div>
 					</form>
 				</div>
 			</div>

@@ -11,7 +11,7 @@
 			Doctor doctor = (Doctor)request.getAttribute("doctor");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
 	%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,28 +26,28 @@
 <body>
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="patient">Central Medic Center</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="patient">Central Medic Center</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="#">Dashboard</a></li>
+					<li><a href="updateDoctorProfile">Edit Profile</a>
+					<li><a href="logout">Logout</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="Search...">
+				</form>
+			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="#">Dashboard</a></li>
-				<li><a href="updateDoctorProfile">Edit Profile</a>
-				<li><a href="logout">Logout</a></li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
-		</div>
-	</div>
 	</nav>
 
 	<div class="container-fluid">
@@ -74,69 +74,72 @@
 
 					</li>
 					<li class="topic"><span class="upcoming">Upcoming
-							Appointment</span> <% ArrayList<Appointment> upcomingAppointments = arrayList.get(0);
-			        	for(int i=0; i<upcomingAppointments.size(); i++)
-			        	{ Appointment appointment = upcomingAppointments.get(i);
+							Appointment</span> 
+							<% 
+								ArrayList<Appointment> upcomingAppointments = arrayList.get(0);
+					        	for(int i=0; i<upcomingAppointments.size(); i++)
+					        	{ Appointment appointment = upcomingAppointments.get(i);
+		        			%>
+							<form class="form-signin" action="doctorAppointmentDetails"
+								method="post">
+							<input type="hidden" class="form-control" name="appointmentId"
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<button class="btn btn-default" type="submit">
+										<div class="row">
+											<div class="col-sm-12 text-left">
+												<b><%= appointment.getTitle() %> </b><br>
+												<% Patient patient = appointment.getPatient();
+												if(patient==null){
+											%>Wating for doctor approval
+												<% }else{ %>
+												<%= patient.getFirstName() %>
+												<% } %>
+												|
+												<%= appointment.getStringDateCreated() %>
+											</div>
+										</div>
+									</button>
+								</li>
+							</ul>
+						</form>
+								<%  }
+				        %>
+				    </li>
+					<li class="topic">Recent Appointment 
+						<%
+							ArrayList<Appointment> appointments2 = arrayList.get(1);
+				        	for(int i=0; i<appointments2.size(); i++)
+				        	{ Appointment appointment = appointments2.get(i);
 	        			%>
 						<form class="form-signin" action="doctorAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /></li>
-					<ul>
-						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
-								<div class="row">
-									<div class="col-sm-12 text-left">
-										<b><%= appointment.getTitle() %> </b><br>
-										<% Patient patient = appointment.getPatient();
-										if(patient==null){
-									%>Wating for doctor approval
-										<% }else{ %>
-										<%= patient.getFirstName() %>
-										<% } %>
-										|
-										<%= appointment.getStringDateCreated() %>
-									</div>
-								</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-
-					<%  }
-	        %>
-					<li class="topic">Recent Appointment <% ArrayList<Appointment> appointments2 = arrayList.get(1);
-			        	for(int i=0; i<appointments2.size(); i++)
-			        	{ Appointment appointment = appointments2.get(i);
-	        			%>
-						<form class="form-signin" action="doctorAppointmentDetails"
-							method="post">
-							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /></li>
-					<ul>
-						<li class="subtopic">
-							<button class="btn btn-default" type="submit">
-								<div class="row">
-									<div class="col-sm-12 text-left">
-										<b><%= appointment.getTitle() %> </b><br>
-										<% Patient patient = appointment.getPatient();
-										if(patient==null){
-									%>Wating for doctor approval
-										<% }else{ %>
-										<%= patient.getFirstName() %>
-										<% } %>
-										|
-										<%= appointment.getStringDateCreated() %>
-									</div>
-								</div>
-							</button>
-							</form>
-						</li>
-					</ul>
-
-					<%  }
-	        %>
-
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<button class="btn btn-default" type="submit">
+										<div class="row">
+											<div class="col-sm-12 text-left">
+												<b><%= appointment.getTitle() %> </b><br>
+												<% Patient patient = appointment.getPatient();
+												if(patient==null){
+											%>Wating for doctor approval
+												<% }else{ %>
+												<%= patient.getFirstName() %>
+												<% } %>
+												|
+												<%= appointment.getStringDateCreated() %>
+											</div>
+										</div>
+									</button>
+								</li>
+							</ul>
+						</form>
+									<%  }
+					        %>
+					</li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
