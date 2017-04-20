@@ -13,7 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
-import patient.modal.Patient;
+import prescription.Lab;
+import prescription.Prescription;
 import staff.modal.Doctor;
 import staff.modal.Staff;
 
@@ -57,7 +58,8 @@ public class ReceptionistAppointmentDetails extends HttpServlet {
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, null);
-
+			ArrayList<Prescription> prescriptions = databaseHelper.getPrescription();
+			ArrayList<Lab> labs = databaseHelper.getLab();
 			Staff receptionist = databaseHelper.getStaff(personId);
 			
 			if (apointment != null && receptionist != null && appointments != null) {
@@ -75,6 +77,8 @@ public class ReceptionistAppointmentDetails extends HttpServlet {
 						request.setAttribute("receptionist", receptionist);
 						request.setAttribute("appointments", appointments);
 						request.setAttribute("doctors", doctors);
+						request.setAttribute("prescriptions", prescriptions);
+						request.setAttribute("labs", labs);
 						rs.forward(request, response);
 						return;
 					}
@@ -85,6 +89,8 @@ public class ReceptionistAppointmentDetails extends HttpServlet {
 					request.setAttribute("appointment", apointment);
 					request.setAttribute("receptionist", receptionist);
 					request.setAttribute("appointments", appointments);
+					request.setAttribute("prescriptions", prescriptions);
+					request.setAttribute("labs", labs);
 					rs.forward(request, response);
 					return;
 				}

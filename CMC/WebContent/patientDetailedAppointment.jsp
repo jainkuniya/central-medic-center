@@ -9,7 +9,7 @@
 		response.sendRedirect("patient");
 	} else {
 		Patient patient = (Patient) request.getAttribute("patient");
-		ArrayList<ArrayList<Appointment>> arraylist = (ArrayList<ArrayList<Appointment>>) request
+		ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>) request
 				.getAttribute("appointments");
 		Appointment detailedAppointment = ((Appointment) request.getAttribute("apointment"));
 		ArrayList<Prescription> prescriptions = (ArrayList<Prescription>)request.getAttribute("prescriptions");
@@ -78,10 +78,7 @@
 								</div>
 							</div>
 						</li>
-						<%
-							ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>) request
-										.getAttribute("appointments");
-						%>
+						
 						<li class=""><a href="openBookAppointment">Book
 								Appointment</a></li>
 						<li class="topic"><span class="upcoming">Upcoming

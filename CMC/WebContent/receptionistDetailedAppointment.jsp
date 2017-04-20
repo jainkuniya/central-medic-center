@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="staff.modal.Staff, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard"%>
+	import="staff.modal.Staff, java.util.ArrayList, modal.AppointmentItems, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard, prescription.Lab, prescription.Prescription"%>
 <%  
 		if(request.getAttribute("receptionist")==null || request.getAttribute("appointments")==null 
 			|| request.getAttribute("appointment")==null){
@@ -10,6 +10,8 @@
 		}
 		else{			
 			Staff receptionist = (Staff)request.getAttribute("receptionist");
+			ArrayList<Prescription> prescriptions = (ArrayList<Prescription>)request.getAttribute("prescriptions");
+			ArrayList<Lab> labs = (ArrayList<Lab>)request.getAttribute("labs");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
 			Appointment detailedAppointment	= (Appointment)request.getAttribute("appointment");
 			if(detailedAppointment.getAllocatedDate() != 0 || request.getAttribute("doctors") != null)
@@ -67,13 +69,14 @@
 						<div class="row intro">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<div class="">
-									<img class="profilePic" src="media/user.png">
+									<img class="profilePic" src="media/receptionist.png">
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-8 info">
 								<br> <span class="name"><%= receptionist.getFirstName() +" " + receptionist.getLastName() %></span><br>
 								<img src="media/gender.png"><span class="details">
-									<%= receptionist.getGender() +", " + receptionist.getAge() %></span><br>
+									<%= receptionist.getGender() +", " + receptionist.getAge() %></span><br> <img
+									src="media/degree.png"><span class="degree"> Receptionist</span><br>
 								<img src="media/Location.png"><span class="location">
 									<%= receptionist.getAddress() %></span>
 							</div>
@@ -91,7 +94,17 @@
 								value="<%= appointment.getId() %>" />
 							<ul>
 								<li class="subtopic">
-									<button class="btn btn-default" type="submit">
+									<%
+											if (detailedAppointment.getId() == appointment.getId()) {
+										%>
+									<button class="btn btn-default activeAppointment" type="submit">
+										<%
+												} else {
+											%>
+										<button class="btn btn-default" type="submit">
+											<%
+													}
+												%>
 										<div class="row">
 											<div class="col-sm-12 text-left">
 												<div>
@@ -106,12 +119,9 @@
 									</button>
 								</li>
 							</ul>
-						</form>
-
-								<%  }
+						</form> <%  }
 						        	
-				        %>
-				    </li>
+				        %></li>
 					<li class="topic">Allocated Appointment <% ArrayList<Appointment> allocatedAppointments = arrayList.get(1);
 			        	for(int i=0; i<allocatedAppointments.size(); i++)
 			        	{ Appointment appointment = allocatedAppointments.get(i);
@@ -119,10 +129,20 @@
 						<form class="form-signin" action="receptionistAppointmentDetails"
 							method="post">
 							<input type="hidden" class="form-control" name="appointmentId"
-								value="<%= appointment.getId() %>" /> 
-								<ul>
-									<li class="subtopic">
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<%
+											if (detailedAppointment.getId() == appointment.getId()) {
+										%>
+									<button class="btn btn-default activeAppointment" type="submit">
+										<%
+												} else {
+											%>
 										<button class="btn btn-default" type="submit">
+											<%
+													}
+												%>
 											<div class="row">
 												<div class="col-sm-12 text-left">
 													<b><%= appointment.getTitle() %> </b><br>
@@ -137,10 +157,9 @@
 												</div>
 											</div>
 										</button>
-									</li>
-								</ul>
-							</form>
-									<%  }
+								</li>
+							</ul>
+						</form> <%  }
 					        %>
 					</li>
 				</ul>
@@ -153,12 +172,12 @@
 							<b>Appointment ID: <%=detailedAppointment.getId()%></b>
 						</div>
 						<% if(detailedAppointment.getAllocatedDate() == 0) { %>
-							<div class="col-sm-5">
-								<b>Preferred Date:</b>
-								<%=detailedAppointment.getStringPreferredDate()%>
-							</div>
+						<div class="col-sm-5">
+							<b>Preferred Date:</b>
+							<%=detailedAppointment.getStringPreferredDate()%>
+						</div>
 						<% }else { %>
-							<div class="col-sm-5">
+						<div class="col-sm-5">
 							<b>Doctor Name: </b>
 							<%
 								if (detailedAppointment.getDoctor() != null) {
@@ -189,38 +208,111 @@
 							<b>Suspected Disease </b><%=detailedAppointment.getDisease()%>
 						</div>
 					</div>
+
 					<br>
 					<% if(detailedAppointment.getAllocatedDate() == 0) { %>
-						<form action="allocateDoctor" method="post">
-							<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId() %>">
-							<div class="row ">
-								<div class="col-sm-4">
-									<b>Allocated Doctor </b>
-								</div>
-								<div class="col-sm-8">
-									<select class="form-control" name="doctorId" required>
-												  <option value="" selected disabled>Choose Doctor</option>
-												  <% for(int i=0; i<doctors.size(); i++) { 
+					<form action="allocateDoctor" method="post">
+						<input type="hidden" name="appointmentId"
+							value="<%= detailedAppointment.getId() %>">
+						<div class="row ">
+							<div class="col-sm-4">
+								<b>Allocated Doctor </b>
+							</div>
+							<div class="col-sm-8">
+								<select class="form-control" name="doctorId" required>
+									<option value="" selected disabled>Choose Doctor</option>
+									<% for(int i=0; i<doctors.size(); i++) { 
 												  		Doctor doctor = doctors.get(i); %>
-												  	<option value="<%= doctor.getId() %>">
-												  	<%= doctor.getFirstName() + " " + doctor.getLastName() + ", "  + doctor.getDegree() + ", " + doctor.getSpecialization()%></option>
-												  <% } %>
-									</select>
-								</div>
-								<br>
-								<div class="col-sm-4">
-									<b>Allocated Date </b>
-								</div>
-								<div class="col-sm-8">
-									<input type="date" class="form-control" name="allocatedDate" id="date" required
-										placeholder="Allocate Date" value="<%= detailedAppointment.getStringPreferredDate() %>">
-								</div>
+									<option value="<%= doctor.getId() %>">
+										<%= doctor.getFirstName() + " " + doctor.getLastName() + ", "  + doctor.getDegree() + ", " + doctor.getSpecialization()%></option>
+									<% } %>
+								</select>
 							</div>
 							<br>
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
-						</form>
+							<div class="col-sm-4">
+								<b>Allocated Date </b>
+							</div>
+							<div class="col-sm-8">
+								<input type="date" class="form-control" name="allocatedDate"
+									id="date" required placeholder="Allocate Date"
+									value="<%= detailedAppointment.getStringPreferredDate() %>">
+							</div>
+						</div>
+						<br>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+					</form>
 					<%} %>
 				</div>
+				<%
+					if (detailedAppointment.getItems() != null) {
+				%>
+				<%
+					for (int i = 0; i < detailedAppointment.getItems().size(); i++) {
+								AppointmentItems item = detailedAppointment.getItems().get(i);
+				%>
+				<div class="content" style="">
+					<div class="row ">
+						<div class="col-sm-2">
+							<div class="messageFrom">
+								<% if(item.getType()==1){ 	%>
+								<%= detailedAppointment.getDoctor().getFirstName() %>
+								<%}else if(item.getType()==2) {%>
+								You
+								<% }else if(item.getType()==3) { %>
+								<%= detailedAppointment.getDoctor().getFirstName() %>
+								-> Prescription
+								<%}else if(item.getType()==4) {%>
+								Lab Report -><% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+								<%= labs.get(k).getLabName() %>
+								<%	} } %>
+								<% }else if(item.getType()==5) { %>
+								<%= detailedAppointment.getDoctor().getFirstName() %>
+								<%}else if(item.getType()==6) {%>
+								System
+								<% } %>
+							</div>
+						</div>
+						<div class="col-sm-10">
+							<div class="message">
+								<%if(item.getType()==1 || item.getType()==2 || item.getType()==5 || item.getType()==6){ %>
+								<%= item.getDescription() %>
+								<%}else if(item.getType()==3) {%>
+								<% for(int k = 0; k< prescriptions.size(); k++){ 
+										if(prescriptions.get(k).getItemId() == item.getItemId()){ %>
+								<div>
+									Take
+									<%= prescriptions.get(k).getQuantity() %>
+									<b><%= prescriptions.get(k).getMedicineName() %></b>
+									<%= prescriptions.get(k).getTimes() %>
+									times a day.
+								</div>
+								<%	} } %>
+								<%}else if(item.getType()==4) {%>
+								<% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+								<div>
+									Your lab result for <b><%= labs.get(k).getTestFor() %></b> is <b><%= labs.get(k).getLabResult() %></b>.
+								</div>
+								<%	} } %>
+								<%} %>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-10"></div>
+						<div class="col-sm-2">
+							<div class="" style="font-size: 11px;">
+								<%=item.getStringDate()%>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%
+					}
+						}
+				%>
 			</div>
 		</div>
 	</div>

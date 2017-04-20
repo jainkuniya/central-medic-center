@@ -54,7 +54,7 @@ public class NewAppointmentItem extends HttpServlet {
 						sendType, "Lab Report Generated For "+ request.getParameter("labName"));
 			}else if(sendType == 5){
 				status = new DatabaseHelper().addItemInAppointment(appointmentId,
-						sendType, request.getParameter("labName")+": Lab Report Request");
+						sendType, request.getParameter("labName")+": Lab Report Requested");
 			}
 			System.out.println(status);	
 			if (status > 0) {

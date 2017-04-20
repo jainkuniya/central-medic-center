@@ -62,13 +62,14 @@
 						<div class="row intro">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<div class="">
-									<img class="profilePic" src="media/user.png">
+									<img class="profilePic" src="media/receptionist.png">
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-8 info">
 								<br> <span class="name"><%= receptionist.getFirstName() +" " + receptionist.getLastName() %></span><br>
 								<img src="media/gender.png"><span class="details">
-									<%= receptionist.getGender() +", " + receptionist.getAge() %></span><br>
+									<%= receptionist.getGender() +", " + receptionist.getAge() %></span><br> <img
+									src="media/degree.png"><span class="degree"> Receptionist</span><br>
 								<img src="media/Location.png"><span class="location">
 									<%= receptionist.getAddress() %></span>
 							</div>
@@ -143,7 +144,7 @@
 			<div class="col-sm-9 col-sm-offset-3 main">
 				<h1 class="page-header">Dashboard</h1>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<div class="card">
 							<div class="cardImage">
 								<img src="media/appointment.png">
@@ -151,7 +152,7 @@
 							<div class="cardText">4 Appointments</div>
 						</div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<div class="card">
 							<div class="cardImage">
 								<img src="media/bmi.png">
@@ -159,15 +160,7 @@
 							<div class="cardText">BMI : 19</div>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/prescription.png">
-							</div>
-							<div class="cardText">4 Medicines</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<div class="card">
 							<div class="cardImage">
 								<img src="media/edit.png">
@@ -176,7 +169,19 @@
 						</div>
 					</div>
 				</div>
-				<h2 class="sub-header">Section title</h2>
+				<br>
+				<div class="row text-center">
+					<div class="col-sm-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Last Login
+							</div>
+							<div class="panel-body">
+								03/05/2017 10:11 PM
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
