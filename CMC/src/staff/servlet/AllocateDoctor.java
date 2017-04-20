@@ -10,66 +10,63 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import database.DatabaseHelper;
 import modal.Appointment;
+import staff.modal.Doctor;
 import staff.modal.Staff;
+import utils.DateUtils;
 
 /**
- * Servlet implementation class DoctorServlet
+ * Servlet implementation class AllocateDoctor
  */
-@WebServlet("/receptionist")
-public class ReceptionistServlet extends HttpServlet {
+@WebServlet("/allocateDoctor")
+public class AllocateDoctor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	HttpSession session;   
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReceptionistServlet() {
+    public AllocateDoctor() {
         super();
-       
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		try {
-			session = request.getSession();
-			if (session.isNew()){
-				redirectToLogin(request, response);
-				 }
-			else{
-			
-			int personId = (int) session.getAttribute("UserID");
-			// get receptionist details
-			DatabaseHelper databaseHelper = new DatabaseHelper();
-			Staff receptionist = databaseHelper.getStaff(personId);
-			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, null);
-			if (receptionist == null || appointments == null) {
-				// redirect to login
-				redirectToLogin(request, response);
-				return;
-			}
-			// redirect to receptionist dashboard
-			RequestDispatcher rs = request.getRequestDispatcher("receptionist.jsp");
-			request.setAttribute("receptionist", receptionist);
-			request.setAttribute("appointments", appointments);
-			rs.forward(request, response);
-			return;
-			}
-		} catch (Exception e) {
-			// redirect to login
-			redirectToLogin(request, response);
-		}
+		// redirect to login
+		redirectToLogin(request, response);
+		return;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
+		// get appointmentDetails from DB
+		try {
+			HttpSession session = request.getSession();
+			int personId = (int) session.getAttribute("UserID");
+			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
+			int doctorId = Integer.parseInt((String) request.getParameter("doctorId"));
+			String allocatedDate = (String)request.getParameter("allocatedDate");
+			// allocate doctor 
+			DatabaseHelper databaseHelper = new DatabaseHelper();
+			int status = databaseHelper.allocateDoctor(appointmentId, doctorId, DateUtils.getLongFromDate(allocatedDate));	
+					
+			if (status > 0) {				
+				// redirect to receptionlist detailed appointment
+				RequestDispatcher rs = request.getRequestDispatcher("receptionistAppointmentDetails");
+				request.setAttribute("appointmentId", appointmentId);
+				rs.forward(request, response);
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// redirect to login
+			redirectToLogin(request, response);
+		}
 	}
 	
 	private void redirectToLogin(HttpServletRequest request, HttpServletResponse response)
@@ -78,4 +75,5 @@ public class ReceptionistServlet extends HttpServlet {
 		request.setAttribute("error", "Please login again");
 		rs.forward(request, response);
 	}
+
 }

@@ -4,13 +4,17 @@
 <%@ page
 	import="staff.modal.Staff, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard"%>
 <%  
-		if(request.getAttribute("receptionist")==null || request.getAttribute("appointments")==null ){
-			 response.sendRedirect("receptionist"); 
+		if(request.getAttribute("receptionist")==null || request.getAttribute("appointments")==null 
+			|| request.getAttribute("appointment")==null){
+			 response.sendRedirect("receptionist");
 		}
-		else{
+		else{			
 			Staff receptionist = (Staff)request.getAttribute("receptionist");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
-			
+			Appointment detailedAppointment	= (Appointment)request.getAttribute("appointment");
+			if(detailedAppointment.getAllocatedDate() != 0 || request.getAttribute("doctors") != null)
+			{ 
+				ArrayList<Doctor> doctors = (ArrayList<Doctor>)request.getAttribute("doctors");
 	%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +27,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/patient.css">
+<link rel="stylesheet" href="css/appointment.css">
 
 </head>
 <body>
@@ -141,42 +146,81 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
-				<h1 class="page-header">Dashboard</h1>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/appointment.png">
+				<h1 class="page-header"><%=detailedAppointment.getTitle()%></h1>
+				<div class="content">
+					<div class="row ">
+						<div class="col-sm-3">
+							<b>Appointment ID: <%=detailedAppointment.getId()%></b>
+						</div>
+						<% if(detailedAppointment.getAllocatedDate() == 0) { %>
+							<div class="col-sm-5">
+								<b>Preferred Date:</b>
+								<%=detailedAppointment.getStringPreferredDate()%>
 							</div>
-							<div class="cardText">4 Appointments</div>
+						<% }else { %>
+							<div class="col-sm-5">
+							<b>Doctor Name: </b>
+							<%
+								if (detailedAppointment.getDoctor() != null) {
+							%>
+							<%=detailedAppointment.getDoctor().getFirstName() + " "
+							+ detailedAppointment.getDoctor().getLastName()%>
+							<%
+								} else {
+							%>
+							Wating for doctor approval
+							<%
+								}
+							%>
+						</div>
+						<% } %>
+						<div class="col-sm-4">
+							<b>Date Created:</b>
+							<%=detailedAppointment.getStringDateCreated()%>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/bmi.png">
-							</div>
-							<div class="cardText">BMI : 19</div>
+					<br>
+					<div class="row ">
+						<div class="col-sm-8">
+							<b>Symptons: </b>
+							<%=detailedAppointment.getSymptons()%>
+						</div>
+						<div class="col-sm-4">
+							<b>Suspected Disease </b><%=detailedAppointment.getDisease()%>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/prescription.png">
+					<br>
+					<% if(detailedAppointment.getAllocatedDate() == 0) { %>
+						<form action="allocateDoctor" method="post">
+							<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId() %>">
+							<div class="row ">
+								<div class="col-sm-4">
+									<b>Allocated Doctor </b>
+								</div>
+								<div class="col-sm-8">
+									<select class="form-control" name="doctorId" required>
+												  <option value="" selected disabled>Choose Doctor</option>
+												  <% for(int i=0; i<doctors.size(); i++) { 
+												  		Doctor doctor = doctors.get(i); %>
+												  	<option value="<%= doctor.getId() %>">
+												  	<%= doctor.getFirstName() + " " + doctor.getLastName() + ", "  + doctor.getDegree() + ", " + doctor.getSpecialization()%></option>
+												  <% } %>
+									</select>
+								</div>
+								<br>
+								<div class="col-sm-4">
+									<b>Allocated Date </b>
+								</div>
+								<div class="col-sm-8">
+									<input type="date" class="form-control" name="allocatedDate" id="date" required
+										placeholder="Allocate Date" value="<%= detailedAppointment.getStringPreferredDate() %>">
+								</div>
 							</div>
-							<div class="cardText">4 Medicines</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/edit.png">
-							</div>
-							<div class="cardText">90% Profile</div>
-						</div>
-					</div>
+							<br>
+							<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+						</form>
+					<%} %>
 				</div>
-				<h2 class="sub-header">Section title</h2>
 			</div>
 		</div>
 	</div>
@@ -191,6 +235,8 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
-<%
+<%}else{
+	response.sendRedirect("receptionist");
+}
 		}
 %>

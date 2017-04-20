@@ -1,4 +1,4 @@
-package patient.servlet;
+package staff.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,20 +14,21 @@ import javax.servlet.http.HttpSession;
 import database.DatabaseHelper;
 import modal.Appointment;
 import patient.modal.Patient;
+import staff.modal.Doctor;
+import staff.modal.Staff;
 
 /**
- * Servlet implementation class PatientAppointmentDetails
+ * Servlet implementation class ReceptionistAppointmentDetails
  */
-@WebServlet("/patientAppointmentDetails")
-public class PatientAppointmentDetails extends HttpServlet {
+@WebServlet("/receptionistAppointmentDetails")
+public class ReceptionistAppointmentDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PatientAppointmentDetails() {
+	public ReceptionistAppointmentDetails() {
 		super();
-		
 	}
 
 	/**
@@ -35,9 +36,10 @@ public class PatientAppointmentDetails extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {
 		// redirect to login
 		redirectToLogin(request, response);
+		return;
 	}
 
 	/**
@@ -49,25 +51,46 @@ public class PatientAppointmentDetails extends HttpServlet {
 		// get appointmentDetails from DB
 		try {
 			HttpSession session = request.getSession();
-			int patientId = (int) session.getAttribute("UserID");
+			int personId = (int) session.getAttribute("UserID");
 			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
 			// get appointment details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
-			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(patientId, "patientId");
-			Patient patient = databaseHelper.getPatient(patientId);
-			if (apointment == null || patient == null || appointments == null) {
-				// redirect to login
-				redirectToLogin(request, response);
-				return;
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, null);
+
+			Staff receptionist = databaseHelper.getStaff(personId);
+			
+			if (apointment != null && receptionist != null && appointments != null) {
+				if (apointment.getAllocatedDate() == 0) {
+					
+					ArrayList<Doctor> doctors = databaseHelper.getDoctors();
+					if (doctors == null) {
+						// redirect to login
+						redirectToLogin(request, response);
+						return;
+					} else {
+						// redirect to receptionist detailed appointment
+						RequestDispatcher rs = request.getRequestDispatcher("receptionistDetailedAppointment.jsp");
+						request.setAttribute("appointment", apointment);
+						request.setAttribute("receptionist", receptionist);
+						request.setAttribute("appointments", appointments);
+						request.setAttribute("doctors", doctors);
+						rs.forward(request, response);
+						return;
+					}
+				}else
+				{
+					// redirect to receptionist detailed appointment
+					RequestDispatcher rs = request.getRequestDispatcher("receptionistDetailedAppointment.jsp");
+					request.setAttribute("appointment", apointment);
+					request.setAttribute("receptionist", receptionist);
+					request.setAttribute("appointments", appointments);
+					rs.forward(request, response);
+					return;
+				}
+
 			}
-			// redirect to person detailed appointment
-			RequestDispatcher rs = request.getRequestDispatcher("patientDetailedAppointment.jsp");
-			request.setAttribute("apointment", apointment);
-			request.setAttribute("patient", patient);
-			request.setAttribute("appointments", appointments);
-			rs.forward(request, response);
-			return;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			// redirect to login

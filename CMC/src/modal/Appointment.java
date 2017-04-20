@@ -70,15 +70,16 @@ public class Appointment {
 		this.title = title;
 	}
 
-	public Appointment(int id, Doctor doctor, String title, long dateCreated, Patient patient) {
+	public Appointment(int id, Doctor doctor, String title, long dateCreated, Patient patient, String disease) {
 		this.id=id;
 		this.doctor= doctor;
 		this.title=title;
 		this.dateCreated = dateCreated;
 		this.patient=patient;
+		this.disease = disease;
 	}
 
-	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease, Patient patient) {
+	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease, Patient patient, long allocatedDate, long preferredDate) {
 		this.id=id;
 		this.doctor= doctor;
 		this.title=title;
@@ -86,6 +87,8 @@ public class Appointment {
 		this.symptons=symptons;
 		this.disease =disease;
 		this.patient = patient;
+		this.allocatedDate =allocatedDate;
+		this.preferredDate = preferredDate;
 	}
 
 	public int getId() {
@@ -116,16 +119,24 @@ public class Appointment {
 		this.disease = disease;
 	}
 
-	public String getPreferredDate() {
-		return DateUtils.getDateTtimeSringFromDate(preferredDate);
+	public String getStringPreferredDate() {
+		return DateUtils.getStringFromDate(preferredDate);
+	}
+	
+	public long getPreferredDate() {
+		return preferredDate;
 	}
 
 	public void setPreferredDate(long preferredDate) {
 		this.preferredDate = preferredDate;
 	}
 
-	public String getAllocatedDate() {
+	public String getStringAllocatedDate() {
 		return DateUtils.getDateTtimeSringFromDate(allocatedDate);
+	}
+	
+	public long getAllocatedDate() {
+		return allocatedDate;
 	}
 
 	public void setAllocatedDate(long allocatedDate) {

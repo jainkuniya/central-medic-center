@@ -28,7 +28,7 @@ public class Doctor extends Person{
 
 
 	public String getDegree() {
-		return degree;
+		return (degree==null) ? "" : degree;
 	}
 	/**
 	 * @param degree the degree to set
@@ -40,7 +40,7 @@ public class Doctor extends Person{
 	 * @return the specialization
 	 */
 	public String getSpecialization() {
-		return specialization;
+		return (specialization==null) ? "" : specialization;
 	}
 	/**
 	 * @param specialization the specialization to set

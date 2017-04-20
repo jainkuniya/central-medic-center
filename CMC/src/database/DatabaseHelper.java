@@ -312,7 +312,7 @@ public class DatabaseHelper {
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
 			ps.setString(4, appointment.getDisease());
-			ps.setLong(5, DateUtils.getLongFromDate(appointment.getPreferredDate()));
+			ps.setLong(5, DateUtils.getLongFromDate(appointment.getStringPreferredDate()));
 			ps.setString(6, appointment.getTitle());
 
 			int status = ps.executeUpdate();
@@ -347,11 +347,21 @@ public class DatabaseHelper {
 		ArrayList<ArrayList<Appointment>> arrayList = new ArrayList<ArrayList<Appointment>>();
 		ArrayList<Appointment> upcommingAppointments = new ArrayList<Appointment>();
 		ArrayList<Appointment> closedAppointments = new ArrayList<Appointment>();
-		ArrayList<Appointment> unconfirmedAppointments = new ArrayList<Appointment>();
+		ArrayList<Appointment> unallocatedAppointments = new ArrayList<Appointment>();
+		ArrayList<Appointment> allocatedAppointments = new ArrayList<Appointment>();
 		try {
-			PreparedStatement ps = connection.prepareStatement(
+			PreparedStatement ps;
+			if(mactingColumn!=null)
+			{
+				ps = connection.prepareStatement(
 					"select * from appointment where " + mactingColumn + " =? order by dateCreated desc");
-			ps.setInt(1, personId);
+				ps.setInt(1, personId);
+			}else
+			{
+				//from receptionist
+				ps = connection.prepareStatement(
+						"select * from appointment  order by dateCreated desc");
+			}
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -362,21 +372,36 @@ public class DatabaseHelper {
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
 				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
-						patient);
-				if (rs.getLong("allocatedDate") == 0 && mactingColumn.equals("admin")) {
-					unconfirmedAppointments.add(appointment);
-				} else if (isClosed == 0) {
-					upcommingAppointments.add(appointment);
-				} else {
-					closedAppointments.add(appointment);
+						patient, rs.getString("disease"));
+				
+				if(mactingColumn!=null)
+				{
+					if (isClosed == 0) {
+						upcommingAppointments.add(appointment);
+					} else {
+						closedAppointments.add(appointment);
+					}
+				}else
+				{
+					//from receptionist
+					if(rs.getLong("allocatedDate") == 0){
+						unallocatedAppointments.add(appointment);
+					}else{
+						allocatedAppointments.add(appointment);
+					}
 				}
 
 			}
-			arrayList.add(upcommingAppointments);
-			arrayList.add(closedAppointments);
-			if (mactingColumn.equals("doctorId")) {
-				arrayList.add(unconfirmedAppointments);
+			if(mactingColumn!=null)
+			{
+				arrayList.add(upcommingAppointments);
+				arrayList.add(closedAppointments);
+			}else
+			{
+				arrayList.add(unallocatedAppointments);
+				arrayList.add(allocatedAppointments);
 			}
+			
 			return arrayList;
 
 		} catch (SQLException e) {
@@ -419,7 +444,7 @@ public class DatabaseHelper {
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
 				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
-						rs.getString("symptons"), rs.getString("disease"), patient);
+						rs.getString("symptons"), rs.getString("disease"), patient, rs.getLong("allocatedDate"), rs.getLong("preferredDate"));
 				appointment.setItems(getAppointmentsItems(id));
 				return appointment;
 			}
@@ -563,8 +588,40 @@ public class DatabaseHelper {
 		}
 		return -1;
 	}
-	
-	
-	
-	
+
+	public ArrayList<Doctor> getDoctors() {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select personId from person where personType=2");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Doctor> arrayList = new ArrayList<>();
+			while (rs.next()) {
+				// get doctor from database
+				arrayList.add(getDoctor(rs.getInt("personId")));
+			}
+			return arrayList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public int allocateDoctor(int appointmentId, int doctorId, long allocatedDate) {
+		try {
+			// update appointment
+			PreparedStatement ps = connection.prepareStatement("update appointment set doctorId=?, allocatedDate=? where appointmentId=?");
+			ps.setInt(1, doctorId);
+			ps.setLong(2, allocatedDate);
+			ps.setInt(3, appointmentId);
+			int status = ps.executeUpdate();
+			if(status>0)
+			{
+				return addItemInAppointment(appointmentId, 6, "Date Allocated :- " + DateUtils.getStringFromDate(allocatedDate));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
