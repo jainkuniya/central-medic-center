@@ -2,14 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard"%>
 <%  
-		if(request.getAttribute("patient")==null || request.getAttribute("appointments")==null){
-			 response.sendRedirect("patient"); 
+		if(request.getAttribute("patient")==null || request.getAttribute("appointments")==null || request.getAttribute("dashBoard") == null){
+			 //response.sendRedirect("patient"); 
 		}
 		else{
 			Patient patient = (Patient)request.getAttribute("patient");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
+			DashBoard dashBoard = (DashBoard)request.getAttribute("dashBoard"); 
 	%>
 <!DOCTYPE html>
 <html>
@@ -154,7 +155,7 @@
 							<div class="cardImage">
 								<img src="media/appointment.png">
 							</div>
-							<div class="cardText">4 Appointments</div>
+							<div class="cardText"><%= dashBoard.getNoOfAppointment() %> Appointments</div>
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -162,7 +163,8 @@
 							<div class="cardImage">
 								<img src="media/bmi.png">
 							</div>
-							<div class="cardText">BMI : 19</div>
+							<div class="cardText">BMI : <%= dashBoard.getBmi() %></div>
+							<div class="cardText">A healthy BMI ranges between 19 and 25.</div>
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -170,7 +172,7 @@
 							<div class="cardImage">
 								<img src="media/prescription.png">
 							</div>
-							<div class="cardText">4 Medicines</div>
+							<div class="cardText"><%= dashBoard.getNoOfMedicines() %> Medicines</div>
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -178,7 +180,7 @@
 							<div class="cardImage">
 								<img src="media/edit.png">
 							</div>
-							<div class="cardText">90% Profile</div>
+							<div class="cardText"><%= dashBoard.getPercentProfile() %>% Profile</div>
 						</div>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ public class Patient extends  Person {
 	private String bloodGroup;
 	
 	public Patient(int id, String firstName, String lastName, String userName, long dob, int type, String gender,
-			String address, String contactNumber, int height, int weight, String bloodGroup) {
+			String address, String contactNumber, int weight, int height, String bloodGroup) {
 		super(id, firstName, lastName, userName, dob, type, gender, address, contactNumber);		
 		this.height = height;
 		this.weight = weight;

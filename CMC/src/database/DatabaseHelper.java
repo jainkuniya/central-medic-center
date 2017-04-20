@@ -442,6 +442,7 @@ public class DatabaseHelper {
 			return null;
 		}
 	}
+
 	public ArrayList<Appointment> getAppointment() {
 		try {
 			PreparedStatement ps = connection.prepareStatement("select * from appointment");
@@ -464,4 +465,17 @@ public class DatabaseHelper {
 	}
 	
 	
+	public int getAppointmentCount(int personId, String matchingColumn){
+		PreparedStatement ps;
+		try {
+			ps = connection.prepareStatement("select COUNT(*) AS rowcount from appointment where " + matchingColumn +" =?");
+			ps.setInt(1, personId);
+
+			ResultSet rs = ps.executeQuery();
+			return (rs.next()) ? rs.getInt("rowcount") : 0;
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return 0;
+		}
+	}
 }

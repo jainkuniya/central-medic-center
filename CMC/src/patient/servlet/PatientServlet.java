@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import patient.modal.DashBoard;
 import patient.modal.Patient;
-
+import utils.BodyMassIndex;
 import database.DatabaseHelper;
 import modal.Appointment;
 
@@ -49,8 +50,11 @@ public class PatientServlet extends HttpServlet {
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Patient patient = databaseHelper.getPatient(personId);
+			//System.out.println(databaseHelper.getAppointmentCount(personId,"patientId") + " " + BodyMassIndex.getBMI(patient.getHeight(), patient.getWeight()));
+			DashBoard dashBoard = new DashBoard(databaseHelper.getAppointmentCount(personId,"patientId"), 
+					BodyMassIndex.getBMI(patient.getHeight(), patient.getWeight()),6,90);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, "patientId");
-			if (patient == null || appointments == null) {
+			if (patient == null || appointments == null || dashBoard == null) {
 				// redirect to login
 				redirectToLogin(request, response);
 				return;
@@ -59,6 +63,7 @@ public class PatientServlet extends HttpServlet {
 			RequestDispatcher rs = request.getRequestDispatcher("patient.jsp");
 			request.setAttribute("patient", patient);
 			request.setAttribute("appointments", appointments);
+			request.setAttribute("dashBoard", dashBoard);
 			rs.forward(request, response);
 			return;
 			}
@@ -68,7 +73,7 @@ public class PatientServlet extends HttpServlet {
 		}
 		}
 	
-
+ 
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -86,7 +91,7 @@ public class PatientServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 		request.setAttribute("error", "Please login again");
-		rs.forward(request, response);
+		//rs.forward(request, response);
 	}
 
 }
