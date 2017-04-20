@@ -64,41 +64,9 @@ ul {
 	text-align: right;
 }
 
-.nav-sidebar
->
-.active
->
-a
-,
-.nav-sidebar
->
-.active
->
-a
-:hover
-,
-.nav-sidebar
->
-.active
->
-a
-:focus
-,
-{
-color
-:
- 
-#fff
-;
-
-	
-background-color
-:
- 
-#428bca
-;
-
-
+.nav-sidebar>.active>a,.nav-sidebar>.active>a:hover,.nav-sidebar>.active>a:focus,{
+color:#fff;	
+background-color: #428bca;
 }
 .main {
 	padding: 20px;
