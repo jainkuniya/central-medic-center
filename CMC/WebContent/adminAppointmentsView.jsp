@@ -14,13 +14,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin Dashboard - Central Medic Center</title>
+<title>List of Appointments - Admin Dashboard - Central Medic Center</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="css/patient.css">
+<link rel="stylesheet" href="css/admin.css">
 
 </head>
 <body>
@@ -81,42 +81,45 @@
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
-				<h1 class="page-header">Dashboard</h1>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/appointment.png">
-							</div>
-							<div class="cardText">4 Appointments</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/bmi.png">
-							</div>
-							<div class="cardText">BMI : 19</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/prescription.png">
-							</div>
-							<div class="cardText">4 Medicines</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/edit.png">
-							</div>
-							<div class="cardText">90% Profile</div>
-						</div>
+				<div class="row tableHere">
+					<div class="col-sm-12">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Doctor Name</th>
+									<th>Patient Name</th>
+									<th>Title</th>
+									<th>Date Created</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Rachit Sharma</td>
+									<td>Vishal Sanghai</td>
+									<td>Eye Problem</td>
+									<td>05/06/2017</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Rachit Sharma</td>
+									<td>Vishal Sanghai</td>
+									<td>Eye Problem</td>
+									<td>05/06/2017</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Rachit Sharma</td>
+									<td>Vishal Sanghai</td>
+									<td>Eye Problem</td>
+									<td>05/06/2017</td>
+								</tr>								
+							</tbody>
+						</table>
 					</div>
 				</div>
-				<h2 class="sub-header">Section title</h2>
+
 			</div>
 		</div>
 	</div>

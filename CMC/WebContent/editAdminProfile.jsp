@@ -72,6 +72,10 @@
 						</div>
 
 					</li>
+					<li class=""><a href="">Patients</a></li>
+					<li class=""><a href="">Doctors</a></li>
+					<li class=""><a href="">Staff</a></li>
+					<li class=""><a href="">Appointments</a></li>
 				</ul>
 			</div>
 
