@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="staff.modal.Staff"%>
+	import="staff.modal.Staff, java.util.ArrayList, prescription.Lab"%>
 <%  
-		if(request.getAttribute("labPerson")==null){
+		if(request.getAttribute("labPerson")==null || request.getAttribute("labs")==null){
 			 response.sendRedirect("labPerson"); 
 		}
 		else{
 			Staff labPerson = (Staff)request.getAttribute("labPerson");
+			ArrayList<ArrayList<Lab>> labs = (ArrayList<ArrayList<Lab>>)request.getAttribute("labs");
 	%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/lab.css">
-<link rel="stylesheet" href="css/appointment.css">
+
 
 </head>
 <body>
@@ -74,8 +75,8 @@
 						</div>
 
 					</li>
-					<li class="activeAppointment"><a href="#">Open Lab Reports</a></li>
-					<li class=""><a href="labReportClosed.jsp">Closed Lab Reports</a></li>
+					<li class="labReports activeReports" id="openLabReports">Open Lab Reports</li>
+					<li class="labReports" id="closedLabReports">Closed Lab Reports</li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 main">
@@ -92,33 +93,38 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="padding-up">Doctor Name</td>
-									<td class="padding-up">Lab Name</td>
-									<td class="padding-up">Test For</td>
-									<form>
-									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
-									<td><button type="submit" class="btn btn-default">Submit</button></td>
-									</form>
-								</tr>
-								<tr>
-									<td class="padding-up">Doctor Name</td>
-									<td class="padding-up">Lab Name</td>
-									<td class="padding-up">Test For</td>
-									<form>
-									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
-									<td><button type="submit" class="btn btn-default">Submit</button></td>
-									</form>
-								</tr>	
-								<tr>
-									<td class="padding-up">Doctor Name</td>
-									<td class="padding-up">Lab Name</td>
-									<td class="padding-up">Test For</td>
-									<form>
-									<td> <input type="text" class="form-control" placeholder="Lab Result"></td>
-									<td><button type="submit" class="btn btn-default">Submit</button></td>
-									</form>
-								</tr>									
+							<div id="openLabs">
+							
+								<% ArrayList<Lab> openLabs = labs.get(0);
+									for(int i=0; i<openLabs.size(); i++) { 
+										Lab lab = openLabs.get(i);
+									%>
+									<tr>
+										<td class="padding-up">Doctor Name</td>
+										<td class="padding-up"><%=lab.getLabName() %></td>
+										<td class="padding-up"><%=lab.getTestFor() %></td>
+										<form>
+										<input type="hidden" name="labId" value="<%= lab.getLabId() %>">
+										<td> <input type="text" class="form-control" placeholder="Result" required></td>
+										<td><button type="submit" class="btn btn-default">Submit</button></td>
+										</form>
+									</tr>	
+									<% } %>	
+								</div>
+								<div id="closedLabs" style="display:none;">
+								
+								<% ArrayList<Lab> closedLabs = labs.get(0);
+									for(int i=0; i<closedLabs.size(); i++) { 
+										Lab lab = closedLabs.get(i);
+									%>
+									<tr>
+										<td class="padding-up">Doctor Name</td>
+										<td class="padding-up"><%=lab.getLabName() %></td>
+										<td class="padding-up"><%=lab.getTestFor() %></td>
+										<td class="padding-up"><%=lab.getLabResult() %></td>
+									</tr>	
+									<% } %>	
+								</div>						
 							</tbody>
 						</table>
 					</div>
@@ -148,6 +154,18 @@
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+                $('#closedLabReports').on('click',function(){
+                	$("#closedLabs").show();
+                	$("#openLabs").hide();       
+            });
+    </script>
+    <script type="text/javascript">
+                $('#openLabReports').on('click',function(){
+                	$("#closedLabs").hide();
+                	$("#openLabs").show();       
+            });
+    </script>
 </body>
 </html>
 <%

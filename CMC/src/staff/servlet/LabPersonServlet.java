@@ -1,6 +1,8 @@
 package staff.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import database.DatabaseHelper;
+import prescription.Lab;
 import staff.modal.Staff;
 
 /**
@@ -42,7 +45,8 @@ public class LabPersonServlet extends HttpServlet {
 			// get labPerson details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Staff labPerson = databaseHelper.getStaff(personId);
-			if (labPerson == null) {
+			ArrayList<ArrayList<Lab>> labs = databaseHelper.getAllLabForLabPerson();
+			if (labPerson == null || labs ==null) {
 				// redirect to login
 				redirectToLogin(request, response);
 				return;
@@ -50,6 +54,7 @@ public class LabPersonServlet extends HttpServlet {
 			// redirect to labPerson dashboard
 			RequestDispatcher rs = request.getRequestDispatcher("labPerson.jsp");
 			request.setAttribute("labPerson", labPerson);
+			request.setAttribute("labs", labs);
 			rs.forward(request, response);
 			return;
 			}

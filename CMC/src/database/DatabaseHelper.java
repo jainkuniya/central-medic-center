@@ -562,6 +562,32 @@ public class DatabaseHelper {
 		}
 	}
 	
+	public ArrayList<ArrayList<Lab>> getAllLabForLabPerson() {
+		try {
+			ArrayList<ArrayList<Lab>> labs = new ArrayList<ArrayList<Lab>>();
+			ArrayList<Lab> openLab = new ArrayList<>();
+			ArrayList<Lab> closedLab = new ArrayList<>();
+			PreparedStatement ps = connection.prepareStatement("select * from lab");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"));
+				if(rs.getString("labResult")==null)
+				{
+					openLab.add(lab);
+				}else
+				{
+					closedLab.add(lab);
+				}
+			}
+			labs.add(openLab);
+			labs.add(closedLab);
+			return labs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public int addLab(String labName, String testFor, int itemId) {
 		try {
 			PreparedStatement ps = connection.prepareStatement(
