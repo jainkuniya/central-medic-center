@@ -76,7 +76,7 @@
 						</div>
 
 					</li>
-					<li class="labReports activeReports" id="openLabReports">Open Lab Reports</li>
+					<li class="labReports" id="openLabReports">Open Lab Reports</li>
 					<li class="labReports" id="closedLabReports">Closed Lab Reports</li>
 				</ul>
 			</div>
@@ -160,13 +160,17 @@
 	<script type="text/javascript">
                 $('#closedLabReports').on('click',function(){
                 	$("#closedLabs").show();
-                	$("#openLabs").hide();       
+                	$("#openLabs").hide();
+                	$("#closedLabs").toggleClass("activeReports");
+                	$("#openLabs").toggleClass("notActiveReports");
             });
     </script>
     <script type="text/javascript">
                 $('#openLabReports').on('click',function(){
                 	$("#closedLabs").hide();
-                	$("#openLabs").show();       
+                	$("#openLabs").show();
+                	$("#closedLabs").toggleClass("notActiveReports");
+                	$("#openLabs").toggleClass("activeReports");
             });
     </script>
 </body>
