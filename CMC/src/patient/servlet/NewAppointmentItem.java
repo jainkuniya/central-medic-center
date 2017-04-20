@@ -41,11 +41,33 @@ public class NewAppointmentItem extends HttpServlet {
 		try{
 			int appointmentId = Integer.valueOf(request.getParameter("appointmentId"));
 			// insert in DB
-			int status = new DatabaseHelper().addItemInAppointment(appointmentId,
-					Integer.valueOf((String)request.getParameter("type")), (String) request.getParameter("description"));
+			int sendType = Integer.valueOf((String)request.getParameter("sendType"));
+			int status = 0;
+			if(sendType == 1 || sendType == 2 || sendType == 6){
+				status = new DatabaseHelper().addItemInAppointment(appointmentId,
+						sendType, (String) request.getParameter("description"));
+			}else if(sendType == 3){
+				status = new DatabaseHelper().addItemInAppointment(appointmentId,
+						sendType, "Medicine Prescribed");
+			}else if(sendType == 4){
+				status = new DatabaseHelper().addItemInAppointment(appointmentId,
+						sendType, "Lab Report Generated For "+ request.getParameter("labName"));
+			}else if(sendType == 5){
+				status = new DatabaseHelper().addItemInAppointment(appointmentId,
+						sendType, request.getParameter("labName")+" Lab Report Request");
+			}
+				
 			if (status > 0) {
 				// successfully inserted
 				// redirect to detailedPatientAppointment
+				if(sendType == 3){
+					new DatabaseHelper().addPrescription(request.getParameter("medicineName"),
+							Double.parseDouble(request.getParameter("quantity")),Integer.parseInt(request.getParameter("times")),status);
+				}
+				else if(sendType == 5){
+					new DatabaseHelper().addLab(request.getParameter("labName"),
+							request.getParameter("testFor"),status);
+				}
 				RequestDispatcher rs;
 				rs = request.getRequestDispatcher((String)request.getParameter("requestDispatcher"));
 				request.setAttribute("appointmentId", appointmentId);

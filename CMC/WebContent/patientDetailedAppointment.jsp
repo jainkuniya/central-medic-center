@@ -244,18 +244,26 @@
 									} else if (item.getType() == 2) {
 								%>
 								You
-								<%
-									} else if (item.getType() == 6) {
-								%>
+								<% }else if(item.getType()==3) { %>
+								Prescription
+								<%}else if(item.getType()==4) {%>
+								Lab Report
+								<% }else if(item.getType()==5) { %>
+								Doctor
+								<%}else if(item.getType()==6) {%>
 								System
-								<%
-									}
-								%>
+								<% } %>
 							</div>
 						</div>
 						<div class="col-sm-10">
 							<div class="message">
-								<%=item.getDescription()%>
+								<%if(item.getType()==1 || item.getType()==2 || item.getType()==5 || item.getType()==6){ %>
+								<%= item.getDescription() %>
+								<%}else if(item.getType()==3) {%>
+								<%= item.getDescription() %>
+								<%}else if(item.getType()==4) {%>
+								<%= item.getDescription() %>
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -281,8 +289,6 @@
 								value="patientAppointmentDetails" /> <input type="hidden"
 								name="appointmentId" value="<%=detailedAppointment.getId()%>" />
 							<div class="col-sm-9 form-group">
-								<label class="sr-only" for="exampleInputEmail3">Email
-									address</label>
 								<textarea class="form-control textman" name="description"
 									rows="3" placeholder="Type your message here"></textarea>
 							</div>

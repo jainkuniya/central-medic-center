@@ -91,7 +91,7 @@ public class PatientServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 		request.setAttribute("error", "Please login again");
-		//rs.forward(request, response);
+		rs.forward(request, response);
 	}
 
 }

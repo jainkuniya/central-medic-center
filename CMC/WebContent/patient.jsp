@@ -5,7 +5,7 @@
 	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard"%>
 <%  
 		if(request.getAttribute("patient")==null || request.getAttribute("appointments")==null || request.getAttribute("dashBoard") == null){
-			 //response.sendRedirect("patient"); 
+			 response.sendRedirect("patient"); 
 		}
 		else{
 			Patient patient = (Patient)request.getAttribute("patient");

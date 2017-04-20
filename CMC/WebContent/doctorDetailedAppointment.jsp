@@ -193,19 +193,30 @@
 					<div class="row ">
 						<div class="col-sm-2">
 							<div class="messageFrom">
-								<% if(item.getType()==2){ 	%>
-								<%= detailedAppointment.getPatient().getFirstName() %>
-
-								<%}else if(item.getType()==1) {%>
+								<% if(item.getType()==1){ 	%>
 								You
-								<% }else if(item.getType()==6) { %>
+								<%}else if(item.getType()==2) {%>
+								<%= detailedAppointment.getPatient().getFirstName() %>
+								<% }else if(item.getType()==3) { %>
+								Prescription
+								<%}else if(item.getType()==4) {%>
+								Lab Report
+								<% }else if(item.getType()==5) { %>
+								You
+								<%}else if(item.getType()==6) {%>
 								System
 								<% } %>
 							</div>
 						</div>
 						<div class="col-sm-10">
 							<div class="message">
+								<%if(item.getType()==1 || item.getType()==2 || item.getType()==5 || item.getType()==6){ %>
 								<%= item.getDescription() %>
+								<%}else if(item.getType()==3) {%>
+								<%= item.getDescription() %>
+								<%}else if(item.getType()==4) {%>
+								<%= item.getDescription() %>
+								<%} %>
 							</div>
 						</div>
 					</div>
@@ -225,20 +236,19 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="radio">
-									<label> <input type="radio" name="optionsRadios"
+									<label> <input type="radio" name="sendType"
 										id="optionsRadios" value="1" checked> Message
 									</label> 
-									<label> <input type="radio" name="optionsRadios"
-										id="optionsRadios" value="2"> Lab Report
+									<label> <input type="radio" name="sendType"
+										id="optionsRadios" value="5"> Lab Report
 									</label> 
-									<label> <input type="radio" name="optionsRadios"
+									<label> <input type="radio" name="sendType"
 										id="optionsRadios" value="3"> Prescription
 									</label>
 								</div>
 							</div>
 						</div>
 						<div class="row ">
-							<input type="hidden" name="type" value="1" /> 
 							<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
 							<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
 							<div class="col-sm-9 form-group" id="Message" >
@@ -250,13 +260,13 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 									    	<!--<label for="LabName">Lab Name</label>-->
-									    	<input type="text" class="form-control" id="LabName" placeholder="Lab Name">
+									    	<input type="text" class="form-control" name="labName" id="LabName" placeholder="Lab Name">
 									  	</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 									    	<!--<label for="TestFor">Test For</label>-->
-									    	<input type="text" class="form-control" id="TestFor" placeholder="Test For">
+									    	<input type="text" class="form-control" name="testFor" id="TestFor" placeholder="Test For">
 									  	</div>
 									</div>
 								</div>
@@ -266,11 +276,11 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 									    	<!--<label for="MedicineName">Medicine Name</label>-->
-									    	<input type="text" class="form-control" id="MedicineName" placeholder="Medicine Name">
+									    	<input type="text" class="form-control" name="medicineName" id="MedicineName" placeholder="Medicine Name">
 									  	</div>
 									</div>
 									<div class="col-sm-4">
-										<select class="form-control">
+										<select name="quantity" class="form-control">
 										  <option value="" selected disabled>Choose Quantity</option>
 										  <option value="0.5">0.5</option>
 										  <option value="1">1</option>
@@ -279,7 +289,7 @@
 										</select>
 									</div>
 									<div class="col-sm-4">
-										<select class="form-control">
+										<select name="times" class="form-control">
 										  <option value="" selected disabled>Times A Day</option>
 										  <option value="1">1</option>
 										  <option value="2">2</option>
@@ -316,15 +326,15 @@
                 $("#LabReport").hide();
                 $("#Prescription").hide();
                 break;
-                case "2":
+                case "5":
                 $("#Message").hide();
                 $("#LabReport").show();
                 $("#Prescription").hide();
                 break;
                 case "3":
-                    $("#Message").hide();
-                    $("#LabReport").hide();
-                    $("#Prescription").show();
+                $("#Message").hide();
+                $("#LabReport").hide();
+                $("#Prescription").show();
                     break;
                 default:
                 $("#Message").show();
