@@ -265,8 +265,8 @@
 								<div class="row prescriptionOptions">
 									<div class="col-sm-4">
 										<div class="form-group">
-									    	<!--<label for="exampleInputEmail1">Medicine Name</label>-->
-									    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Medicine Name">
+									    	<!--<label for="MedicineName">Medicine Name</label>-->
+									    	<input type="text" class="form-control" id="MedicineName" placeholder="Medicine Name">
 									  	</div>
 									</div>
 									<div class="col-sm-4">
