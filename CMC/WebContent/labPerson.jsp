@@ -9,6 +9,7 @@
 		else{
 			Staff labPerson = (Staff)request.getAttribute("labPerson");
 			ArrayList<ArrayList<Lab>> labs = (ArrayList<ArrayList<Lab>>)request.getAttribute("labs");
+			System.out.println(labs.size() + " " + labs.get(0).size() + " " + labs.get(1).size());
 	%>
 <!DOCTYPE html>
 <html>
@@ -93,37 +94,39 @@
 								</tr>
 							</thead>
 							<tbody>
-							<div id="openLabs">
-							
-								<% ArrayList<Lab> openLabs = labs.get(0);
-									for(int i=0; i<openLabs.size(); i++) { 
-										Lab lab = openLabs.get(i);
-									%>
-									<tr>
-										<td class="padding-up">Doctor Name</td>
-										<td class="padding-up"><%=lab.getLabName() %></td>
-										<td class="padding-up"><%=lab.getTestFor() %></td>
-										<form>
-										<input type="hidden" name="labId" value="<%= lab.getLabId() %>">
-										<td> <input type="text" class="form-control" placeholder="Result" required></td>
-										<td><button type="submit" class="btn btn-default">Submit</button></td>
-										</form>
-									</tr>	
-									<% } %>	
+								<div id="openLabs">
+									<h1>hgfsdhtew</h1>
+									<% ArrayList<Lab> openLabs = labs.get(0);
+										for(int i=0; i<openLabs.size(); i++) { 
+											Lab lab = openLabs.get(i);
+											System.out.println(lab.getLabId());
+										%>
+										<tr>
+											<td class="padding-up"><%=lab.getDoctor().getFirstName() %></td>
+											<td class="padding-up"><%=lab.getLabName() %></td>
+											<td class="padding-up"><%=lab.getTestFor() %></td>
+											<form>
+												<input type="hidden" name="labId" value="<%= lab.getLabId() %>">
+												<td> <input type="text" class="form-control" placeholder="Result" required></td>
+											<td><button type="submit" class="btn btn-default">Submit</button></td>
+											</form>
+										</tr>	
+										<% } %>	
 								</div>
-								<div id="closedLabs" style="display:none;">
-								
-								<% ArrayList<Lab> closedLabs = labs.get(0);
-									for(int i=0; i<closedLabs.size(); i++) { 
-										Lab lab = closedLabs.get(i);
-									%>
-									<tr>
-										<td class="padding-up">Doctor Name</td>
-										<td class="padding-up"><%=lab.getLabName() %></td>
-										<td class="padding-up"><%=lab.getTestFor() %></td>
-										<td class="padding-up"><%=lab.getLabResult() %></td>
-									</tr>	
-									<% } %>	
+								<div id="closedLabs">
+									<h1>gfsagrewa</h1>
+									<% ArrayList<Lab> closedLabs = labs.get(0);
+										for(int i=0; i<closedLabs.size(); i++) { 
+											Lab lab = closedLabs.get(i);
+											System.out.println(lab.getLabId());
+										%>
+										<tr>
+											<td class="padding-up"><%=lab.getDoctor().getFirstName() %></td>
+											<td ><%=lab.getLabName() %></td>
+											<td ><%=lab.getTestFor() %></td>
+											<td ><%=lab.getLabResult() %></td>
+										</tr>	
+										<% } %>	
 								</div>						
 							</tbody>
 						</table>

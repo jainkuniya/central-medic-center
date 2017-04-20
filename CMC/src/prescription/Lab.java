@@ -1,5 +1,7 @@
 package prescription;
 
+import staff.modal.Doctor;
+
 public class Lab {
 
 	private int labId;
@@ -8,27 +10,27 @@ public class Lab {
 	private String labResult;
 	private String reportFile;
 	private int itemId;
-	private int doctorId;
+	private Doctor doctor;
 	
-	public Lab(int labId, String labName, String testFor, String labResult, String reportFile, int itemId, int doctorId) {
+	public Lab(int labId, String labName, String testFor, String labResult, String reportFile, int itemId, Doctor doctor) {
 		this.labId = labId;
 		this.labName = labName;
 		this.testFor = testFor;
 		this.labResult = labResult;
 		this.reportFile = reportFile;
 		this.itemId = itemId;
-		this.doctorId = doctorId;
+		this.doctor = doctor;
 	}
 	
 	
 	
-	public Lab(String labName, String testFor, String labResult, String reportFile, int itemId, int doctorId) {
+	public Lab(String labName, String testFor, String labResult, String reportFile, int itemId, Doctor doctor) {
 		this.labName = labName;
 		this.testFor = testFor;
 		this.labResult = labResult;
 		this.reportFile = reportFile;
 		this.itemId = itemId;
-		this.doctorId = doctorId;
+		this.doctor = doctor;
 	}
 
 
@@ -69,14 +71,14 @@ public class Lab {
 
 
 
-	public int getDoctorId() {
-		return doctorId;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
 
 
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+	public void setDoctorId(Doctor doctorId) {
+		this.doctor = doctor;
 	}
 	
 }

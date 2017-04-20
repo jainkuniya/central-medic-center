@@ -552,7 +552,8 @@ public class DatabaseHelper {
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Lab> labs = new ArrayList<Lab>();
 			while (rs.next()) {
-				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"),rs.getInt("doctorId"));
+				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"),
+						rs.getString("reportFile"),rs.getInt("itemId"),getDoctor(rs.getInt("doctorId")));
 				labs.add(lab);
 			}
 			return labs;
@@ -570,7 +571,8 @@ public class DatabaseHelper {
 			PreparedStatement ps = connection.prepareStatement("select * from lab");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor"),rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"));
+				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor")
+						,rs.getString("labResult"), rs.getString("reportFile"),rs.getInt("itemId"), getDoctor(rs.getInt("doctorId")));
 				if(rs.getString("labResult")==null)
 				{
 					openLab.add(lab);
