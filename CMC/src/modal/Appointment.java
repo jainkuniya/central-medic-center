@@ -18,6 +18,22 @@ public class Appointment {
 	private String symptons;
 	private String disease;
 	private String title;
+	
+	public Appointment(int id, Doctor doctor, Patient patient, int isClosed, long preferredDate, long allocatedDate,
+			long dateCreated, ArrayList<AppointmentItems> items, String symptons, String disease, String title) {
+		this.id = id;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.isClosed = isClosed;
+		this.preferredDate = preferredDate;
+		this.allocatedDate = allocatedDate;
+		this.dateCreated = dateCreated;
+		this.items = items;
+		this.symptons = symptons;
+		this.disease = disease;
+		this.title = title;
+	}
+
 	public Appointment(int id, Doctor doctor, int isClosed, long dateCreated, ArrayList<AppointmentItems> items) {
 		this.id = id;
 		this.doctor= doctor;

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import modal.Appointment;
 import modal.AppointmentItems;
 import modal.Person;
+import modal.PersonType;
 import patient.modal.Patient;
 import staff.modal.Doctor;
 import staff.modal.Staff;
@@ -31,7 +32,7 @@ public class DatabaseHelper {
 		try {
 			PreparedStatement ps = connection.prepareStatement
 
-			("select * from person where userName=? and password=?");
+					("select * from person where userName=? and password=?");
 
 			ps.setString(1, userName);
 			ps.setString(2, password);
@@ -45,23 +46,23 @@ public class DatabaseHelper {
 			}
 
 		} catch (SQLException e) {
-			 
+
 			e.printStackTrace();
 		}
 
 		return result;
 
 	}
+
 	public int checkPerson(String username) {
 		try {
 			// check person in database
 			PreparedStatement ps = connection.prepareStatement("select * from person where userName=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return 0;
-			}
-			else {
+			} else {
 				return 1;
 			}
 		} catch (SQLException e) {
@@ -69,7 +70,6 @@ public class DatabaseHelper {
 			return -1;
 		}
 
-		
 	}
 
 	public Patient getPatient(int id) {
@@ -85,9 +85,9 @@ public class DatabaseHelper {
 				ResultSet rsPatient = ps.executeQuery();
 				if (rsPatient.next()) {
 					return new Patient(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
-							rs.getString("address"), rs.getString("contactNumber"), rsPatient.getInt("weight"),
-							rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"),
+							rs.getString("gender"), rs.getString("address"), rs.getString("contactNumber"),
+							rsPatient.getInt("weight"), rsPatient.getInt("height"), rsPatient.getString("bloodGroup"));
 				}
 			}
 			// get patient from database
@@ -111,9 +111,9 @@ public class DatabaseHelper {
 				ResultSet rsDoctor = ps.executeQuery();
 				if (rsDoctor.next()) {
 					return new Doctor(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
-							rs.getString("address"), rs.getString("contactNumber"), rsDoctor.getString("degree"),
-							rsDoctor.getString("specialization"));
+							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"),
+							rs.getString("gender"), rs.getString("address"), rs.getString("contactNumber"),
+							rsDoctor.getString("degree"), rsDoctor.getString("specialization"));
 				}
 			}
 			// get doctor from database
@@ -123,7 +123,7 @@ public class DatabaseHelper {
 
 		return null;
 	}
-	
+
 	public Person getPerson(int id) {
 		try {
 			// get person from database
@@ -131,19 +131,18 @@ public class DatabaseHelper {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-					return new Person(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
-							rs.getString("address"), rs.getString("contactNumber"));
-				}
-			
-			
+				return new Person(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+						rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
+						rs.getString("address"), rs.getString("contactNumber"));
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return null;
 	}
-	
+
 	public Staff getStaff(int id) {
 		try {
 			// get staff from database
@@ -151,11 +150,11 @@ public class DatabaseHelper {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-					return new Staff(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
-							rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
-							rs.getString("address"), rs.getString("contactNumber"));
-				}
-			
+				return new Staff(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+						rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
+						rs.getString("address"), rs.getString("contactNumber"));
+			}
+
 			// get staff from database
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,14 +162,13 @@ public class DatabaseHelper {
 
 		return null;
 	}
-	
 
 	public int createAppointment(Appointment appointment) {
 		try {
 			// create appointment in database
 			PreparedStatement ps = connection.prepareStatement(
 					"insert into appointment (patientId, dateCreated, symptons, disease, preferredDate, "
-					+ "title) values(?,?,?,?,?,?)");
+							+ "title) values(?,?,?,?,?,?)");
 			ps.setInt(1, appointment.getPatient().getId());
 			ps.setLong(2, System.currentTimeMillis());
 			ps.setString(3, appointment.getSymptons());
@@ -212,7 +210,8 @@ public class DatabaseHelper {
 		ArrayList<Appointment> closedAppointments = new ArrayList<Appointment>();
 		ArrayList<Appointment> unconfirmedAppointments = new ArrayList<Appointment>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointment where " + mactingColumn +" =? order by dateCreated desc");
+			PreparedStatement ps = connection.prepareStatement(
+					"select * from appointment where " + mactingColumn + " =? order by dateCreated desc");
 			ps.setInt(1, personId);
 
 			ResultSet rs = ps.executeQuery();
@@ -223,21 +222,20 @@ public class DatabaseHelper {
 				int patientId = rs.getInt("patientId");
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
-				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"), patient);
-				if(rs.getLong("allocatedDate") == 0 && mactingColumn.equals("admin"))
-				{
+				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
+						patient);
+				if (rs.getLong("allocatedDate") == 0 && mactingColumn.equals("admin")) {
 					unconfirmedAppointments.add(appointment);
-				}else if(isClosed==0)
-				{
+				} else if (isClosed == 0) {
 					upcommingAppointments.add(appointment);
-				}else {
+				} else {
 					closedAppointments.add(appointment);
 				}
-				
+
 			}
 			arrayList.add(upcommingAppointments);
 			arrayList.add(closedAppointments);
-			if(mactingColumn.equals("doctorId")){
+			if (mactingColumn.equals("doctorId")) {
 				arrayList.add(unconfirmedAppointments);
 			}
 			return arrayList;
@@ -248,17 +246,17 @@ public class DatabaseHelper {
 
 		return null;
 	}
-	
 
 	public ArrayList<AppointmentItems> getAppointmentsItems(int id) {
 		ArrayList<AppointmentItems> items = new ArrayList<AppointmentItems>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointmentItems where appointmentId=? order by date asc");
+			PreparedStatement ps = connection
+					.prepareStatement("select * from appointmentItems where appointmentId=? order by date asc");
 			ps.setInt(1, id);
 			ResultSet itemSet = ps.executeQuery();
 			while (itemSet.next()) {
-				AppointmentItems item = new AppointmentItems(itemSet.getLong("date"), itemSet.getString("description"), 
-						itemSet.getInt("typeId"), itemSet.getInt("appointmentId"));
+				AppointmentItems item = new AppointmentItems(itemSet.getInt("itemId"), itemSet.getLong("date"), itemSet.getInt("typeId"),
+						itemSet.getString("description"), itemSet.getInt("appointmentId"));
 				items.add(item);
 			}
 			return items;
@@ -338,8 +336,8 @@ public class DatabaseHelper {
 		try {
 			// update person
 			if (!request.getParameter("password").isEmpty()) {
-				PreparedStatement ps = connection
-						.prepareStatement("update person set password=?, dob=?, address=?, contactNumber=? where personId=?");
+				PreparedStatement ps = connection.prepareStatement(
+						"update person set password=?, dob=?, address=?, contactNumber=? where personId=?");
 				ps.setString(1, request.getParameter("password"));
 				ps.setLong(2, DateUtils.getLongFromDate(request.getParameter("dob")));
 				ps.setString(3, request.getParameter("address"));
@@ -366,29 +364,28 @@ public class DatabaseHelper {
 
 	public void createPerson(HttpServletRequest request) {
 		try {
-			PreparedStatement ps,ts,ps1,ps2;
+			PreparedStatement ps, ts, ps1, ps2;
 			ps = connection.prepareStatement(
 					"insert into person(firstName,lastName,userName,password,dob,token,personType,gender,address,contactNumber) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, request.getParameter("firstName"));
 			ps.setString(2, request.getParameter("lastName"));
 			ps.setString(3, request.getParameter("userName"));
 			ps.setString(4, request.getParameter("password"));
-			ps.setLong(5,  DateUtils.getLongFromDate(request.getParameter("dob")));
+			ps.setLong(5, DateUtils.getLongFromDate(request.getParameter("dob")));
 			ps.setString(6, "1");
-			ps.setInt(7, Integer.parseInt(request.getParameter("userType")) );
+			ps.setInt(7, Integer.parseInt(request.getParameter("userType")));
 			ps.setString(8, request.getParameter("gender"));
 			ps.setString(9, request.getParameter("address"));
 			ps.setString(10, request.getParameter("contactNumber"));
 			ps.executeUpdate();
-			
-			ts = connection.prepareStatement(
-					"Select personId from person where userName=?");
+
+			ts = connection.prepareStatement("Select personId from person where userName=?");
 			ts.setString(1, request.getParameter("userName"));
 			ResultSet rs = ts.executeQuery();
-			int userId=0;
+			int userId = 0;
 			if (rs.next()) {
 				userId = rs.getInt("personId");
-			} 
+			}
 			int uType = Integer.parseInt(request.getParameter("userType"));
 			if (uType == 1) {
 				ps1 = connection
@@ -397,21 +394,74 @@ public class DatabaseHelper {
 				ps1.setString(2, request.getParameter("height"));
 				ps1.setString(3, request.getParameter("weight"));
 				ps1.setString(4, request.getParameter("bloodGroup"));
-				 ps1.executeUpdate();
+				ps1.executeUpdate();
 			} else if (uType == 2) {
-				ps2 = connection
-						.prepareStatement("insert into doctor(doctorId,degree,specialization) values(?,?,?)");
+				ps2 = connection.prepareStatement("insert into doctor(doctorId,degree,specialization) values(?,?,?)");
 				ps2.setInt(1, userId);
 				ps2.setString(2, request.getParameter("degree"));
 				ps2.setString(3, request.getParameter("specialization"));
-				 ps2.executeUpdate();
-			} 
-			 
-			
+				ps2.executeUpdate();
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		 
+
 	}
+
+	public ArrayList<Person> getPerson() {
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from person");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Person> persons = new ArrayList<Person>();
+			while (rs.next()) {
+				Person person = new Person(rs.getInt("personId"), rs.getString("firstName"), rs.getString("lastName"),
+						rs.getString("userName"), rs.getLong("dob"), rs.getInt("personType"), rs.getString("gender"),
+						rs.getString("address"), rs.getString("contactNumber"));
+				persons.add(person);
+			}
+			return persons;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<PersonType> getPersonType() {
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from personType");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<PersonType> personTypes = new ArrayList<PersonType>();
+			while (rs.next()) {
+				PersonType personType = new PersonType(rs.getInt("typeId"), rs.getString("description"), rs.getString("type"));
+				personTypes.add(personType);
+			}
+			return personTypes;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public ArrayList<Appointment> getAppointment() {
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from appointment");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+			while (rs.next()) {
+				int doctorId = rs.getInt("doctorId");
+				int patientId = rs.getInt("patientId");
+				Doctor doctor = getDoctor(doctorId);
+				Patient patient = getPatient(patientId);
+				ArrayList<AppointmentItems> items = getAppointmentsItems(rs.getInt("appointmentId"));
+				Appointment appointment = new Appointment(rs.getInt("appointmentId"),doctor, patient, rs.getInt("isClosed"), rs.getLong("preferredDate"), rs.getLong("allocatedDate"),rs.getLong("dateCreated"), items, rs.getString("symptons"), rs.getString("disease"), rs.getString("title"));
+				appointments.add(appointment);
+			}
+			return appointments;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 }

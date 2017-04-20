@@ -3,14 +3,16 @@ package modal;
 import utils.DateUtils;
 
 public class AppointmentItems {
+	private int itemId;
 	private long date;
 	private int type;
 	private String description;
 	private int appointmentId;
 	
-	public AppointmentItems(long date, String description,int type, int appointmentId) {		 
+	public AppointmentItems(int itemId, long date, int type, String description, int appointmentId) {
+		this.itemId = itemId;
 		this.date = date;
-		this.type =type;
+		this.type = type;
 		this.description = description;
 		this.appointmentId = appointmentId;
 	}
@@ -45,5 +47,13 @@ public class AppointmentItems {
 
 	public int getAppointmentId() {
 		return appointmentId;
+	}
+
+	public int getItemId() {
+		return itemId;
+	}
+	
+	public void setAppointmentId(int appointmentId) {
+		this.appointmentId= appointmentId;
 	}
 }
