@@ -1,0 +1,7 @@
+.prescriptionOptions, .LabReportOptions{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.LabReportOptions .form-group{
+	width:100%;
+}

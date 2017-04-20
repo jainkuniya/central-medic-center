@@ -23,6 +23,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/appointment.css">
+<link rel="stylesheet" href="css/doctor.css">
 </head>
 <body>
 
@@ -219,30 +220,74 @@
 					</div>
 				</div>
 				<% } }%>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="radio">
-							<label> <input type="radio" name="optionsRadios"
-								id="optionsRadios1" value="option1" checked> Message
-							</label> <label> <input type="radio" name="optionsRadios"
-								id="optionsRadios1" value="option1"> Lab Report
-							</label> <label> <input type="radio" name="optionsRadios"
-								id="optionsRadios1" value="option1"> Prescription
-							</label>
-						</div>
-					</div>
-				</div>
 				<div class="">
 					<form class="form-inline" action="newAppointmentItem" method="post">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios" value="1" checked> Message
+									</label> 
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios" value="2"> Lab Report
+									</label> 
+									<label> <input type="radio" name="optionsRadios"
+										id="optionsRadios" value="3"> Prescription
+									</label>
+								</div>
+							</div>
+						</div>
 						<div class="row ">
-							<input type="hidden" name="type" value="1" /> <input
-								type="hidden" name="requestDispatcher"
-								value="doctorAppointmentDetails" /> <input type="hidden"
-								name="appointmentId" value="<%= detailedAppointment.getId()%>" />
-							<div class="col-sm-9 form-group">
-
+							<input type="hidden" name="type" value="1" /> 
+							<input type="hidden" name="requestDispatcher" value="doctorAppointmentDetails" />
+							<input type="hidden" name="appointmentId" value="<%= detailedAppointment.getId()%>" />
+							<div class="col-sm-9 form-group" id="Message" >
 								<textarea class="form-control textman" name="description"
 									rows="3" placeholder="Type your message here"></textarea>
+							</div>
+							<div class="col-sm-9 form-group" id="LabReport" style="display: none;" >
+								<div class="row LabReportOptions">
+									<div class="col-sm-6">
+										<div class="form-group">
+									    	<!--<label for="LabName">Lab Name</label>-->
+									    	<input type="text" class="form-control" id="LabName" placeholder="Lab Name">
+									  	</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+									    	<!--<label for="TestFor">Test For</label>-->
+									    	<input type="text" class="form-control" id="TestFor" placeholder="Test For">
+									  	</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-9 form-group" id="Prescription" style="display: none;" >
+								<div class="row prescriptionOptions">
+									<div class="col-sm-4">
+										<div class="form-group">
+									    	<!--<label for="exampleInputEmail1">Medicine Name</label>-->
+									    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Medicine Name">
+									  	</div>
+									</div>
+									<div class="col-sm-4">
+										<select class="form-control">
+										  <option value="" selected disabled>Choose Quantity</option>
+										  <option value="0.5">0.5</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										</select>
+									</div>
+									<div class="col-sm-4">
+										<select class="form-control">
+										  <option value="" selected disabled>Times A Day</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										</select>
+									</div>
+								</div>
 							</div>
 							<div class="col-sm-3">
 								<button type="submit" class="send btn btn-success">Send</button>
@@ -262,6 +307,50 @@
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+                $('input[type="radio"]').on('click',function(){
+                var selection = $(this).val();
+                switch(selection){
+                case "1":
+                $("#Message").show();
+                $("#LabReport").hide();
+                $("#Prescription").hide();
+                break;
+                case "2":
+                $("#Message").hide();
+                $("#LabReport").show();
+                $("#Prescription").hide();
+                break;
+                case "3":
+                    $("#Message").hide();
+                    $("#LabReport").hide();
+                    $("#Prescription").show();
+                    break;
+                default:
+                $("#Message").show();
+                $("#LabReport").hide();
+                $("#Prescription").hide();
+                }
+            });
+    </script>
+<!--<script>
+    function addFields(){
+        var container = document.getElementById("Prescription");
+        // Clear previous contents of the container
+        //while (container.hasChildNodes()) {
+        //    container.removeChild(container.lastChild);
+        //}
+        // Append a node with a random text
+            container.appendChild(document.createTextNode("Member " + 1));
+            // Create an <input> element, set its type and name attributes
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "member" + i;
+            container.appendChild(input);
+            // Append a line break 
+            container.appendChild(document.createElement("br"));
+    }
+    </script>-->
 </body>
 </html>
 <%
