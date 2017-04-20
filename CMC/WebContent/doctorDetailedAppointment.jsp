@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor"%>
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor, prescription.Lab, prescription.Prescription "%>
 
 <%  
 		if(request.getAttribute("doctor")==null || request.getAttribute("appointments")==null || request.getAttribute("apointment") == null){
@@ -11,6 +11,8 @@
 			Doctor doctor = (Doctor)request.getAttribute("doctor");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
 			Appointment detailedAppointment = ((Appointment)request.getAttribute("apointment"));
+			ArrayList<Prescription> prescriptions = (ArrayList<Prescription>)request.getAttribute("prescriptions");
+			ArrayList<Lab> labs = (ArrayList<Lab>)request.getAttribute("labs");
 	%>
 <!DOCTYPE html>
 <html>
@@ -198,9 +200,12 @@
 								<%}else if(item.getType()==2) {%>
 								<%= detailedAppointment.getPatient().getFirstName() %>
 								<% }else if(item.getType()==3) { %>
-								Prescription
+								You -> Prescription 
 								<%}else if(item.getType()==4) {%>
-								Lab Report
+								Lab Report -><% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+											<%= labs.get(k).getLabName() %>											
+									<%	} } %>
 								<% }else if(item.getType()==5) { %>
 								You
 								<%}else if(item.getType()==6) {%>
@@ -213,9 +218,15 @@
 								<%if(item.getType()==1 || item.getType()==2 || item.getType()==5 || item.getType()==6){ %>
 								<%= item.getDescription() %>
 								<%}else if(item.getType()==3) {%>
-								<%= item.getDescription() %>
+								<% for(int k = 0; k< prescriptions.size(); k++){ 
+										if(prescriptions.get(k).getItemId() == item.getItemId()){ %>
+											<div>Take <%= prescriptions.get(k).getQuantity() %> <b><%= prescriptions.get(k).getMedicineName() %></b> <%= prescriptions.get(k).getTimes() %> times a day.</div>											
+									<%	} } %>
 								<%}else if(item.getType()==4) {%>
-								<%= item.getDescription() %>
+								<% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+											<div>Your lab result for <b><%= labs.get(k).getTestFor() %></b> is <b><%= labs.get(k).getLabResult() %></b>.</div>											
+									<%	} } %>
 								<%} %>
 							</div>
 						</div>

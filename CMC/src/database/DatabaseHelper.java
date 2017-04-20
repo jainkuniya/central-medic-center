@@ -335,8 +335,14 @@ public class DatabaseHelper {
 			ps.setLong(3, System.currentTimeMillis());
 			ps.setString(4, description);
 
-			return ps.executeUpdate();
+			ps.executeUpdate();
 
+			ps = connection.prepareStatement(
+					"Select itemId from appointmentItems order by itemId desc LIMIT 1");
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return rs.getInt("itemId");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -474,7 +480,7 @@ public class DatabaseHelper {
 
 	public ArrayList<Appointment> getAppointment() {
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointment order by dateCreated");
+			PreparedStatement ps = connection.prepareStatement("select * from appointment order by dateCreated desc");
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 			while (rs.next()) {
@@ -510,7 +516,7 @@ public class DatabaseHelper {
 	
 	public ArrayList<AppointmentItemType> getAppointmentItemType() {
 		try {
-			PreparedStatement ps = connection.prepareStatement("select * from appointmentItemType order by date");
+			PreparedStatement ps = connection.prepareStatement("select * from appointmentItemType order by date desc");
 			ResultSet rs = ps.executeQuery();
 			ArrayList<AppointmentItemType> appointmentItemTypes = new ArrayList<AppointmentItemType>();
 			while (rs.next()) {

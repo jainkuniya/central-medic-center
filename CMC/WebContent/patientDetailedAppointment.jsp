@@ -1,7 +1,7 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
 		pageEncoding="UTF-8"%>
 	<%@ page
-		import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor"%>
+		import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, modal.Appointment, modal.AppointmentItems, staff.modal.Doctor, prescription.Lab, prescription.Prescription"%>
 	
 	<%
 	if (request.getAttribute("patient") == null || request.getAttribute("appointments") == null
@@ -12,6 +12,8 @@
 		ArrayList<ArrayList<Appointment>> arraylist = (ArrayList<ArrayList<Appointment>>) request
 				.getAttribute("appointments");
 		Appointment detailedAppointment = ((Appointment) request.getAttribute("apointment"));
+		ArrayList<Prescription> prescriptions = (ArrayList<Prescription>)request.getAttribute("prescriptions");
+		ArrayList<Lab> labs = (ArrayList<Lab>)request.getAttribute("labs");
 	%>
 	
 	<!DOCTYPE html>
@@ -236,20 +238,19 @@
 					<div class="row ">
 						<div class="col-sm-2">
 							<div class="messageFrom">
-								<%
-									if (item.getType() == 1) {
-								%>
+								<% if(item.getType()==1){ 	%>
 								<%= detailedAppointment.getDoctor().getFirstName() %>
-								<%
-									} else if (item.getType() == 2) {
-								%>
+								<%}else if(item.getType()==2) {%>
 								You
 								<% }else if(item.getType()==3) { %>
-								Prescription
+								<%= detailedAppointment.getDoctor().getFirstName() %> -> Prescription 
 								<%}else if(item.getType()==4) {%>
-								Lab Report
+								Lab Report -><% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+											<%= labs.get(k).getLabName() %>											
+									<%	} } %>
 								<% }else if(item.getType()==5) { %>
-								Doctor
+								<%= detailedAppointment.getDoctor().getFirstName() %>
 								<%}else if(item.getType()==6) {%>
 								System
 								<% } %>
@@ -260,9 +261,15 @@
 								<%if(item.getType()==1 || item.getType()==2 || item.getType()==5 || item.getType()==6){ %>
 								<%= item.getDescription() %>
 								<%}else if(item.getType()==3) {%>
-								<%= item.getDescription() %>
+								<% for(int k = 0; k< prescriptions.size(); k++){ 
+										if(prescriptions.get(k).getItemId() == item.getItemId()){ %>
+											<div>Take <%= prescriptions.get(k).getQuantity() %> <b><%= prescriptions.get(k).getMedicineName() %></b> <%= prescriptions.get(k).getTimes() %> times a day.</div>											
+									<%	} } %>
 								<%}else if(item.getType()==4) {%>
-								<%= item.getDescription() %>
+								<% for(int k = 0; k< labs.size(); k++){ 
+										if(labs.get(k).getItemId() == item.getItemId()){ %>
+											<div>Your lab result for <b><%= labs.get(k).getTestFor() %></b> is <b><%= labs.get(k).getLabResult() %></b>.</div>											
+									<%	} } %>
 								<%} %>
 							</div>
 						</div>
@@ -284,7 +291,7 @@
 				<div class="">
 					<form class="form-inline" action="newAppointmentItem" method="post">
 						<div class="row">
-							<input type="hidden" name="type" value="2" /> <input
+							<input type="hidden" name="sendType" value="2" /> <input
 								type="hidden" name="requestDispatcher"
 								value="patientAppointmentDetails" /> <input type="hidden"
 								name="appointmentId" value="<%=detailedAppointment.getId()%>" />

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import prescription.Lab;
+import prescription.Prescription;
 import staff.modal.Doctor;
 
 /**
@@ -55,6 +57,8 @@ public class DoctorAppointmentDetails extends HttpServlet {
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Appointment apointment = databaseHelper.getDetailedAppointment(appointmentId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(doctorId, "doctorId");
+			ArrayList<Prescription> prescriptions = databaseHelper.getPrescription();
+			ArrayList<Lab> labs = databaseHelper.getLab();
 			Doctor doctor = databaseHelper.getDoctor(doctorId);
 			if (apointment == null || doctor == null || appointments == null) {
 				// redirect to login
@@ -66,6 +70,8 @@ public class DoctorAppointmentDetails extends HttpServlet {
 			request.setAttribute("apointment", apointment);
 			request.setAttribute("doctor", doctor);
 			request.setAttribute("appointments", appointments);
+			request.setAttribute("prescriptions", prescriptions);
+			request.setAttribute("labs", labs);
 			rs.forward(request, response);
 			return;
 		} catch (Exception e) {
