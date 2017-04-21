@@ -79,7 +79,8 @@ public class Appointment {
 		this.disease = disease;
 	}
 
-	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, String disease, Patient patient, long allocatedDate, long preferredDate) {
+	public Appointment(int id, Doctor doctor, String title, long dateCreated, String symptons, 
+			String disease, Patient patient, long allocatedDate, long preferredDate, int isClosed) {
 		this.id=id;
 		this.doctor= doctor;
 		this.title=title;
@@ -89,6 +90,7 @@ public class Appointment {
 		this.patient = patient;
 		this.allocatedDate =allocatedDate;
 		this.preferredDate = preferredDate;
+		this.isClosed=isClosed;
 	}
 
 	public int getId() {

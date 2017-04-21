@@ -69,6 +69,7 @@ public class AdminServlet extends HttpServlet {
 				return;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			// redirect to login
 			redirectToLogin(request, response);
 		}
@@ -88,6 +89,6 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 		request.setAttribute("error", "Please login again");
-		rs.forward(request, response);
+		//rs.forward(request, response);
 	}
 }

@@ -450,7 +450,7 @@ public class DatabaseHelper {
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
 				Appointment appointment = new Appointment(id, doctor, rs.getString("title"), rs.getLong("dateCreated"),
-						rs.getString("symptons"), rs.getString("disease"), patient, rs.getLong("allocatedDate"), rs.getLong("preferredDate"));
+						rs.getString("symptons"), rs.getString("disease"), patient, rs.getLong("allocatedDate"), rs.getLong("preferredDate"), rs.getInt("isClosed"));
 				appointment.setItems(getAppointmentsItems(id));
 				return appointment;
 			}
@@ -754,5 +754,22 @@ public class DatabaseHelper {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public int closeAppointment(int appointmentId, String by) {
+		try {
+			// update appointment
+			PreparedStatement ps = connection.prepareStatement(
+					"update appointment set isClosed=1 where appointmentId=?");
+			ps.setInt(1, appointmentId);
+			if(ps.executeUpdate()>0)
+			{
+				return addItemInAppointment(appointmentId, 6, "Closed " + by);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

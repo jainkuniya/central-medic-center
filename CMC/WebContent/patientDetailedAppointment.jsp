@@ -221,6 +221,23 @@
 							<b>Suspected Disease </b><%=detailedAppointment.getDisease()%>
 						</div>
 					</div>
+					<br>
+					<% if(detailedAppointment.getIsClosed()==0){ %>
+						<div class="row">
+							<form method="post" action="closeAppointment">
+							<input type="hidden" name="appointmentId" value="<%=detailedAppointment.getId() %>" >
+							<input
+									type="hidden" name="by"
+									value="<%="By patient: - " + patient.getFirstName() %>" /> 
+							<input
+									type="hidden" name="requestDispatcher"
+									value="patientAppointmentDetails" /> 
+							<button type="submit" class="send btn btn-success">Close</button>
+						</form>
+						</div>
+					<%}else { %>
+						<center><h3>Closed</h3></center>
+					<% } %>
 				</div>
 				<%
 					if (detailedAppointment.getItems() != null) {
@@ -283,23 +300,27 @@
 					}
 						}
 				%>
-				<div class="">
-					<form class="form-inline" action="newAppointmentItem" method="post">
-						<div class="row">
-							<input type="hidden" name="sendType" value="2" /> <input
-								type="hidden" name="requestDispatcher"
-								value="patientAppointmentDetails" /> <input type="hidden"
-								name="appointmentId" value="<%=detailedAppointment.getId()%>" />
-							<div class="col-sm-9 form-group">
-								<textarea class="form-control textman" name="description"
-									rows="3" placeholder="Type your message here"></textarea>
+				<% if(detailedAppointment.getIsClosed()==0){ %>
+					<div class="">
+						<form class="form-inline" action="newAppointmentItem" method="post">
+							<div class="row">
+								<input type="hidden" name="sendType" value="2" /> 
+								<input
+									type="hidden" name="requestDispatcher"
+									value="patientAppointmentDetails" /> 
+								<input type="hidden"
+									name="appointmentId" value="<%=detailedAppointment.getId()%>" />
+								<div class="col-sm-9 form-group">
+									<textarea class="form-control textman" name="description"
+										rows="3" placeholder="Type your message here"></textarea>
+								</div>
+								<div class="col-sm-3">
+									<button type="submit" class="send btn btn-success">Send</button>
+								</div>
 							</div>
-							<div class="col-sm-3">
-								<button type="submit" class="send btn btn-success">Send</button>
-							</div>
-						</div>
-					</form>
-				</div>
+						</form>
+					</div>
+				<%} %>
 			</div>
 		</div>
 	</div>
