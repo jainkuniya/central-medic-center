@@ -88,6 +88,7 @@
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
+										<th>Report Id :-</th>
 										<th>Doctor Name</th>
 										<th>Lab Name</th>
 										<th>Test For</th>
@@ -101,6 +102,7 @@
 												Lab lab = openLabs.get(i);
 											%>
 									<tr>
+										<td class="padding-up"><%=lab.getLabId() %></td>
 										<td class="padding-up"><%=lab.getDoctor().getFirstName() %></td>
 										<td class="padding-up"><%=lab.getLabName() %></td>
 										<td class="padding-up"><%=lab.getTestFor() %></td>
@@ -122,6 +124,7 @@
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
+										<th>Report Id :-</th>
 										<th>Doctor Name</th>
 										<th>Lab Name</th>
 										<th>Test For</th>
@@ -135,6 +138,7 @@
 												Lab lab = closedLabs.get(i);
 											%>
 									<tr>
+										<td><%=lab.getLabId() %></td>
 										<td><%=lab.getDoctor().getFirstName() %></td>
 										<td><%=lab.getLabName() %></td>
 										<td><%=lab.getTestFor() %></td>
@@ -175,16 +179,16 @@
                 $('#closedLabReports').on('click',function(){
                 	$("#closedLabs").show();
                 	$("#openLabs").hide();
-                	$("#closedLabs").toggleClass("activeReports");
-                	$("#openLabs").toggleClass("notActiveReports");
+                	$("#closedLabReports").toggleClass("activeReports");
+                	$("#openLabReports").toggleClass("notActiveReports");
             });
     </script>
 	<script type="text/javascript">
                 $('#openLabReports').on('click',function(){
                 	$("#closedLabs").hide();
                 	$("#openLabs").show();
-                	$("#closedLabs").toggleClass("notActiveReports");
-                	$("#openLabs").toggleClass("activeReports");
+                	$("#closedLabReports").toggleClass("notActiveReports");
+                	$("#openLabReports").toggleClass("activeReports");
             });
     </script>
 </body>

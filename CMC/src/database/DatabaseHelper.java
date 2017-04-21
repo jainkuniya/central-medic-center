@@ -582,7 +582,7 @@ public class DatabaseHelper {
 			ArrayList<ArrayList<Lab>> labs = new ArrayList<ArrayList<Lab>>();
 			ArrayList<Lab> openLab = new ArrayList<>();
 			ArrayList<Lab> closedLab = new ArrayList<>();
-			PreparedStatement ps = connection.prepareStatement("select * from lab");
+			PreparedStatement ps = connection.prepareStatement("select * from lab order by labId desc");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Lab lab = new Lab(rs.getInt("labId"), rs.getString("labName"), rs.getString("testFor")

@@ -33,7 +33,7 @@ CREATE TABLE `lab` (
   PRIMARY KEY (`labId`),
   KEY `labfk1_idx` (`itemId`),
   KEY `labfk2_idx` (`doctorId`),
-  CONSTRAINT `labfk1` FOREIGN KEY (`itemId`) REFERENCES `appointmentitems` (`itemId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `labfk1` FOREIGN KEY (`itemId`) REFERENCES `appointmentItems` (`itemId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `labfk11` FOREIGN KEY (`doctorId`) REFERENCES `doctor` (`doctorId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
