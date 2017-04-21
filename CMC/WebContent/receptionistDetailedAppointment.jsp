@@ -257,7 +257,7 @@
 						</form>
 						</div>
 					<%}else { %>
-						<center><h3>Closed</h3></center>
+						<h3 style="text-align:center">Closed</h3>
 					<% } %>
 				</div>
 				<%

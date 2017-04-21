@@ -277,7 +277,13 @@
 					  <tr>
 					    <td><%= appointment.getId() %></td>
 					    <td><%= appointment.getTitle() %></td>
+					    <% if( appointment.getDoctor() == null){ %>
+					    <td>Not Allocated</td>
+					    <%}else { %>
 					    <td><%= appointment.getDoctor().getFirstName() %></td>
+					    <%
+					    }%>
+					    
 					    <td><%= appointment.getPatient().getFirstName() %></td>
 					    <td>
 					    	<% if(appointment.getIsClosed()==1){ %>

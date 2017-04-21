@@ -201,7 +201,7 @@
 						</form>
 						</div>
 					<%}else { %>
-						<center><h3>Closed</h3></center>
+						<h3 style="text-align:center">Closed</h3>
 					<% } %>
 				</div>
 				<% if(detailedAppointment.getItems()!=null) {%>
@@ -242,7 +242,7 @@
 								<%}else if(item.getType()==4) {%>
 								<% for(int k = 0; k< labs.size(); k++){ 
 										if(labs.get(k).getItemId() == item.getItemId()){ %>
-											<div>Your lab result for <b><%= labs.get(k).getTestFor() %></b> is <b><%= labs.get(k).getLabResult() %></b>.</div>											
+											<div>Lab result for <b><%= labs.get(k).getTestFor() %></b> is <b><%= labs.get(k).getLabResult() %></b>.</div>											
 									<%	} } %>
 								<%} %>
 							</div>

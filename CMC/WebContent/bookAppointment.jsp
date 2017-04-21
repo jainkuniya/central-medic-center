@@ -168,7 +168,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="symptons" class="col-sm-2 control-label">Symptons</label>
+						<label for="symptons" class="col-sm-2 control-label">Symptoms</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" rows="2"
 								placeholder="chest pain, fatigue, hallucination, swelling"
