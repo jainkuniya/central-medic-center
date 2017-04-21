@@ -489,7 +489,9 @@ public class DatabaseHelper {
 				Doctor doctor = getDoctor(doctorId);
 				Patient patient = getPatient(patientId);
 				ArrayList<AppointmentItems> items = getAppointmentsItems(rs.getInt("appointmentId"));
-				Appointment appointment = new Appointment(rs.getInt("appointmentId"),doctor, patient, rs.getInt("isClosed"), rs.getLong("preferredDate"), rs.getLong("allocatedDate"),rs.getLong("dateCreated"), items, rs.getString("symptons"), rs.getString("disease"), rs.getString("title"));
+				Appointment appointment = new Appointment(rs.getInt("appointmentId"),doctor, patient, rs.getInt("isClosed"), 
+						rs.getLong("preferredDate"), rs.getLong("allocatedDate"),rs.getLong("dateCreated"), items, 
+						rs.getString("symptons"), rs.getString("disease"), rs.getString("title"));
 				appointments.add(appointment);
 			}
 			return appointments;
@@ -647,6 +649,42 @@ public class DatabaseHelper {
 			while (rs.next()) {
 				// get doctor from database
 				arrayList.add(getDoctor(rs.getInt("personId")));
+			}
+			return arrayList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	public ArrayList<Staff> getStaff() {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select personId from person where personType<>2 AND personType<>1");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Staff> arrayList = new ArrayList<>();
+			while (rs.next()) {
+				// get doctor from database
+				arrayList.add(getStaff(rs.getInt("personId")));
+			}
+			return arrayList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	public ArrayList<Patient> getPatients() {
+		try {
+			// get person from database
+			PreparedStatement ps = connection.prepareStatement("select personId from person where personType=1");
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Patient> arrayList = new ArrayList<>();
+			while (rs.next()) {
+				// get doctor from database
+				arrayList.add(getPatient(rs.getInt("personId")));
 			}
 			return arrayList;
 		} catch (SQLException e) {
