@@ -242,6 +242,7 @@
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
 					</form>
+					<br>
 					<%} %>
 					<% if(detailedAppointment.getIsClosed()==0){ %>
 						<div class="row">

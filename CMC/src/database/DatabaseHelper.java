@@ -315,10 +315,13 @@ public class DatabaseHelper {
 			ps.setLong(5, DateUtils.getLongFromDate(appointment.getStringPreferredDate()));
 			ps.setString(6, appointment.getTitle());
 
-			int status = ps.executeUpdate();
+			ps.executeUpdate();
+			ps = connection.prepareStatement(
+					"Select appointmentId from appointment order by appointmentId desc LIMIT 1");
+			ResultSet rs = ps.executeQuery();
 			// create an item
-			if (status > 0) {
-				return addItemInAppointment(status, 6, "Appointment Created");
+			if (rs.next()) {
+				return addItemInAppointment(rs.getInt("appointmentId"), 6, "Appointment Created");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
