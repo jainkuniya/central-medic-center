@@ -77,7 +77,7 @@ public class Lab {
 
 
 
-	public void setDoctorId(Doctor doctorId) {
+	public void setDoctorId(Doctor doctor) {
 		this.doctor = doctor;
 	}
 	

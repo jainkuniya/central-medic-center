@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import database.DatabaseHelper;
 import modal.Appointment;
-import modal.Person;
 import patient.modal.Patient;
-import prescription.Prescription;
 import staff.modal.Doctor;
 import staff.modal.Staff;
 
