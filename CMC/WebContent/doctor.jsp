@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
+	import="patient.modal.Patient, java.util.ArrayList, modal.Appointment, staff.modal.Doctor, patient.modal.DashBoard"%>
 <%  
 		if(request.getAttribute("doctor")==null || request.getAttribute("appointments")==null){
 			 response.sendRedirect("doctor"); 
@@ -10,6 +10,7 @@
 		else{
 			Doctor doctor = (Doctor)request.getAttribute("doctor");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
+			DashBoard dashBoard = (DashBoard)request.getAttribute("dashBoard"); 
 	%>
 <!DOCTYPE html>
 <html>
@@ -150,7 +151,7 @@
 							<div class="cardImage">
 								<img src="media/appointment.png">
 							</div>
-							<div class="cardText" style="padding-left:10px; padding-right:10px;">4 Appointments today</div>
+							<div class="cardText"><%= dashBoard.getNoOfAppointment() %> Appointments</div>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -158,7 +159,7 @@
 							<div class="cardImage">
 								<img src="media/patient.png">
 							</div>
-							<div class="cardText">x Patients Treated</div>
+							<div class="cardText"><%= dashBoard.getPatientCount() %> Patients Treated</div>
 						</div>
 					</div>
 <!-- 				<div class="col-sm-4">
@@ -174,7 +175,7 @@
 							<div class="cardImage">
 								<img src="media/edit.png">
 							</div>
-							<div class="cardText">90% Profile</div>
+							<div class="cardText"><%= dashBoard.getPercentProfile() %>% Profile</div>
 						</div>
 					</div>
 				</div>

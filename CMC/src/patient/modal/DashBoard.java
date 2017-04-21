@@ -1,6 +1,15 @@
 package patient.modal;
 
 public class DashBoard {
+	
+	private int noOfAppointment;
+	private double bmi;
+	private int noOfMedicines;
+	private int percentProfile;
+	private int patientCount;
+	private int totalAppointment;
+	private int unapproveAppointment;
+	
 	public DashBoard(int noOfAppointment, double bmi, int noOfMedicines, int percentProfile) {
 		this.noOfAppointment = noOfAppointment;
 		this.bmi = bmi;
@@ -8,7 +17,17 @@ public class DashBoard {
 		this.percentProfile = percentProfile;
 	}
 
-	private int noOfAppointment;
+	
+	public DashBoard(int noOfAppointment, int patientCount, int percentProfile) {
+		this.noOfAppointment = noOfAppointment;
+		this.patientCount = patientCount;
+		this.percentProfile = percentProfile;
+	}
+
+
+	public int getPatientCount() {
+		return patientCount;
+	}
 
 	public int getNoOfAppointment() {
 		return noOfAppointment;
@@ -26,8 +45,15 @@ public class DashBoard {
 		return percentProfile;
 	}
 
-	private double bmi;
-	private int noOfMedicines;
-	private int percentProfile;
+
+	public int getTotalAppointment() {
+		return totalAppointment;
+	}
+
+
+	public int getUnapproveAppointment() {
+		return unapproveAppointment;
+	}
+
 
 }

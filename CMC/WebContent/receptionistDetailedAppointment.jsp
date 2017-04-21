@@ -157,9 +157,10 @@
 												</div>
 											</div>
 										</button>
-								</li>
-							</ul>
-						</form> <%  }
+									</li>
+								</ul>
+							</form> 
+							<%  }
 					        %>
 					</li>
 				</ul>

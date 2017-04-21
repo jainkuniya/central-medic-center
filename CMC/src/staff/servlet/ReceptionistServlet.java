@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import database.DatabaseHelper;
 import modal.Appointment;
+import patient.modal.DashBoard;
 import staff.modal.Staff;
+import utils.DashUtils;
 
 /**
  * Servlet implementation class DoctorServlet
@@ -44,6 +46,8 @@ public class ReceptionistServlet extends HttpServlet {
 			int personId = (int) session.getAttribute("UserID");
 			// get receptionist details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
+			DashBoard dashBoard = new DashBoard(DashUtils.getUnapprovedAppointment(), 
+					DashUtils.getTotalAppointment(),DashUtils.getProfileRating(personId, 5));
 			Staff receptionist = databaseHelper.getStaff(personId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, null);
 			if (receptionist == null || appointments == null) {
@@ -54,6 +58,7 @@ public class ReceptionistServlet extends HttpServlet {
 			// redirect to receptionist dashboard
 			RequestDispatcher rs = request.getRequestDispatcher("receptionist.jsp");
 			request.setAttribute("receptionist", receptionist);
+			request.setAttribute("dashBoard", dashBoard);
 			request.setAttribute("appointments", appointments);
 			rs.forward(request, response);
 			return;

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import patient.modal.DashBoard;
 import patient.modal.Patient;
-import utils.BodyMassIndex;
+import utils.DashUtils;
 import database.DatabaseHelper;
 import modal.Appointment;
 
@@ -50,9 +50,8 @@ public class PatientServlet extends HttpServlet {
 			// get patient details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
 			Patient patient = databaseHelper.getPatient(personId);
-			//System.out.println(databaseHelper.getAppointmentCount(personId,"patientId") + " " + BodyMassIndex.getBMI(patient.getHeight(), patient.getWeight()));
 			DashBoard dashBoard = new DashBoard(databaseHelper.getAppointmentCount(personId,"patientId"), 
-					BodyMassIndex.getBMI(patient.getHeight(), patient.getWeight()),6,90);
+					DashUtils.getBMI(patient.getHeight(), patient.getWeight()),DashUtils.getMedicineCount(personId),DashUtils.getProfileRating(personId, 1));
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, "patientId");
 			if (patient == null || appointments == null || dashBoard == null) {
 				// redirect to login

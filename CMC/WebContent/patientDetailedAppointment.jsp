@@ -124,10 +124,9 @@
 													</div>
 												</div>
 											</button>
-										</button>
-									</li>
-								</ul>
-							</form>
+										</li>
+									</ul>
+								</form>
 		
 					<%
 							}
@@ -175,10 +174,9 @@
 												</div>
 											</div>
 										</button>
-									</button>
-								</li>
-							</ul>
-						</form>
+									</li>
+								</ul>
+							</form>
 								<%
 										}
 									%>

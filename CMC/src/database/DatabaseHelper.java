@@ -514,6 +514,20 @@ public class DatabaseHelper {
 		}
 	}
 	
+	public int getPatientCount(int personId){
+		PreparedStatement ps;
+		try {
+			ps = connection.prepareStatement("select COUNT(DISTINCT patientId) AS rowcount from appointment where doctorId =?");
+			ps.setInt(1, personId);
+
+			ResultSet rs = ps.executeQuery();
+			return (rs.next()) ? rs.getInt("rowcount") : 0;
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	public ArrayList<AppointmentItemType> getAppointmentItemType() {
 		try {
 			PreparedStatement ps = connection.prepareStatement("select * from appointmentItemType order by date desc");

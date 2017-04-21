@@ -1,20 +1,13 @@
 package staff.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import database.DatabaseHelper;
-import modal.Appointment;
-import staff.modal.Doctor;
-import staff.modal.Staff;
 import utils.DateUtils;
 
 /**
@@ -46,8 +39,6 @@ public class AllocateDoctor extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// get appointmentDetails from DB
 		try {
-			HttpSession session = request.getSession();
-			int personId = (int) session.getAttribute("UserID");
 			int appointmentId = Integer.parseInt((String) request.getParameter("appointmentId"));
 			int doctorId = Integer.parseInt((String) request.getParameter("doctorId"));
 			String allocatedDate = (String)request.getParameter("allocatedDate");

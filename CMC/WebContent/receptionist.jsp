@@ -10,6 +10,7 @@
 		else{
 			Staff receptionist = (Staff)request.getAttribute("receptionist");
 			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
+			DashBoard dashBoard = (DashBoard)request.getAttribute("dashBoard");
 			
 	%>
 <!DOCTYPE html>
@@ -149,7 +150,7 @@
 							<div class="cardImage">
 								<img src="media/appointment.png">
 							</div>
-							<div class="cardText">4 Appointments</div>
+							<div class="cardText"><%= dashBoard.getNoOfAppointment() %> Appointment Request</div>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -157,7 +158,7 @@
 							<div class="cardImage">
 								<img src="media/bmi.png">
 							</div>
-							<div class="cardText">BMI : 19</div>
+						<div class="cardText"><%= dashBoard.getPatientCount() %> Total Appointments</div>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -165,7 +166,7 @@
 							<div class="cardImage">
 								<img src="media/edit.png">
 							</div>
-							<div class="cardText">90% Profile</div>
+							<div class="cardText"><%= dashBoard.getPercentProfile() %>% Profile</div>
 						</div>
 					</div>
 				</div>

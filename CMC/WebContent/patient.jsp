@@ -164,7 +164,6 @@
 								<img src="media/bmi.png">
 							</div>
 							<div class="cardText">BMI : <%= dashBoard.getBmi() %></div>
-							<div class="cardText">A healthy BMI ranges between 19 and 25.</div>
 						</div>
 					</div>
 					<div class="col-sm-3">

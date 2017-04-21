@@ -1,4 +1,4 @@
-package staff.servlet;
+	package staff.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
 import modal.Appointment;
+import patient.modal.DashBoard;
 import staff.modal.Doctor;
+import utils.DashUtils;
 
 /**
  * Servlet implementation class DoctorServlet
@@ -45,6 +47,8 @@ public class DoctorServlet extends HttpServlet {
 			int personId = (int) session.getAttribute("UserID");
 			// get doctor details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
+			DashBoard dashBoard = new DashBoard(databaseHelper.getAppointmentCount(personId,"doctorId"), 
+					databaseHelper.getPatientCount(personId),DashUtils.getProfileRating(personId, 2));
 			Doctor doctor = databaseHelper.getDoctor(personId);
 			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(personId, "doctorId");
 			if (doctor == null || appointments == null) {
@@ -56,6 +60,7 @@ public class DoctorServlet extends HttpServlet {
 			RequestDispatcher rs = request.getRequestDispatcher("doctor.jsp");
 			request.setAttribute("doctor", doctor);
 			request.setAttribute("appointments", appointments);
+			request.setAttribute("dashBoard", dashBoard);
 			rs.forward(request, response);
 			return;
 			}
