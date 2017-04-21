@@ -21,6 +21,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/patient.css">
+<link rel="stylesheet" href="css/lab.css">
 </head>
 <body>
 
@@ -72,10 +73,7 @@
 						</div>
 
 					</li>
-					<li class=""><a href="">Patients</a></li>
-					<li class=""><a href="">Doctors</a></li>
-					<li class=""><a href="">Staff</a></li>
-					<li class=""><a href="">Appointments</a></li>
+					<a href="admin"><li class="labReports">Home</li></a>
 				</ul>
 			</div>
 

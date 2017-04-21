@@ -71,8 +71,7 @@
 						</div>
 
 					</li>
-					<li class=""><a href="labPerson">Open Lab Reports</a></li>
-					<li class=""><a href="labPerson">Closed Lab Reports</a></li>
+					<li class=""><a href="labPerson">Lab Reports</a></li>
 				</ul>
 			</div>
 

@@ -1,6 +1,8 @@
 package staff.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.DatabaseHelper;
+import modal.Appointment;
 import staff.modal.Staff;
 
 /**
@@ -37,6 +40,7 @@ public class UpdateReceptionistProfile extends HttpServlet {
 			int receptionistId = (int) session.getAttribute("UserID");
 			// get receptionist details
 			DatabaseHelper databaseHelper = new DatabaseHelper();
+			ArrayList<ArrayList<Appointment>> appointments = databaseHelper.getAppointments(receptionistId, null);
 			Staff receptionist = databaseHelper.getStaff(receptionistId);
 			if (receptionist == null ) {
 				// redirect to login
@@ -46,6 +50,7 @@ public class UpdateReceptionistProfile extends HttpServlet {
 			// redirect to receptionist dashboard
 			RequestDispatcher rs = request.getRequestDispatcher("editReceptionistProfile.jsp");
 			request.setAttribute("receptionist", receptionist);
+			request.setAttribute("appointments", appointments);
 			rs.forward(request, response);
 			return;
 		} catch (Exception e) {

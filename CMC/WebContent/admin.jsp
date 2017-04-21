@@ -110,28 +110,17 @@
 					<div class="col-sm-3">
 						<div class="card">
 							<div class="cardImage">
-								<img src="media/appointment.png">
-							</div>
-							<div class="cardText"><%=appointments.size() %> Appointments</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
-								<img src="media/edit.png">
-							</div>
-							<div class="cardText">90% Profile</div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="card">
-							<div class="cardImage">
 								<img src="media/admin.png">
 							</div>
 							<div class="cardText"><%=staffs.size() %> Staff</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="card">
+							<div class="cardImage">
+								<img src="media/appointment.png">
+							</div>
+							<div class="cardText"><%=appointments.size() %> Appointments</div>
 						</div>
 					</div>
 				</div>
@@ -329,6 +318,7 @@
                 	$("#openDoctors").addClass("notActiveReports");
                 	$("#openStaff").addClass("notActiveReports");
                 	$("#openAppointments").addClass("notActiveReports");
+                	$("#openHome").addClass("notActiveReports");
             });
     </script>
 	<script type="text/javascript">

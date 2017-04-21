@@ -2,13 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="staff.modal.Staff"%>
+	import="staff.modal.Staff, java.util.ArrayList, modal.Appointment, staff.modal.Doctor"%>
 <%  
 		if(request.getAttribute("receptionist")==null){
 			 response.sendRedirect("receptionist"); 
 		}
 		else{
 			Staff receptionist = (Staff)request.getAttribute("receptionist");
+			ArrayList<ArrayList<Appointment>> arrayList = (ArrayList<ArrayList<Appointment>>)request.getAttribute("appointments");
 	%>
 <!DOCTYPE html>
 <html>
@@ -70,7 +71,68 @@
 									<%= receptionist.getAddress() %></span>
 							</div>
 						</div>
+						<li class="topic"><span class="upcoming">Unallocated
+							Appointment</span> <% ArrayList<Appointment> unallocatedAppointments = arrayList.get(0);
+			        	for(int i=0; i<unallocatedAppointments.size(); i++)
+			        	{ Appointment appointment = unallocatedAppointments.get(i);
+	        			%>
+						<form class="form-signin" action="receptionistAppointmentDetails"
+							method="post">
+							<input type="hidden" class="form-control" name="appointmentId"
+								value="<%= appointment.getId() %>" />
+							<ul>
+								<li class="subtopic">
+									<button class="btn btn-default" type="submit">
+										<div class="row">
+											<div class="col-sm-12 text-left">
+												<div>
+													<b><%= appointment.getTitle() %> </b><br>
+													<% if(appointment.getDisease()!=null) { %>
+													<%= appointment.getDisease() + " | " %>
+													<%  } %>
+													<%= appointment.getStringDateCreated() %>
+												</div>
+											</div>
+										</div>
+									</button>
+								</li>
+							</ul>
+						</form>
 
+								<%  }
+						        	
+				        %>
+				    </li>
+					<li class="topic">Allocated Appointment <% ArrayList<Appointment> allocatedAppointments = arrayList.get(1);
+			        	for(int i=0; i<allocatedAppointments.size(); i++)
+			        	{ Appointment appointment = allocatedAppointments.get(i);
+	        			%>
+						<form class="form-signin" action="receptionistAppointmentDetails"
+							method="post">
+							<input type="hidden" class="form-control" name="appointmentId"
+								value="<%= appointment.getId() %>" /> 
+								<ul>
+									<li class="subtopic">
+										<button class="btn btn-default" type="submit">
+											<div class="row">
+												<div class="col-sm-12 text-left">
+													<b><%= appointment.getTitle() %> </b><br>
+													<% Doctor doctor = appointment.getDoctor();
+													if(doctor==null){
+												%>Wating for doctor approval
+													<% }else{ %>
+													<%= doctor.getFirstName() %>
+													<% } %>
+													|
+													<%= appointment.getStringDateCreated() %>
+												</div>
+											</div>
+										</button>
+									</li>
+								</ul>
+							</form>
+									<%  }
+					        %>
 					</li>
 				</ul>
 			</div>
